@@ -36,14 +36,16 @@ const LogoSection = () => {
       <div className="max-w-[95%] mx-auto flex flex-col items-center justify-center relative h-[900px] sm:h-[950px]">
 
         {/* Background Title */}
-        <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+        <h1
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
           text-[70px] sm:text-[120px] font-extrabold text-transparent 
-          bg-clip-text bg-gradient-to-r from-gray-300 to-gray-500 opacity-20 select-none tracking-wider whitespace-nowrap">
+          bg-clip-text bg-gradient-to-r from-gray-300 to-gray-500 opacity-20 select-none tracking-wider whitespace-nowrap"
+        >
           LOGO CREATIONS
         </h1>
 
         {/* Foreground Title */}
-        <h2 className="relative text-4xl sm:text-5xl font-bold text-gray-900 mb-16 z-10 text-center  ">
+        <h2 className="relative text-4xl sm:text-5xl font-bold text-gray-900 mb-16 z-10 text-center">
           LOGO CREATION
         </h2>
 
@@ -51,7 +53,7 @@ const LogoSection = () => {
         <div className="relative w-[280px] sm:w-[460px] z-10">
           <img
             src={heroPerson}
-            alt="My Photo"
+            alt="Hero person"
             className="w-full h-auto object-contain relative z-20 mx-auto"
           />
 
@@ -59,8 +61,6 @@ const LogoSection = () => {
           {logosAround.map((logo, idx) => {
             const angle = (360 / logosAround.length) * idx;
             const rad = (angle * Math.PI) / 180;
-
-            const radius = 160; // mobile
             const radiusMd = 260; // md+
 
             return (
@@ -107,7 +107,7 @@ const LogoSection = () => {
           </div>
 
           {/* Text below image */}
-          <p className="mt-10 text-sm sm:text-base text-gray-700 max-w-md mx-auto z-10 text-center ">
+          <p className="mt-10 text-sm sm:text-base text-gray-700 max-w-md mx-auto z-10 text-center">
             Bringing your brand to life with creative, professional, and unique logo creations that make a lasting impression.
           </p>
         </div>
