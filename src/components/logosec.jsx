@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import heroPerson from "../assets/hero-person.png";
 
 // Logos
@@ -26,19 +26,26 @@ const logosOuter = [
   { src: logo10, name: "Logo 10" },
 ];
 
-const logosAround = logosOuter;
-
 const LogoSection = () => {
+  const [radius, setRadius] = useState(120);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) setRadius(240);
+      else if (window.innerWidth >= 640) setRadius(180);
+      else setRadius(120);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <section className="relative py-24 bg-gradient-to-b from-white to-gray-100 overflow-hidden">
       <div className="max-w-[95%] mx-auto flex flex-col items-center justify-center relative h-[800px] sm:h-[900px] md:h-[950px]">
 
         {/* Background Title */}
-        <h1
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-          text-[50px] sm:text-[70px] md:text-[100px] lg:text-[120px] font-extrabold text-transparent 
-          bg-clip-text bg-gradient-to-r from-gray-300 to-gray-500 opacity-20 select-none tracking-wider whitespace-nowrap"
-        >
+        <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[50px] sm:text-[70px] md:text-[100px] lg:text-[120px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-500 opacity-20 select-none tracking-wider whitespace-nowrap">
           LOGO CREATIONS
         </h1>
 
@@ -49,44 +56,22 @@ const LogoSection = () => {
 
         {/* Center Image */}
         <div className="relative w-[200px] sm:w-[280px] md:w-[400px] lg:w-[460px] z-10">
-          <img
-            src={heroPerson}
-            alt="Hero person"
-            className="w-full h-auto object-contain relative z-20 mx-auto"
-          />
+
+          <img src={heroPerson} alt="Hero person" className="w-full h-auto object-contain relative z-20 mx-auto" />
 
           {/* Radial Logos Around Image */}
-          {logosAround.map((logo, idx) => {
-            const angle = (360 / logosAround.length) * idx;
+          {logosOuter.map((logo, idx) => {
+            const angle = (360 / logosOuter.length) * idx;
             const rad = (angle * Math.PI) / 180;
-            const radiusMobile = 120;
-            const radiusSm = 180;
-            const radiusMd = 240;
-
             return (
               <div
                 key={logo.name}
-                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-                  w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-white shadow-lg flex items-center justify-center transition-transform duration-500 hover:scale-110`}
+                className="absolute top-1/2 left-1/2 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-white shadow-lg flex items-center justify-center transition-transform duration-500 hover:scale-110"
                 style={{
-                  transform: `translate(${(window.innerWidth >= 768
-                    ? radiusMd * Math.cos(rad)
-                    : window.innerWidth >= 640
-                    ? radiusSm * Math.cos(rad)
-                    : radiusMobile * Math.cos(rad)
-                  )}px, ${(window.innerWidth >= 768
-                    ? radiusMd * Math.sin(rad)
-                    : window.innerWidth >= 640
-                    ? radiusSm * Math.sin(rad)
-                    : radiusMobile * Math.sin(rad)
-                  )}px)`,
+                  transform: `translate(${radius * Math.cos(rad)}px, ${radius * Math.sin(rad)}px)`,
                 }}
               >
-                <img
-                  src={logo.src}
-                  alt={logo.name}
-                  className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 object-contain"
-                />
+                <img src={logo.src} alt={logo.name} className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 object-contain" />
               </div>
             );
           })}
@@ -96,37 +81,24 @@ const LogoSection = () => {
             {logosOuter.map((logo, idx) => (
               <div
                 key={`outer-${logo.name}`}
-                className="rounded-full flex items-center justify-center"
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  smWidth: "48px",
-                  smHeight: "48px",
-                  mdWidth: "60px",
-                  mdHeight: "60px",
-                  boxShadow: "0 0 15px 4px rgba(59, 130, 246, 0.5)",
-                  backgroundColor: "white",
-                  opacity: 0.3,
-                  animation: `bounce 2s ease-in-out ${idx * 0.1}s infinite alternate`,
-                }}
+                className="rounded-full flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-white opacity-30 shadow-md animate-bounce"
+                style={{ animationDelay: `${idx * 0.1}s` }}
               >
-                <img
-                  src={logo.src}
-                  alt={logo.name}
-                  className="w-6 h-6 sm:w-12 sm:h-12 object-contain"
-                />
+                <img src={logo.src} alt={logo.name} className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 object-contain" />
               </div>
             ))}
           </div>
 
-          {/* Text below image */}
-          <p className="mt-8 sm:mt-10 text-sm sm:text-base md:text-lg text-gray-700 max-w-md mx-auto z-10 text-center">
-            Bringing your brand to life with creative, professional, and unique logo creations that make a lasting impression.
-          </p>
         </div>
+
+        {/* Text below image - pinned at bottom on mobile */}
+        <p className="mt-8 sm:mt-10 text-sm sm:text-base md:text-lg text-gray-700 max-w-md mx-auto z-10 text-center 
+                      absolute bottom-6 sm:relative">
+          Bringing your brand to life with creative, professional, and unique logo creations that make a lasting impression.
+        </p>
+
       </div>
 
-      {/* Bouncy Animation */}
       <style>
         {`
           @keyframes bounce {
