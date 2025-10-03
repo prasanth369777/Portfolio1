@@ -1,0 +1,5 @@
+[[plugins]]
+  package = "netlify-plugin-one"
+
+[[plugins]]
+  package = "netlify-plugin-two"
