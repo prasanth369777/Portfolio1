@@ -1,6 +1,38 @@
+import React from "react";
 import { Mail, Github, Linkedin, Send } from "lucide-react";
 
 export default function Contact() {
+  const [result, setResult] = React.useState("");
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setResult("Sending....");
+    const formData = new FormData(event.target);
+
+    // Added your access key here
+    formData.append("access_key", "86c1a356-7d8f-47ec-b523-6d02ef8d5996");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult("Form Submitted Successfully");
+        event.target.reset();
+      } else {
+        console.log("Error", data);
+        setResult(data.message);
+      }
+    } catch (error) {
+      console.log("Fetch Error", error);
+      setResult("Something went wrong. Please try again later.");
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -23,22 +55,28 @@ export default function Contact() {
         {/* Contact Card */}
         <div className="bg-gray-800/60 backdrop-blur-xl rounded-3xl shadow-2xl p-14 hover:shadow-indigo-500/20 transition-all duration-500">
           {/* Form */}
-          <form className="space-y-8">
+          <form className="space-y-8" onSubmit={onSubmit}>
             <div className="grid md:grid-cols-2 gap-8">
               <input
                 type="text"
+                name="name"
                 placeholder="Your Name"
+                required
                 className="w-full px-5 py-4 rounded-xl bg-gray-900 border border-gray-700 text-white placeholder-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
               />
               <input
                 type="email"
+                name="email"
                 placeholder="Your Email"
+                required
                 className="w-full px-5 py-4 rounded-xl bg-gray-900 border border-gray-700 text-white placeholder-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
               />
             </div>
             <textarea
+              name="message"
               rows={6}
               placeholder="Your Message"
+              required
               className="w-full px-5 py-4 rounded-xl bg-gray-900 border border-gray-700 text-white placeholder-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
             ></textarea>
             <button
@@ -48,6 +86,7 @@ export default function Contact() {
               <Send className="w-6 h-6" />
               Send Message
             </button>
+            <span className="text-center block mt-4 text-gray-300">{result}</span>
           </form>
 
           {/* Social Links */}

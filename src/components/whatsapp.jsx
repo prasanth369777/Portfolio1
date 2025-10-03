@@ -10,7 +10,7 @@ const WhatsappButton = () => {
       href={whatsappLink}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 rounded-full bg-green-500 shadow-xl hover:shadow-green-400 transition-all duration-500"
+      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 rounded-full bg-green-500 shadow-xl hover:shadow-green-400 transition-all duration-500 mb-16"
       title="Chat on WhatsApp"
       style={{
         animation: 'float 2s ease-in-out infinite',

@@ -1,15 +1,13 @@
 import React from "react";
 import heroPerson from "../assets/hero-person.png";
 
-// Import your logos
+// Logos
 import figmaLogo from "../assets/DJ1-01.png";
 import photoshopLogo from "../assets/GREENSAND LOGO-01.png";
 import illustratorLogo from "../assets/KAIPULLA-01.png";
 import webDesignLogo from "../assets/VIKRAM LOGO-01.png";
 import canvaLogo from "../assets/ak holidays-01-01.png";
 import marketingLogo from "../assets/bloom field logo-02-01.png";
-
-// Extra 4 logos
 import logo7 from "../assets/cyberfox log-01.png";
 import logo8 from "../assets/hero-person.png";
 import logo9 from "../assets/sss logo-01.png";
@@ -28,29 +26,29 @@ const logosOuter = [
   { src: logo10, name: "Logo 10" },
 ];
 
-const logosAround = logosOuter; // Radial logos
+const logosAround = logosOuter;
 
 const LogoSection = () => {
   return (
     <section className="relative py-24 bg-gradient-to-b from-white to-gray-100 overflow-hidden">
-      <div className="max-w-[95%] mx-auto flex flex-col items-center justify-center relative h-[900px] sm:h-[950px]">
+      <div className="max-w-[95%] mx-auto flex flex-col items-center justify-center relative h-[800px] sm:h-[900px] md:h-[950px]">
 
         {/* Background Title */}
         <h1
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-          text-[70px] sm:text-[120px] font-extrabold text-transparent 
+          text-[50px] sm:text-[70px] md:text-[100px] lg:text-[120px] font-extrabold text-transparent 
           bg-clip-text bg-gradient-to-r from-gray-300 to-gray-500 opacity-20 select-none tracking-wider whitespace-nowrap"
         >
           LOGO CREATIONS
         </h1>
 
         {/* Foreground Title */}
-        <h2 className="relative text-4xl sm:text-5xl font-bold text-gray-900 mb-16 z-10 text-center">
+        <h2 className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-12 sm:mb-16 z-10 text-center">
           LOGO CREATION
         </h2>
 
         {/* Center Image */}
-        <div className="relative w-[280px] sm:w-[460px] z-10">
+        <div className="relative w-[200px] sm:w-[280px] md:w-[400px] lg:w-[460px] z-10">
           <img
             src={heroPerson}
             alt="Hero person"
@@ -61,37 +59,52 @@ const LogoSection = () => {
           {logosAround.map((logo, idx) => {
             const angle = (360 / logosAround.length) * idx;
             const rad = (angle * Math.PI) / 180;
-            const radiusMd = 260; // md+
+            const radiusMobile = 120;
+            const radiusSm = 180;
+            const radiusMd = 240;
 
             return (
               <div
                 key={logo.name}
                 className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-                  w-12 h-12 md:w-20 md:h-20 
-                  rounded-full bg-white shadow-lg flex items-center justify-center transition-transform duration-500 hover:scale-110`}
+                  w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-white shadow-lg flex items-center justify-center transition-transform duration-500 hover:scale-110`}
                 style={{
-                  transform: `translate(${radiusMd * Math.cos(rad)}px, ${radiusMd * Math.sin(rad)}px)`,
+                  transform: `translate(${(window.innerWidth >= 768
+                    ? radiusMd * Math.cos(rad)
+                    : window.innerWidth >= 640
+                    ? radiusSm * Math.cos(rad)
+                    : radiusMobile * Math.cos(rad)
+                  )}px, ${(window.innerWidth >= 768
+                    ? radiusMd * Math.sin(rad)
+                    : window.innerWidth >= 640
+                    ? radiusSm * Math.sin(rad)
+                    : radiusMobile * Math.sin(rad)
+                  )}px)`,
                 }}
               >
                 <img
                   src={logo.src}
                   alt={logo.name}
-                  className="w-8 h-8 md:w-14 md:h-14 object-contain"
+                  className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 object-contain"
                 />
               </div>
             );
           })}
 
           {/* Horizontal Outer Logos Behind Image */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex space-x-4 sm:space-x-6 z-0 justify-center">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex space-x-3 sm:space-x-4 md:space-x-6 z-0 justify-center">
             {logosOuter.map((logo, idx) => (
               <div
                 key={`outer-${logo.name}`}
                 className="rounded-full flex items-center justify-center"
                 style={{
-                  width: "48px",
-                  height: "48px",
-                  boxShadow: "0 0 20px 5px rgba(59, 130, 246, 0.5)", // blue glow
+                  width: "40px",
+                  height: "40px",
+                  smWidth: "48px",
+                  smHeight: "48px",
+                  mdWidth: "60px",
+                  mdHeight: "60px",
+                  boxShadow: "0 0 15px 4px rgba(59, 130, 246, 0.5)",
                   backgroundColor: "white",
                   opacity: 0.3,
                   animation: `bounce 2s ease-in-out ${idx * 0.1}s infinite alternate`,
@@ -100,14 +113,14 @@ const LogoSection = () => {
                 <img
                   src={logo.src}
                   alt={logo.name}
-                  className="w-8 h-8 sm:w-16 sm:h-16 object-contain"
+                  className="w-6 h-6 sm:w-12 sm:h-12 object-contain"
                 />
               </div>
             ))}
           </div>
 
           {/* Text below image */}
-          <p className="mt-10 text-sm sm:text-base text-gray-700 max-w-md mx-auto z-10 text-center">
+          <p className="mt-8 sm:mt-10 text-sm sm:text-base md:text-lg text-gray-700 max-w-md mx-auto z-10 text-center">
             Bringing your brand to life with creative, professional, and unique logo creations that make a lasting impression.
           </p>
         </div>

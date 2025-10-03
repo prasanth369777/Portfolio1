@@ -56,11 +56,11 @@ const Footer = () => {
               <div className="space-y-3">
                 <div className="flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200">
                   <Mail className="w-4 h-4 mr-3" />
-                  <span className="text-sm">hello@uidesigner.com</span>
+                  <span className="text-sm">mrprasanthh@gmail.com</span>
                 </div>
                 <div className="flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200">
                   <Phone className="w-4 h-4 mr-3" />
-                  <span className="text-sm">+1 (555) 123-4567</span>
+                  <span className="text-sm">+91 8531985733</span>
                 </div>
               </div>
             </div>
@@ -121,13 +121,16 @@ const Footer = () => {
                 © 2025 UI Designer Portfolio. All rights reserved.
               </div>
               
-              <button
-                onClick={scrollToTop}
-                className="p-2 bg-gray-200 border border-gray-300 rounded-full hover:border-gray-400 hover:bg-gray-300 transition-all duration-300 text-gray-700 hover:text-gray-900 group"
-                aria-label="Scroll to top"
-              >
-                <ArrowUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform duration-200" />
-              </button>
+             <button
+  onClick={scrollToTop}
+  className="fixed bottom-10 right-6 p-3 bg-gray-200 border border-gray-300 rounded-full 
+             hover:border-gray-400 hover:bg-gray-300 transition-all duration-300 
+             text-gray-700 hover:text-gray-900 group shadow-lg "
+  aria-label="Scroll to top"
+>
+  <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-200 " />
+</button>
+
             </div>
           </div>
         </div>

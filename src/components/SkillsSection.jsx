@@ -21,7 +21,10 @@ const SkillsWaveSection = () => {
   }, [controls, inView]);
 
   return (
-    <section className="relative py-28 sm:py-36 lg:py-44 bg-gradient-to-b from-white to-gray-100 overflow-hidden px-4 sm:px-6 lg:px-20">
+    <section
+      id="skillssection"
+      className="relative py-20 sm:py-28 lg:py-36 bg-gradient-to-b from-white to-gray-100 overflow-hidden px-4 sm:px-6 lg:px-20"
+    >
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="text-5xl sm:text-6xl font-extrabold mb-8 sm:mb-12 text-gray-900">My Skills</h2>
         <p className="text-gray-700 mb-20 max-w-4xl mx-auto text-base sm:text-lg md:text-xl">

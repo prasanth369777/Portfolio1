@@ -6,10 +6,10 @@ const logos = [
   "https://img.icons8.com/color/452/adobe-illustrator.png",
   "https://img.icons8.com/color/452/canva.png",
   "https://img.icons8.com/color/452/artificial-intelligence.png",
-  "https://img.icons8.com/color/452/marketing.png",
+  
   "https://img.icons8.com/color/452/google-logo.png",
   "https://img.icons8.com/color/452/microsoft.png",
-  "https://img.icons8.com/color/452/apple-logo.png",
+
   "https://img.icons8.com/color/452/amazon.png",
   "https://img.icons8.com/color/452/facebook-new.png",
   "https://img.icons8.com/color/452/netflix.png",
@@ -32,7 +32,7 @@ const InfiniteHorizontalScroll = () => {
       {/* Single scrolling row */}
       <div
         className="w-full flex gap-12 animate-scroll whitespace-nowrap"
-        style={{ animationDuration: "50s" }}
+        style={{ animationDuration: "30s" }} // ⏩ faster scroll
         aria-label="Scrolling brand logos"
         role="list"
       >

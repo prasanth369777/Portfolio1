@@ -67,19 +67,21 @@ const Projects = () => {
           <a
             key={index}
             href={project.link}
-            className={`group relative rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-gray-800 transition-transform duration-500 hover:scale-[1.03] hover:shadow-2xl ${project.span}`}
+            className={`group relative rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-gray-800 
+              transition-transform duration-300 ease-out hover:scale-[1.05] hover:shadow-2xl ${project.span}`}
           >
             {/* Project Image */}
             <img
               src={project.image}
               alt={project.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transform transition-transform duration-300 ease-out group-hover:scale-105"
               loading="lazy"
               draggable={false}
             />
 
             {/* Hover Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-6">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent 
+              opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out flex flex-col justify-end p-6">
               <h3 className="text-xl font-semibold text-white mb-2 font-poppins">
                 {project.title}
               </h3>

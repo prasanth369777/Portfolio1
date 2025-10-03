@@ -38,7 +38,10 @@ const timeline = [
 
 const TimelineSection = () => {
   return (
-    <section className="relative py-24 bg-gradient-to-b from-white to-gray-300 overflow-hidden">
+    <section
+      id="experience"
+      className="relative py-20 sm:py-24 bg-gradient-to-b from-white to-gray-300 overflow-hidden"
+    >
       <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 text-center mb-16">
         Education & Experience
       </h2>

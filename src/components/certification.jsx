@@ -35,7 +35,9 @@ const CertificationRoadmap = () => {
   }, []);
 
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-50 to-gray-200 relative">
+    <section 
+    id="certification"
+    className="py-24 bg-gradient-to-b from-gray-50 to-gray-200 relative">
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 text-center mb-16 sm:mb-20 font-poppins">
         Certifications Roadmap
       </h2>

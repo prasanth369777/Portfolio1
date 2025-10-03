@@ -16,8 +16,8 @@ const Header = () => {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Projects', href: '#projects' },
-    { name: 'Education', href: '#education' },
-    { name: 'Skills', href: '#skills' },
+    { name: 'Education', href: '#experience' },
+    { name: 'Skills', href: '#skillssection' },
     { name: 'Certifications', href: '#certification' },
     { name: 'Contact', href: '#contact' },
   ];
@@ -31,7 +31,7 @@ const Header = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-3 sm:py-4">
+        <div className="flex justify-between items-center py-2 sm:py-3">
           {/* Logo */}
           <div className="flex items-center space-x-2 cursor-pointer group">
             <div className="relative">
@@ -40,17 +40,17 @@ const Header = () => {
             <img
               src={LogoImg}
               alt="PD Logo"
-              className="w-28 sm:w-32 h-auto object-contain"
+              className="w-20 sm:w-24 md:w-28 h-auto object-contain"
             />
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex space-x-3 sm:space-x-5">
+          <nav className="hidden lg:flex space-x-2 sm:space-x-3 md:space-x-5">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="relative px-3 sm:px-4 py-2 text-gray-700 hover:text-white transition-all duration-300 group"
+                className="relative px-2 sm:px-3 md:px-4 py-1 text-gray-700 hover:text-white transition-all duration-300 group"
               >
                 <span className="relative z-10">{item.name}</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-800/20 to-purple-800/20 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-95 group-hover:scale-100" />
@@ -72,16 +72,16 @@ const Header = () => {
         <div
           className={`lg:hidden transition-all duration-300 overflow-hidden ${
             isMobileMenuOpen
-              ? 'max-h-screen opacity-100 py-4 bg-gray-300/95 backdrop-blur-md rounded-xl mt-2'
+              ? 'max-h-screen opacity-100 py-3 bg-gray-300/95 backdrop-blur-md rounded-xl mt-2'
               : 'max-h-0 opacity-0'
           }`}
         >
-          <div className="flex flex-col space-y-2">
+          <div className="flex flex-col space-y-2 px-2 sm:px-4">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="block py-3 px-4 text-gray-900 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all duration-200"
+                className="block py-2 px-4 text-gray-900 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all duration-200"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}
@@ -91,7 +91,7 @@ const Header = () => {
             {/* Mobile CTA Button */}
             <a
               href="#contact"
-              className="block mt-2 py-3 px-4 text-white text-center bg-gradient-to-r from-blue-500 to-purple-600 font-semibold rounded-xl hover:shadow-lg transition-all duration-300"
+              className="block mt-2 py-2 px-4 text-white text-center bg-gradient-to-r from-blue-500 to-purple-600 font-semibold rounded-xl hover:shadow-lg transition-all duration-300"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Let's Talk
