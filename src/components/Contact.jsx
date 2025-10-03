@@ -53,9 +53,21 @@ export default function Contact() {
           {/* Social Links */}
           <div className="mt-14 flex justify-center gap-10">
             {[
-              { icon: Mail, href: "mailto:john@example.com", color: "hover:text-indigo-400" },
-              { icon: Github, href: "#", color: "hover:text-gray-400" },
-              { icon: Linkedin, href: "#", color: "hover:text-blue-400" },
+              {
+                icon: Mail,
+                href: "mailto:mrprasanthh@gmail.com",
+                color: "hover:text-indigo-400",
+              },
+              {
+                icon: Github,
+                href: "https://github.com/prasanth369777",
+                color: "hover:text-gray-400",
+              },
+              {
+                icon: Linkedin,
+                href: "https://www.linkedin.com/in/prasanth-d-/",
+                color: "hover:text-blue-400",
+              },
             ].map((social, i) => (
               <a
                 key={i}
