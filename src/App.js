@@ -10,6 +10,7 @@ import WhatsappButton from './components/whatsapp';
 import LogoSection from './components/logosec';
 import ExperienceSection from './components/experience';
 import CertificationSection from './components/certification';
+import VerticalPosterScroll from './components/posterproject';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <InfiniteHorizontalScroll /> {/* fixed */}
       <About />
       <Projects />
+      <VerticalPosterScroll />
       <LogoSection />
       <ExperienceSection />
       <SkillsSection />

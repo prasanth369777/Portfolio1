@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import heroPerson from "../assets/hero-person.png";
+import heroPerson from "../assets/hero-person.webp";
 
 // Logos
 import figmaLogo from "../assets/DJ1-01.png";
@@ -9,7 +9,7 @@ import webDesignLogo from "../assets/VIKRAM LOGO-01.png";
 import canvaLogo from "../assets/ak holidays-01-01.png";
 import marketingLogo from "../assets/bloom field logo-02-01.png";
 import logo7 from "../assets/cyberfox log-01.png";
-import logo8 from "../assets/hero-person.png";
+import logo8 from "../assets/hero-person.webp";
 import logo9 from "../assets/sss logo-01.png";
 import logo10 from "../assets/Untitled design (1).png";
 
