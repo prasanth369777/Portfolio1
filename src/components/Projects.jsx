@@ -30,17 +30,17 @@ const projectList = [
     span: "md:col-span-2 md:row-span-1",
   },
   {
-    title: "Landing Page",
+    title: "Agasthiyas Kathir Healthcare",
     image:
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
-    link: "#",
+      "https://content.jdmagicbox.com//v2/comp/coimbatore/x1/0422px422.x422.180326113611.y2x1/menu/agasthiyas-kathir-health-care-centre-gn-mills-coimbatore-chiropractic-doctors-cj6o4wu.jpg",
+    link: "https://www.agasthiyaskathirhealthcare.com/",
     span: "md:col-span-1 md:row-span-1",
   },
   {
-    title: "Creative Branding",
+    title: "Career Ladder Education",
     image:
-      "https://images.unsplash.com/photo-1497493292307-31c376b6e479?auto=format&fit=crop&w=800&q=80",
-    link: "#",
+      "https://www.careerladderedu.com/static/media/java.c6b2c6adf12ccb3814f5.webp",
+    link: "https://www.careerladderedu.com/",
     span: "md:col-span-1 md:row-span-1",
   },
 ];
@@ -67,6 +67,8 @@ const Projects = () => {
           <a
             key={index}
             href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
             className={`group relative rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-gray-800 
               transition-transform duration-300 ease-out hover:scale-[1.05] hover:shadow-2xl ${project.span}`}
           >
@@ -80,8 +82,10 @@ const Projects = () => {
             />
 
             {/* Hover Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent 
-              opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out flex flex-col justify-end p-6">
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent 
+              opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out flex flex-col justify-end p-6"
+            >
               <h3 className="text-xl font-semibold text-white mb-2 font-poppins">
                 {project.title}
               </h3>

@@ -2,7 +2,7 @@ import React from 'react';
 import heroPortrait from '../assets/hero-person.webp';
 
 const HeroSection = () => {
-  const skills = ['UI/UX', 'Web Dev', 'Graphic Designing'];
+  const skills = ['UI/UX', 'Web Dev', 'Digital Marketing'];
 
   return (
     <section
