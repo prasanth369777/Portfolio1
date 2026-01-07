@@ -1,6 +1,6 @@
 import React from "react";
 
-// Import your posters/logos here
+// Import posters
 import poster1 from "../assets/poster1.webp";
 import poster2 from "../assets/poster2.webp";
 import poster3 from "../assets/poster3.webp";
@@ -32,32 +32,32 @@ const posters = [
 ];
 
 const VerticalPosterScroll = () => {
-  const repeatedPosters = Array(5).fill(posters).flat();
+  // Repeat posters for seamless continuous loop
+  const repeatedPosters = Array(3).fill(posters).flat();
 
   return (
-    <section className="relative py-12 bg-gray-900 overflow-hidden">
-      <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-white">
+    <section className="relative py-16 bg-gray-900 overflow-hidden">
+      {/* Title */}
+      <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-white font-poppins">
         Our Posters
       </h2>
 
-      <div className="flex justify-center gap-6 max-w-[95%] mx-auto max-h-[500px] overflow-hidden">
-        {[0, 1, 2, 3].map((col) => (
+      {/* 3 continuous scrolling columns */}
+      <div className="flex justify-center gap-6 max-w-[95%] mx-auto h-[600px] overflow-hidden">
+        {[0, 1, 2].map((col) => (
           <div
-            key={`col-${col}`}
-            className="flex flex-col gap-4 animate-verticalScroll"
-            style={{
-              animationDuration: `${8 + col * 3}s`, // Faster scroll
-            }}
+            key={col}
+            className={`flex flex-col gap-6 animate-scroll-${col}`}
           >
             {repeatedPosters.map((poster, idx) => (
               <div
-                key={`poster-${col}-${idx}`}
-                className="w-40 h-56 sm:w-44 sm:h-60 md:w-48 md:h-64 bg-white/10 rounded-lg flex items-center justify-center shadow-lg"
+                key={`${col}-${idx}`}
+                className="w-44 h-60 sm:w-48 sm:h-64 md:w-56 md:h-72 bg-white/10 rounded-xl flex items-center justify-center shadow-lg"
               >
                 <img
                   src={poster}
                   alt={`Poster ${idx + 1}`}
-                  className="h-full w-full object-contain p-1"
+                  className="h-full w-full object-contain p-2"
                   draggable={false}
                 />
               </div>
@@ -66,19 +66,26 @@ const VerticalPosterScroll = () => {
         ))}
       </div>
 
-      {/* Vertical scrolling animation */}
+      {/* Smooth infinite animations */}
       <style>{`
-        @keyframes verticalScroll {
+        @keyframes scroll-up {
           0% { transform: translateY(0); }
           100% { transform: translateY(-50%); }
         }
-        .animate-verticalScroll {
-          animation-name: verticalScroll;
-          animation-timing-function: linear;
-          animation-iteration-count: infinite;
+        @keyframes scroll-down {
+          0% { transform: translateY(-50%); }
+          100% { transform: translateY(0); }
         }
-        .animate-verticalScroll:hover {
-          animation-play-state: paused;
+
+        /* All 3 columns scroll infinitely */
+        .animate-scroll-0 {
+          animation: scroll-up 25s linear infinite;
+        }
+        .animate-scroll-1 {
+          animation: scroll-down 25s linear infinite;
+        }
+        .animate-scroll-2 {
+          animation: scroll-up 25s linear infinite;
         }
       `}</style>
     </section>

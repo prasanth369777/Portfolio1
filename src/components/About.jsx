@@ -122,8 +122,8 @@ const About: React.FC = () => {
         {/* Stats */}
         <div className="mt-12 sm:mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 text-center">
           <div>
-            <div className="text-2xl sm:text-3xl font-bold text-indigo-500 mb-1 sm:mb-2">11</div>
-            <div className="text-gray-700 text-sm sm:text-base">Months Experience</div>
+            <div className="text-2xl sm:text-3xl font-bold text-indigo-500 mb-1 sm:mb-2">1.5</div>
+            <div className="text-gray-700 text-sm sm:text-base">Year Experience</div>
           </div>
           <div>
             <div className="text-2xl sm:text-3xl font-bold text-pink-500 mb-1 sm:mb-2">6+</div>
