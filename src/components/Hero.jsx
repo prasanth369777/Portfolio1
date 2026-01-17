@@ -2,170 +2,156 @@ import React from 'react';
 import heroPortrait from '../assets/hero-person.webp';
 
 const HeroSection = () => {
-  const skills = ['UI/UX', 'Web Dev', 'Digital Marketing'];
+  const skills = ['React', 'TypeScript', 'Tailwind', 'Next.js', 'Figma'];
 
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center bg-gradient-to-b from-white via-gray-200 to-gray-400 text-gray-900 relative overflow-hidden 
-                 px-4 sm:px-6 md:px-10 lg:px-20 
-                 pt-24 sm:pt-0 font-sans"
+      className="relative w-full min-h-screen flex items-center bg-slate-950 overflow-hidden font-sans selection:bg-cyan-500 selection:text-white py-20 lg:py-0"
     >
-      {/* FULL SECTION MATRIX DIGITAL RAIN */}
-      <svg
-        className="absolute inset-0 w-full h-full opacity-20 pointer-events-none z-0"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-      >
-        <defs>
-          <linearGradient id="matrixFade" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#00ff88" stopOpacity="0" />
-            <stop offset="30%" stopColor="#00ff88" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="#00ff88" stopOpacity="1" />
-          </linearGradient>
-        </defs>
+      {/* --- BACKGROUND EFFECTS --- */}
+      
+      {/* 1. Dotted Grid Overlay */}
+      <div className="absolute inset-0 z-0 opacity-20"
+        style={{
+            backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)',
+            backgroundSize: '30px 30px'
+        }}
+      ></div>
 
-        {[...Array(60)].map((_, i) => (
-          <text
-            key={i}
-            x={(i * 100) / 60}
-            y="-10"
-            fill="url(#matrixFade)"
-            fontSize="2.5"
-            fontFamily="monospace"
-            className="matrix-rain"
-            style={{
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 3}s`,
-            }}
-          >
-            {Math.random() > 0.5
-              ? '1010101010101010'
-              : '0101010101010101'}
-          </text>
-        ))}
-      </svg>
+      {/* 2. Glowing Aurora Orbs */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/30 rounded-full blur-[120px] animate-pulse"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-600/20 rounded-full blur-[120px] animate-pulse delay-1000"></div>
 
-      {/* Bottom Right Accent Shape */}
-      <svg
-        className="absolute bottom-0 right-0 w-40 sm:w-60 md:w-80 h-40 sm:h-60 md:h-80 opacity-15 animate-bounce-slow"
-        viewBox="0 0 200 200"
-        fill="none"
-      >
-        <rect x="0" y="0" width="200" height="200" rx="50" fill="url(#grad2)" />
-        <defs>
-          <linearGradient id="grad2" x1="0" y1="0" x2="200" y2="200">
-            <stop offset="0%" stopColor="#00FFBC" />
-            <stop offset="100%" stopColor="#0057FF" />
-          </linearGradient>
-        </defs>
-      </svg>
+      {/* --- CONTENT CONTAINER --- */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        
+        {/* LEFT COLUMN: TEXT CONTENT */}
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
+          
+          {/* Status Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 backdrop-blur-md animate-fadeIn cursor-default hover:border-cyan-500/50 transition-colors">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
+            </span>
+            <span className="text-cyan-300 text-sm font-medium tracking-wide">Available for projects</span>
+          </div>
 
-      {/* CONTENT */}
-      <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center relative z-10">
-        {/* LEFT */}
-        <div className="space-y-5 sm:space-y-6 md:space-y-8 lg:space-y-10 text-center lg:text-left">
-          <span className="inline-block px-3 py-1 text-green-700 font-semibold rounded-full bg-green-100 animate-pulse text-xs sm:text-sm md:text-base">
-            And I'm a
-          </span>
+          {/* Typography Block */}
+          <div className="space-y-4">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white animate-slideUp">
+              I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Prasanth.</span>
+            </h1>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-gray-300 animate-slideUp delay-100">
+              Creative Designer & <br className="hidden sm:block" />
+              <span className="font-semibold text-white">UX Developer</span>
+            </h2>
+            <p className="text-base sm:text-lg text-gray-400 max-w-lg leading-relaxed animate-slideUp delay-200">
+              I craft scalable digital products and immersive web experiences that 
+              bridge the gap between <strong className="text-gray-100">art</strong> and <strong className="text-gray-100">engineering</strong>.
+            </p>
+          </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold font-heading animate-fadeIn delay-200">
-            Prasanth.
-          </h1>
-
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 max-w-2xl leading-relaxed animate-fadeIn delay-400 mx-auto lg:mx-0">
-            Creative Designer & Developer crafting beautiful digital experiences
-            that combine aesthetic excellence with functional innovation.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 animate-fadeIn delay-600 justify-center lg:justify-start">
-            <button
-              onClick={() =>
-                document
-                  .getElementById('projects')
-                  ?.scrollIntoView({ behavior: 'smooth' })
-              }
-              className="px-8 py-3 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-2xl font-semibold shadow-lg hover:scale-105 transition text-white"
+          {/* Call to Action Area */}
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto animate-slideUp delay-300">
+            <button 
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-8 py-4 bg-white text-gray-900 rounded-full font-bold shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] hover:scale-105 transition-all duration-300"
             >
               View My Work
             </button>
-
-            <button className="px-8 py-3 border border-gray-400 rounded-2xl font-semibold hover:bg-gray-300 transition">
+            <button className="px-8 py-4 rounded-full font-bold text-white border border-gray-700 hover:bg-white/5 hover:border-gray-500 transition-all duration-300">
               Contact Me
             </button>
           </div>
-
-          <div className="flex flex-col sm:flex-row gap-6 pt-4 animate-fadeIn delay-800 justify-center lg:justify-start">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              <span className="text-sm text-gray-700">Available for hire</span>
-            </div>
-
-            <div className="flex gap-3 flex-wrap">
-              {skills.map((skill, i) => (
-                <span
-                  key={skill}
-                  className={`px-4 py-1.5 bg-gray-100 rounded-full text-sm font-medium animate-fadeIn delay-${(i + 1) * 200}`}
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
+          
+          {/* Tech Stack Indicators */}
+          <div className="pt-6 animate-slideUp delay-400">
+             <p className="text-sm text-gray-500 uppercase tracking-widest mb-3">Tech Stack</p>
+             <div className="flex flex-wrap justify-center lg:justify-start gap-3">
+                {skills.map((skill, i) => (
+                   <span key={i} className="px-3 py-1 text-xs font-mono text-cyan-300 bg-cyan-950/50 border border-cyan-900 rounded hover:border-cyan-500/50 transition-colors cursor-default">
+                     {skill}
+                   </span>
+                ))}
+             </div>
           </div>
         </div>
 
-        {/* RIGHT IMAGE */}
-        <div className="flex justify-center lg:justify-end animate-fadeIn delay-1000">
-          <img
-            src={heroPortrait}
-            alt="Prasanth – Creative Designer & Developer"
-            className="w-72 md:w-96 lg:w-full max-w-xl rounded-2xl shadow-2xl animate-float"
-          />
+        {/* RIGHT COLUMN: VISUALS */}
+        <div className="relative flex justify-center lg:justify-end animate-fadeIn delay-500">
+          
+          {/* Abstract Geometric Shapes Background */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-gray-800 rounded-full animate-[spin_20s_linear_infinite]"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] border border-dashed border-gray-700 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+
+          {/* Main Portrait Card */}
+          <div className="relative group">
+            {/* Glow effect behind image */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-600 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+            
+            {/* Image Container */}
+            <div className="relative w-72 sm:w-80 md:w-96 aspect-[3/4] bg-slate-900 rounded-xl overflow-hidden border border-slate-800">
+               <img
+                  src={heroPortrait}
+                  alt="Prasanth"
+                  className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-100 group-hover:scale-110"
+               />
+               
+               {/* Overlay Gradient */}
+               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
+               
+               {/* Bottom Info inside Image */}
+               <div className="absolute bottom-6 left-6 text-left">
+                 <p className="text-cyan-400 text-xs font-bold tracking-widest uppercase mb-1">Lead Designer</p>
+                 <p className="text-white text-xl font-bold">Based in India</p>
+               </div>
+            </div>
+
+            {/* Floating Glass Cards */}
+            <div className="absolute -left-6 bottom-10 bg-slate-900/80 backdrop-blur-md border border-slate-700 p-4 rounded-xl shadow-xl animate-float hidden sm:block">
+               <div className="flex items-center gap-3">
+                  <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                  <span className="text-sm font-semibold text-white">6+ Projects Done</span>
+               </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* ANIMATIONS */}
+      {/* --- ANIMATION STYLES --- */}
       <style>{`
-        .animate-fadeIn { opacity: 0; animation: fadeIn 1s ease forwards; }
-        .delay-200 { animation-delay: .2s }
-        .delay-400 { animation-delay: .4s }
-        .delay-600 { animation-delay: .6s }
-        .delay-800 { animation-delay: .8s }
-        .delay-1000 { animation-delay: 1s }
-
-        @keyframes fadeIn {
-          to { opacity: 1 }
-        }
-
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-
         @keyframes float {
-          0%, 100% { transform: translateY(0) }
-          50% { transform: translateY(-15px) }
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+          animation: float 4s ease-in-out infinite;
         }
 
-        .animate-bounce-slow {
-          animation: bounce 5s ease-in-out infinite;
+        @keyframes slideUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slideUp {
+          animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 1.5s ease-out forwards;
         }
 
-        @keyframes bounce {
-          0%, 100% { transform: translateY(0) }
-          50% { transform: translateY(-20px) }
-        }
-
-        .matrix-rain {
-          animation-name: matrixFall;
-          animation-timing-function: linear;
-          animation-iteration-count: infinite;
-        }
-
-        @keyframes matrixFall {
-          from { transform: translateY(-120%); opacity: 0 }
-          10% { opacity: 1 }
-          to { transform: translateY(120%); opacity: 0 }
-        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-1000 { animation-delay: 1s; }
       `}</style>
     </section>
   );
