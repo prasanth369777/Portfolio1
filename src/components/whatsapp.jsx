@@ -9,10 +9,7 @@ const WhatsappButton = () => {
   return (
     <div className="fixed bottom-8 right-8 z-50 group">
       
-      {/* 1. Radar Ping (Optimized) 
-          - Using CSS transforms instead of default width/height changes for better performance 
-      */}
-      <div className="absolute inset-0 rounded-full bg-green-500/40 animate-ping pointer-events-none "></div>
+ 
       
       {/* 2. Main Button Container */}
       <a

@@ -1,169 +1,67 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Figma, Image, PenTool, Globe, Cpu } from "lucide-react";
+import React, { useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { Figma, Image, Monitor } from "lucide-react";
 
-// Data
 const skills = [
-  { 
-    name: "Figma", 
-    level: 95, 
-    color: "from-pink-500 to-rose-500",
-    shadow: "shadow-pink-500/20",
-    icon: <Figma className="w-6 h-6 text-white" /> 
-  },
-  { 
-    name: "Photoshop", 
-    level: 85, 
-    color: "from-blue-500 to-cyan-500",
-    shadow: "shadow-blue-500/20",
-    icon: <Image className="w-6 h-6 text-white" /> 
-  },
-  { 
-    name: "Illustrator", 
-    level: 80, 
-    color: "from-orange-500 to-yellow-500",
-    shadow: "shadow-orange-500/20",
-    icon: <PenTool className="w-6 h-6 text-white" /> 
-  },
-  { 
-    name: "Canva", 
-    level: 90, 
-    color: "from-teal-400 to-emerald-500",
-    shadow: "shadow-teal-500/20",
-    icon: <Image className="w-6 h-6 text-white" /> 
-  },
-  { 
-    name: "AI & No-Code", 
-    level: 75, 
-    color: "from-purple-500 to-indigo-500",
-    shadow: "shadow-purple-500/20",
-    icon: <Cpu className="w-6 h-6 text-white" /> 
-  },
-  { 
-    name: "Digital Marketing", 
-    level: 70, 
-    color: "from-red-500 to-orange-500",
-    shadow: "shadow-red-500/20",
-    icon: <Globe className="w-6 h-6 text-white" /> 
-  },
+  { name: "Figma", level: 90, icon: <Figma className="w-6 h-6 sm:w-8 sm:h-8 text-pink-500" /> },
+  { name: "Photoshop", level: 85, icon: <Image className="w-6 h-6 sm:w-8 sm:h-8 text-blue-500" /> },
+  { name: "Adobe Illustrator", level: 80, icon: <Image className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-500" /> },
+  { name: "Canva", level: 95, icon: <Image className="w-6 h-6 sm:w-8 sm:h-8 text-green-500" /> },
+  { name: "AI Website", level: 75, icon: <Monitor className="w-6 h-6 sm:w-8 sm:h-8 text-purple-500" /> },
+  { name: "Digital Marketing", level: 70, icon: <Monitor className="w-6 h-6 sm:w-8 sm:h-8 text-orange-500" /> },
 ];
 
-const SkillsRoadmap = () => {
+const SkillsWaveSection = () => {
+  const controls = useAnimation();
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
+
+  useEffect(() => {
+    if (inView) controls.start("visible");
+  }, [controls, inView]);
+
   return (
-    <section id="skills" className="relative py-24 overflow-hidden bg-black">
-      
-      {/* --- BACKGROUND OPTIMIZATION --- */}
-      
-      {/* 1. Gray Gradient Background (Replaces flat color) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-[#111] to-black z-0"></div>
+    <section
+      id="skillssection"
+      className="relative py-20 sm:py-28 lg:py-36 bg-gradient-to-b from-white to-gray-100 overflow-hidden px-4 sm:px-6 lg:px-20"
+    >
+      <div className="max-w-7xl mx-auto text-center">
+        <h2 className="text-5xl sm:text-6xl font-extrabold mb-8 sm:mb-12 text-gray-900">My Skills</h2>
+        <p className="text-gray-700 mb-20 max-w-4xl mx-auto text-base sm:text-lg md:text-xl">
+          I blend creativity and technology to craft interactive designs and websites. Here's a snapshot of my key skills with animated highlights.
+        </p>
 
-      {/* 2. Static Noise (Replaces heavy SVG calculation) */}
-      <div className="absolute inset-0 opacity-[0.04] pointer-events-none z-0 mix-blend-overlay"
-           style={{ 
-             backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")`,
-             backgroundSize: "100px 100px" 
-           }}>
-      </div>
-      
-      <div className="relative z-10 max-w-5xl mx-auto px-4">
-        
-        {/* Header */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-700 bg-gray-800/50 backdrop-blur-md mb-4">
-             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-             <span className="text-xs font-mono text-gray-300 uppercase tracking-widest">Tech Stack</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter">
-            Skill <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-500">Highway</span>
-          </h2>
-        </div>
+        {/* Skills Wave */}
+        <div ref={ref} className="relative flex flex-col sm:flex-row items-center justify-center gap-16 sm:gap-24">
+          {skills.map((skill, idx) => (
+            <motion.div
+              key={skill.name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={controls}
+              variants={{
+                visible: { opacity: 1, y: 0, transition: { delay: idx * 0.2, duration: 0.6 } },
+              }}
+              className="flex flex-col items-center relative"
+            >
+              {/* Skill dot with glow and bounce */}
+              <motion.div
+                className="relative flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white shadow-lg"
+                animate={{ y: ["0%", "-15%", "0%"] }}
+                transition={{ repeat: Infinity, duration: 2, delay: idx * 0.2, ease: "easeInOut" }}
+              >
+                {skill.icon}
+                <div className="absolute inset-0 rounded-full bg-blue-400 opacity-20 blur-xl"></div>
+              </motion.div>
 
-        {/* --- THE ROAD STRUCTURE --- */}
-        <div className="relative">
-          
-          {/* 1. CENTRAL SPINE (The Road) */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-gray-800 rounded-full md:-translate-x-1/2 overflow-hidden">
-            {/* Animated Beam flowing down the road */}
-            <motion.div 
-              className="absolute top-0 left-0 w-full h-[30%] bg-gradient-to-b from-transparent via-cyan-400 to-transparent blur-md"
-              animate={{ top: ["-30%", "130%"] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              style={{ willChange: "top" }} // Performance Hint
-            />
-          </div>
-
-          <div className="flex flex-col gap-12 md:gap-16">
-            {skills.map((skill, idx) => {
-              const isEven = idx % 2 === 0;
-
-              return (
-                <div key={idx} className={`relative flex flex-col md:flex-row items-center ${isEven ? "md:flex-row-reverse" : ""}`}>
-                  
-                  {/* SPACER for Desktop Layout */}
-                  <div className="hidden md:block w-1/2"></div>
-
-                  {/* 2. THE NODE (Intersection) */}
-                  <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 bg-gray-900 border-2 border-cyan-500 rounded-full z-20 shadow-[0_0_10px_rgba(34,211,238,0.8)]"></div>
-
-                  {/* 3. THE CURVED CONNECTOR (The "Off-Ramp") */}
-                  <div className={`
-                    hidden md:block absolute h-1/2 w-1/2 top-1/2 border-t-2 border-gray-800 -z-10
-                    ${isEven 
-                      ? "left-1/2 rounded-tr-[30px] border-r-2 border-gray-800 translate-x-0" 
-                      : "right-1/2 rounded-tl-[30px] border-l-2 border-gray-800 -translate-x-0"
-                    }
-                  `}></div>
-
-                  {/* 4. THE SKILL CARD */}
-                  <div className="w-full md:w-1/2 pl-12 md:pl-0 md:px-12">
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-50px" }}
-                      transition={{ delay: idx * 0.1 }}
-                      className={`
-                        group relative overflow-hidden rounded-2xl bg-gray-900/50 backdrop-blur-sm border border-gray-800 p-5
-                        hover:border-gray-600 transition-all duration-300 ${skill.shadow} hover:shadow-2xl
-                      `}
-                    >
-                      {/* Hover Gradient Background */}
-                      <div className={`absolute inset-0 bg-gradient-to-r ${skill.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
-
-                      <div className="flex items-center justify-between mb-4 relative z-10">
-                        <div className="flex items-center gap-4">
-                           {/* Icon Box */}
-                           <div className={`p-3 rounded-xl bg-gradient-to-br ${skill.color} shadow-lg`}>
-                             {skill.icon}
-                           </div>
-                           <h3 className="text-xl font-bold text-white tracking-wide">{skill.name}</h3>
-                        </div>
-                        <span className="text-xl font-mono font-bold text-gray-500 group-hover:text-white transition-colors">{skill.level}%</span>
-                      </div>
-
-                      {/* Progress Bar Container */}
-                      <div className="h-2 w-full bg-gray-800 rounded-full overflow-hidden relative z-10">
-                        {/* Animated Fill */}
-                        <motion.div 
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${skill.level}%` }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
-                          className={`h-full rounded-full bg-gradient-to-r ${skill.color}`}
-                        />
-                      </div>
-                      
-                    </motion.div>
-                  </div>
-
-                </div>
-              );
-            })}
-          </div>
-
+              {/* Skill label */}
+              <span className="mt-3 text-sm sm:text-base md:text-lg font-semibold text-gray-900">{skill.name}</span>
+              <span className="text-xs sm:text-sm text-gray-500 mt-1">{skill.level}%</span>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
 
-export default SkillsRoadmap;
+export default SkillsWaveSection;
