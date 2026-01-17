@@ -7,7 +7,6 @@ const projectList = [
     category: "EDUTECH • PLATFORM",
     image: "https://www.careerladderedu.com/static/media/java.c6b2c6adf12ccb3814f5.webp",
     link: "https://www.careerladderedu.com/",
-    // Large 2x2 box for the main featured project on desktop
     span: "md:col-span-2 md:row-span-2",
   },
   {
@@ -29,7 +28,6 @@ const projectList = [
     category: "PERSONAL • BRANDING",
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
     link: "#",
-    // Wide span for variety in the grid
     span: "md:col-span-2 md:row-span-1",
   },
   {
@@ -47,23 +45,29 @@ const Projects = () => {
       id="projects"
       className="relative min-h-screen py-20 md:py-32 bg-[#050505] overflow-hidden selection:bg-lime-400 selection:text-black font-sans"
     >
-      {/* --- BACKGROUND TEXTURES --- */}
+      {/* --- OPTIMIZED BACKGROUND LAYERS --- */}
       
-      {/* 1. Noise Grain */}
+      {/* 1. Static Noise Texture (Replaces heavy SVG Filter) */}
       <div className="absolute inset-0 opacity-[0.04] pointer-events-none z-0"
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
+           style={{ 
+             backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")`,
+             backgroundSize: '100px 100px'
+           }}
       ></div>
 
-      {/* 2. Gradient Blobs (Animated) */}
-      <div className="absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-purple-600/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none animate-pulse"></div>
-      <div className="absolute bottom-0 left-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-lime-500/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none"></div>
+      {/* 2. Radial Gradients (Replaces heavy Blur effects) */}
+      {/* Top Right Purple Glow */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(147,51,234,0.1)_0%,transparent_70%)] pointer-events-none"></div>
+      
+      {/* Bottom Left Lime Glow */}
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(132,204,22,0.1)_0%,transparent_70%)] pointer-events-none"></div>
 
       <div className="relative z-10 max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12">
         
         {/* --- HEADER --- */}
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-12 md:mb-20 gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-4 md:mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-4 md:mb-6">
                <span className="w-2 h-2 rounded-full bg-lime-400 animate-pulse"></span>
                <span className="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-widest">Selected Works 2024-25</span>
             </div>
@@ -80,7 +84,6 @@ const Projects = () => {
         </div>
 
         {/* --- BENTO GRID --- */}
-        {/* Mobile: grid-cols-1, Desktop: grid-cols-3 */}
         <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[300px] md:auto-rows-[300px] gap-4 md:gap-6">
           {projectList.map((project, index) => (
             <a
@@ -98,12 +101,13 @@ const Projects = () => {
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0"
                   loading="lazy"
+                  decoding="async" // Async decoding prevents main thread blocking
                 />
               </div>
 
               {/* Glass Overlay (Bottom) */}
               <div className="absolute bottom-0 left-0 w-full p-4 md:p-6 z-20">
-                <div className="relative overflow-hidden rounded-xl bg-black/60 backdrop-blur-xl border border-white/10 p-4 md:p-5 transition-all duration-300 hover:bg-black/80 group-hover:-translate-y-2">
+                <div className="relative overflow-hidden rounded-xl bg-black/60 backdrop-blur-md border border-white/10 p-4 md:p-5 transition-all duration-300 hover:bg-black/80 group-hover:-translate-y-2">
                   
                   <div className="flex justify-between items-start">
                     <div>

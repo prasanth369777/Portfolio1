@@ -1,66 +1,66 @@
 import React from 'react';
-import { Code, Palette, Zap, Users, ArrowUpRight, Terminal, Cpu, Globe } from 'lucide-react';
+import { Code, Palette, Zap, Users, ArrowUpRight } from 'lucide-react';
+
+// --- DATA MOVED OUTSIDE COMPONENT (Performance Best Practice) ---
+const highlights = [
+  {
+    icon: Code,
+    title: 'UI/UX Design',
+    desc: 'Crafting intuitive interfaces that delight users.',
+    color: 'text-cyan-400',
+    bg: 'bg-cyan-400/10'
+  },
+  {
+    icon: Palette,
+    title: 'Graphic Design',
+    desc: 'Visual storytelling through pixel-perfect graphics.',
+    color: 'text-purple-400',
+    bg: 'bg-purple-400/10'
+  },
+  {
+    icon: Zap,
+    title: 'Web Dev',
+    desc: 'High-performance, scalable web solutions.',
+    color: 'text-amber-400',
+    bg: 'bg-amber-400/10'
+  },
+  {
+    icon: Users,
+    title: 'Marketing',
+    desc: 'Data-driven strategies for brand growth.',
+    color: 'text-pink-400',
+    bg: 'bg-pink-400/10'
+  },
+];
+
+const stats = [
+  { value: '2', label: 'Years Exp.' },
+  { value: '6+', label: 'Projects' },
+  { value: '3', label: 'Internships' },
+  { value: '7', label: 'Certs' },
+];
+
+const skills = [
+  'React ', 'UIUX', 'Figma', 'Python', 'Ethical Hacking', 'DigitalMarketing', 'No-Code'
+];
 
 const About = () => {
-  // Highlight cards data
-  const highlights = [
-    {
-      icon: Code,
-      title: 'UI/UX Design',
-      desc: 'Crafting intuitive interfaces that delight users.',
-      color: 'text-cyan-400',
-      bg: 'bg-cyan-400/10'
-    },
-    {
-      icon: Palette,
-      title: 'Graphic Design',
-      desc: 'Visual storytelling through pixel-perfect graphics.',
-      color: 'text-purple-400',
-      bg: 'bg-purple-400/10'
-    },
-    {
-      icon: Zap,
-      title: 'Web Dev',
-      desc: 'High-performance, scalable web solutions.',
-      color: 'text-amber-400',
-      bg: 'bg-amber-400/10'
-    },
-    {
-      icon: Users,
-      title: 'Marketing',
-      desc: 'Data-driven strategies for brand growth.',
-      color: 'text-pink-400',
-      bg: 'bg-pink-400/10'
-    },
-  ];
-
-  // Stats data
-  const stats = [
-    { value: '2', label: 'Years Exp.' },
-    { value: '6+', label: 'Projects' },
-    { value: '3', label: 'Internships' },
-    { value: '7', label: 'Certs' },
-  ];
-
-  const skills = [
-    'React ', 'UIUX', 'Figma', 'Python', 'Ethical Hacking', 'DigitalMarketing', 'No-Code'
-  ];
-
   return (
-    <section id="about" className="relative min-h-screen py-24 bg-[#030712] overflow-hidden text-gray-300">
+    <section id="about" className="relative min-h-screen py-24 bg-[#030712] overflow-hidden text-gray-300 font-sans">
       
-      {/* --- BACKGROUND DECORATION --- */}
-      {/* Grid Pattern */}
-      <div className="absolute inset-0 opacity-20"
+      {/* --- OPTIMIZED BACKGROUND --- */}
+      
+      {/* 1. Grid Pattern (Lightweight CSS) */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none"
         style={{
             backgroundImage: `linear-gradient(#1f2937 1px, transparent 1px), linear-gradient(to right, #1f2937 1px, transparent 1px)`,
             backgroundSize: '40px 40px'
         }}
       ></div>
       
-      {/* Glowing Orbs */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[100px] pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+      {/* 2. Radial Gradients (Replaces heavy 'blur-[100px]' effects) */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(79,70,229,0.15)_0%,transparent_70%)] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.15)_0%,transparent_70%)] pointer-events-none"></div>
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
         
@@ -122,10 +122,10 @@ const About = () => {
               {highlights.map((item, index) => (
                 <div 
                   key={index} 
-                  className="group relative p-8 bg-gray-900/30 border border-gray-800 rounded-3xl overflow-hidden hover:border-gray-600 transition-all duration-300 hover:-translate-y-1"
+                  className="group relative p-8 bg-gray-900/30 border border-gray-800 rounded-3xl overflow-hidden hover:border-gray-600 transition-all duration-300 hover:-translate-y-1 will-change-transform"
                 >
-                  {/* Hover Gradient Blob */}
-                  <div className={`absolute -right-10 -top-10 w-32 h-32 rounded-full blur-[50px] opacity-0 group-hover:opacity-40 transition-opacity duration-500 ${item.bg}`}></div>
+                  {/* Optimized Hover Gradient (Radial instead of Blur) */}
+                  <div className={`absolute -right-10 -top-10 w-48 h-48 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(circle,rgba(255,255,255,1)_0%,transparent_70%)] ${item.color.replace('text-', 'text-')}`}></div>
 
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${item.bg} ${item.color}`}>
                     <item.icon className="w-6 h-6" />

@@ -51,20 +51,25 @@ const CertificationRoadmap = () => {
   return (
     <section id="certification" className="relative py-24 bg-[#050505] overflow-hidden">
       
-      {/* --- BACKGROUND FX --- */}
-      <div className="absolute inset-0 opacity-[0.03]"
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
+      {/* --- OPTIMIZED BACKGROUND FX --- */}
+      
+      {/* 1. Static Noise Texture (Replaces heavy SVG calculation) */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-0"
+           style={{ 
+             backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")`,
+             backgroundSize: "100px 100px" 
+           }}>
       </div>
       
-      {/* Glows */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+      {/* 2. Radial Gradients (Replaces heavy blur-[120px] effects) */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(6,182,212,0.1)_0%,transparent_70%)] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(168,85,247,0.1)_0%,transparent_70%)] pointer-events-none"></div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
         
         {/* Header */}
         <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-4">
              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
              <span className="text-xs font-mono text-gray-400 uppercase tracking-widest">Verified Skills</span>
           </div>
@@ -96,12 +101,12 @@ const CertificationRoadmap = () => {
                   <div className="w-full md:w-1/2 pl-20 md:pl-0 md:px-12">
                     <div className={`
                       group relative p-1 rounded-2xl bg-gradient-to-br from-white/10 to-transparent 
-                      hover:from-cyan-500/50 hover:to-purple-500/50 transition-all duration-500
+                      hover:from-cyan-500/50 hover:to-purple-500/50 transition-colors duration-500
                     `}>
                       <div className="relative h-full bg-[#0a0a0a] rounded-xl p-6 md:p-8 overflow-hidden">
                         
                         {/* Background Grid inside card */}
-                        <div className="absolute inset-0 opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+                        <div className="absolute inset-0 opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none"></div>
                         
                         <div className="relative z-10 flex items-start gap-4">
                            {/* Icon Box */}
@@ -129,7 +134,7 @@ const CertificationRoadmap = () => {
                         </div>
 
                         {/* Decoration: Corner Accent */}
-                        <div className="absolute top-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="absolute top-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                            <BadgeCheck className="w-5 h-5 text-cyan-500" />
                         </div>
 

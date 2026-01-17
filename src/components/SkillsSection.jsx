@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Figma, Image, Monitor, PenTool, Globe, Cpu } from "lucide-react";
+import { Figma, Image, PenTool, Globe, Cpu } from "lucide-react";
 
-// Enhanced data with specific colors for the "Glow" effect
+// Data
 const skills = [
   { 
     name: "Figma", 
@@ -50,23 +50,31 @@ const skills = [
 
 const SkillsRoadmap = () => {
   return (
-    <section id="skills" className="relative py-24 bg-[#050505] overflow-hidden">
+    <section id="skills" className="relative py-24 overflow-hidden bg-black">
       
-      {/* --- BACKGROUND FX --- */}
-      <div className="absolute inset-0 opacity-[0.03]"
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
+      {/* --- BACKGROUND OPTIMIZATION --- */}
+      
+      {/* 1. Gray Gradient Background (Replaces flat color) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-[#111] to-black z-0"></div>
+
+      {/* 2. Static Noise (Replaces heavy SVG calculation) */}
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none z-0 mix-blend-overlay"
+           style={{ 
+             backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")`,
+             backgroundSize: "100px 100px" 
+           }}>
       </div>
       
       <div className="relative z-10 max-w-5xl mx-auto px-4">
         
         {/* Header */}
         <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-700 bg-gray-800/50 backdrop-blur-md mb-4">
              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-             <span className="text-xs font-mono text-gray-400 uppercase tracking-widest">Tech Stack</span>
+             <span className="text-xs font-mono text-gray-300 uppercase tracking-widest">Tech Stack</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter">
-            Skill <span className=" bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-200">Highway</span>
+            Skill <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-500">Highway</span>
           </h2>
         </div>
 
@@ -77,9 +85,10 @@ const SkillsRoadmap = () => {
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-gray-800 rounded-full md:-translate-x-1/2 overflow-hidden">
             {/* Animated Beam flowing down the road */}
             <motion.div 
-              className="absolute top-0 left-0 w-full h-[30%] bg-gradient-to-b from-transparent via-cyan-400 to-transparent blur-sm"
+              className="absolute top-0 left-0 w-full h-[30%] bg-gradient-to-b from-transparent via-cyan-400 to-transparent blur-md"
               animate={{ top: ["-30%", "130%"] }}
               transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              style={{ willChange: "top" }} // Performance Hint
             />
           </div>
 
@@ -94,10 +103,9 @@ const SkillsRoadmap = () => {
                   <div className="hidden md:block w-1/2"></div>
 
                   {/* 2. THE NODE (Intersection) */}
-                  <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 bg-[#050505] border-2 border-cyan-500 rounded-full z-20 shadow-[0_0_10px_rgba(34,211,238,0.8)]"></div>
+                  <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 bg-gray-900 border-2 border-cyan-500 rounded-full z-20 shadow-[0_0_10px_rgba(34,211,238,0.8)]"></div>
 
                   {/* 3. THE CURVED CONNECTOR (The "Off-Ramp") */}
-                  {/* This draws the curved line from the center road to the card */}
                   <div className={`
                     hidden md:block absolute h-1/2 w-1/2 top-1/2 border-t-2 border-gray-800 -z-10
                     ${isEven 
@@ -114,8 +122,8 @@ const SkillsRoadmap = () => {
                       viewport={{ once: true, margin: "-50px" }}
                       transition={{ delay: idx * 0.1 }}
                       className={`
-                        group relative overflow-hidden rounded-2xl bg-[#0a0a0a] border border-white/10 p-5
-                        hover:border-white/20 transition-all duration-300 ${skill.shadow} hover:shadow-2xl
+                        group relative overflow-hidden rounded-2xl bg-gray-900/50 backdrop-blur-sm border border-gray-800 p-5
+                        hover:border-gray-600 transition-all duration-300 ${skill.shadow} hover:shadow-2xl
                       `}
                     >
                       {/* Hover Gradient Background */}

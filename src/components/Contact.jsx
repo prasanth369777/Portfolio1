@@ -42,16 +42,19 @@ export default function Contact() {
       id="contact"
       className="relative py-24 bg-[#050505] overflow-hidden text-gray-300 font-sans selection:bg-cyan-500 selection:text-black"
     >
-      {/* --- BACKGROUND TEXTURES --- */}
+      {/* --- OPTIMIZED BACKGROUND TEXTURES --- */}
       
-      {/* 1. Noise Grain */}
+      {/* 1. Static Noise Grain (Replaces heavy SVG filter) */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
+           style={{ 
+             backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")`,
+             backgroundSize: "100px 100px" 
+           }}
       ></div>
 
-      {/* 2. Gradient Orbs */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+      {/* 2. Radial Gradients (Replaces heavy blur-[120px]) */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(8,145,178,0.1)_0%,transparent_70%)] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(147,51,234,0.1)_0%,transparent_70%)] pointer-events-none"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
         
@@ -61,7 +64,7 @@ export default function Contact() {
           <div className="space-y-10">
             
             {/* Status Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 backdrop-blur-sm">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -126,10 +129,10 @@ export default function Contact() {
 
           {/* --- RIGHT COLUMN: THE FORM --- */}
           <div className="relative">
-             {/* Glow behind form */}
-             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 rounded-3xl blur-2xl -z-10 transform rotate-2 scale-105"></div>
+             {/* Optimized Glow behind form (Radial Gradient) */}
+             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.15)_0%,transparent_70%)] rounded-3xl -z-10 transform rotate-2 scale-105"></div>
 
-             <div className="bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl">
+             <div className="bg-[#0a0a0a]/80 backdrop-blur-md border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl">
                 <form className="space-y-6" onSubmit={onSubmit}>
                   
                   <div className="grid md:grid-cols-2 gap-6">
@@ -171,7 +174,9 @@ export default function Contact() {
                     disabled={isSubmitting}
                     className="group relative w-full flex items-center justify-center gap-3 px-8 py-4 bg-white text-black rounded-xl font-bold text-lg overflow-hidden transition-all hover:scale-[1.02]"
                   >
+                    {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-white to-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
                     <span className="relative z-10 flex items-center gap-2">
                        {isSubmitting ? "Transmitting..." : "Send Transmission"}
                        {!isSubmitting && <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}

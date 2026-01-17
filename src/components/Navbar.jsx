@@ -7,7 +7,12 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => {
+      // Use requestAnimationFrame for smoother scroll handling
+      window.requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 20);
+      });
+    };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -15,7 +20,7 @@ const Header = () => {
   const navItems = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
-    { name: 'Work', href: '#projects' }, // Shortened for cleaner UI
+    { name: 'Work', href: '#projects' },
     { name: 'Timeline', href: '#experience' },
     { name: 'Stack', href: '#skillssection' },
     { name: 'Certs', href: '#certification' },
@@ -23,19 +28,17 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 flex justify-center pt-4 px-4 ${
+      className={`fixed top-0 left-0 right-0 z-50 flex justify-center px-4 transition-[padding] duration-300 ease-out will-change-transform ${
         isScrolled ? 'pt-2' : 'pt-6'
       }`}
     >
-      {/* FLOATING ISLAND CONTAINER 
-         - Uses a max-width and rounded corners to look like a floating HUD element
-      */}
+      {/* FLOATING ISLAND CONTAINER */}
       <div 
         className={`
           relative w-full max-w-7xl mx-auto rounded-full 
-          transition-all duration-500 border border-white/10
+          transition-colors duration-300 border
           ${isScrolled 
-            ? 'bg-[#0a0a0a]/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] py-2 px-6' 
+            ? 'bg-[#0a0a0a]/90 backdrop-blur-md shadow-2xl border-white/10 py-2 px-6' 
             : 'bg-transparent border-transparent py-3 px-4'
           }
         `}
@@ -45,11 +48,13 @@ const Header = () => {
           {/* --- LOGO --- */}
           <a href="#home" className="flex items-center gap-2 group">
             <div className="relative w-10 h-10 flex items-center justify-center bg-white/5 rounded-full border border-white/10 overflow-hidden group-hover:border-cyan-500/50 transition-colors">
-               <div className="absolute inset-0 bg-cyan-500/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
+               {/* Optimized Glow - Removed Blur */}
+               <div className="absolute inset-0 bg-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                <img
                 src={LogoImg}
                 alt="PD Logo"
                 className="w-full h-full object-cover scale-125"
+                loading="eager" // Load logo instantly
               />
             </div>
             <span className="font-bold text-white tracking-tight hidden sm:block">
@@ -58,7 +63,7 @@ const Header = () => {
           </a>
 
           {/* --- DESKTOP NAVIGATION --- */}
-          <nav className="hidden lg:flex items-center gap-1 bg-white/5 rounded-full px-2 py-1 border border-white/5 backdrop-blur-md">
+          <nav className="hidden lg:flex items-center gap-1 bg-white/5 rounded-full px-2 py-1 border border-white/5">
             {navItems.map((item) => (
               <a
                 key={item.name}
@@ -66,8 +71,8 @@ const Header = () => {
                 className="relative px-4 py-2 text-sm text-gray-400 hover:text-white transition-colors rounded-full group"
               >
                 <span className="relative z-10">{item.name}</span>
-                {/* Hover Pill Background */}
-                <div className="absolute inset-0 bg-white/10 rounded-full opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300"></div>
+                {/* Optimized Hover Pill - Scale Transform is faster than width/height */}
+                <div className="absolute inset-0 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
               </a>
             ))}
           </nav>
@@ -95,12 +100,13 @@ const Header = () => {
       </div>
 
       {/* --- MOBILE MENU DROPDOWN --- */}
+      {/* Optimized: Only render visible content or use opacity toggle without layout shift */}
       <div
         className={`
           absolute top-full left-4 right-4 mt-2 p-4 rounded-3xl 
-          bg-[#0a0a0a]/95 backdrop-blur-xl border border-white/10 shadow-2xl
+          bg-[#0a0a0a]/95 backdrop-blur-md border border-white/10 shadow-2xl
           transform transition-all duration-300 origin-top
-          ${isMobileMenuOpen ? 'scale-100 opacity-100 visible' : 'scale-95 opacity-0 invisible'}
+          ${isMobileMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'}
         `}
       >
         <div className="flex flex-col gap-2">

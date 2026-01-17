@@ -30,12 +30,19 @@ const Footer = () => {
   return (
     <footer className="relative bg-[#050505] text-white border-t border-white/10 overflow-hidden font-sans selection:bg-cyan-500 selection:text-black">
       
-      {/* --- BACKGROUND TEXTURES --- */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
+      {/* --- OPTIMIZED BACKGROUND TEXTURES --- */}
+      
+      {/* 1. Static Noise Grain (Replaces heavy SVG filter) */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-0"
+           style={{ 
+             backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")`,
+             backgroundSize: "100px 100px" 
+           }}>
       </div>
-      <div className="absolute -top-20 left-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute -bottom-20 right-1/4 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+      {/* 2. Radial Gradients (Replaces heavy blur-[120px]) */}
+      <div className="absolute -top-20 left-1/4 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(147,51,234,0.1)_0%,transparent_70%)] pointer-events-none"></div>
+      <div className="absolute -bottom-20 right-1/4 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(6,182,212,0.1)_0%,transparent_70%)] pointer-events-none"></div>
 
       {/* CHANGE: Increased max-w to 1600px */}
       <div className="relative z-10 max-w-[1600px] mx-auto px-6 lg:px-12 pt-20 pb-12">
@@ -47,11 +54,13 @@ const Footer = () => {
           <div className="lg:col-span-4 space-y-8">
             <div className="flex items-center gap-3">
               <div className="relative">
-                 <div className="absolute inset-0 bg-cyan-500 blur-lg opacity-20 rounded-full"></div>
+                 {/* Optimized Glow */}
+                 <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(6,182,212,0.4)_0%,transparent_70%)] rounded-full"></div>
                  <img
                     src={LogoImg}
                     alt="PD Logo"
                     className="relative w-16 h-auto object-contain brightness-200"
+                    loading="lazy"
                   />
               </div>
               <span className="text-xl font-bold tracking-tighter">PRASANTH.D</span>
@@ -63,13 +72,13 @@ const Footer = () => {
 
             <div className="flex flex-col gap-3">
                <a href="mailto:mrprasanthh@gmail.com" className="flex items-center gap-3 text-gray-400 hover:text-cyan-400 transition-colors group">
-                 <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-cyan-500/50">
+                 <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-cyan-500/50 transition-colors">
                    <Mail className="w-4 h-4" />
                  </div>
                  <span className="text-sm">mrprasanthh@gmail.com</span>
                </a>
                <a href="tel:+918531985733" className="flex items-center gap-3 text-gray-400 hover:text-cyan-400 transition-colors group">
-                 <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-cyan-500/50">
+                 <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-cyan-500/50 transition-colors">
                    <Phone className="w-4 h-4" />
                  </div>
                  <span className="text-sm">+91 8531985733</span>
