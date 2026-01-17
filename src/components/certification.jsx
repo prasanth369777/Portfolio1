@@ -1,98 +1,149 @@
-import React, { useEffect, useRef } from "react";
-import { HiAcademicCap, HiBadgeCheck, HiDocumentText } from "react-icons/hi";
+import React from "react";
+import { BadgeCheck, ShieldCheck, Award, Terminal, PenTool, LayoutTemplate } from "lucide-react";
 
+// Updated data with Lucide icons
 const certifications = [
-  { year: "2020", title: "Ethical Hacking", issuer: "LIVEWIRE", desc: "Hands-on training in cybersecurity fundamentals.", icon: <HiBadgeCheck /> },
-  { year: "2020", title: "CCNA", issuer: "LIVEWIRE", desc: "Cisco Certified Network Associate certification.", icon: <HiAcademicCap /> },
-  { year: "2023", title: "Google Digital Marketing", issuer: "Google", desc: "Certified in SEO, SEM, and digital campaigns.", icon: <HiDocumentText /> },
-  { year: "2024", title: "Graphic Designing", issuer: "Skill Dragon", desc: "Advanced design tools and creative workflows.", icon: <HiAcademicCap /> },
-  { year: "2024", title: "UI/UX Design", issuer: "Skill Dragon", desc: "End-to-end UX research, prototyping, and design.", icon: <HiBadgeCheck /> },
-  { year: "2024", title: "No-Code Development", issuer: "Skill Dragon", desc: "Built scalable apps and websites without coding.", icon: <HiDocumentText /> },
-  { year: "2024", title: "Yoga Teacher Training", issuer: "Certified Program", desc: "Completed training for teaching yoga professionally.", icon: <HiAcademicCap /> },
+  { 
+    year: "2024", 
+    title: "UI/UX Design Master", 
+    issuer: "Skill Dragon", 
+    desc: "Advanced prototyping, user research, and design systems.", 
+    icon: <PenTool className="w-5 h-5" /> 
+  },
+  { 
+    year: "2024", 
+    title: "No-Code Developer", 
+    issuer: "Skill Dragon", 
+    desc: "Building scalable applications without writing traditional code.", 
+    icon: <LayoutTemplate className="w-5 h-5" /> 
+  },
+  { 
+    year: "2024", 
+    title: "Graphic Designing", 
+    issuer: "Skill Dragon", 
+    desc: "Mastery of Adobe Suite and visual communication principles.", 
+    icon: <PenTool className="w-5 h-5" /> 
+  },
+  { 
+    year: "2023", 
+    title: "Google Digital Marketing", 
+    issuer: "Google", 
+    desc: "Certified in SEO, SEM, Analytics, and digital strategy.", 
+    icon: <Award className="w-5 h-5" /> 
+  },
+  { 
+    year: "2020", 
+    title: "Ethical Hacking", 
+    issuer: "LIVEWIRE", 
+    desc: "Penetration testing and network security fundamentals.", 
+    icon: <ShieldCheck className="w-5 h-5" /> 
+  },
+  { 
+    year: "2020", 
+    title: "CCNA Networking", 
+    issuer: "LIVEWIRE", 
+    desc: "Cisco Certified Network Associate routing & switching.", 
+    icon: <Terminal className="w-5 h-5" /> 
+  },
 ];
 
 const CertificationRoadmap = () => {
-  const cardsRef = useRef([]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(({ target, isIntersecting }) => {
-          if (isIntersecting) {
-            target.classList.add("animate-fadeInUp");
-            observer.unobserve(target);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    cardsRef.current.forEach((card) => {
-      if (card) observer.observe(card);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section 
-    id="certification"
-    className="py-24 bg-gradient-to-b from-gray-50 to-gray-200 relative">
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 text-center mb-16 sm:mb-20 font-poppins">
-        Certifications Roadmap
-      </h2>
+    <section id="certification" className="relative py-24 bg-[#050505] overflow-hidden">
+      
+      {/* --- BACKGROUND FX --- */}
+      <div className="absolute inset-0 opacity-[0.03]"
+           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
+      </div>
+      
+      {/* Glows */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[120px] pointer-events-none"></div>
 
-      <div className="relative max-w-5xl mx-auto px-4 sm:px-6">
-        {/* Vertical timeline line */}
-        <div className="absolute left-1/2 top-0 h-full w-1 bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 transform -translate-x-1/2 hidden sm:block"></div>
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
+        
+        {/* Header */}
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-4">
+             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+             <span className="text-xs font-mono text-gray-400 uppercase tracking-widest">Verified Skills</span>
+          </div>
+          <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter">
+            Credential <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Vault</span>
+          </h2>
+        </div>
 
-        <div className="flex flex-col space-y-12 sm:space-y-16 relative z-10">
-          {certifications.map((cert, idx) => {
-            const isLeft = idx % 2 === 0;
-            return (
-              <div
-                key={idx}
-                ref={(el) => (cardsRef.current[idx] = el)}
-                className={`relative flex flex-col sm:flex-row items-center w-full ${
-                  isLeft ? "sm:justify-start" : "sm:justify-end"
-                }`}
-              >
-                <div
-                  className={`w-full sm:w-5/12 bg-white p-6 rounded-2xl shadow-xl border border-gray-200 hover:scale-105 transition-transform duration-500 ${
-                    isLeft ? "text-left sm:text-left" : "text-left sm:text-right"
-                  }`}
-                >
-                  <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-indigo-600 text-white text-2xl shadow-md">
-                      {cert.icon}
+        {/* --- TIMELINE STRUCTURE --- */}
+        <div className="relative">
+          
+          {/* Central Line */}
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-500/50 via-purple-500/50 to-transparent md:-translate-x-1/2"></div>
+
+          <div className="flex flex-col gap-8 md:gap-12">
+            {certifications.map((cert, idx) => {
+              const isEven = idx % 2 === 0;
+
+              return (
+                <div key={idx} className={`relative flex flex-col md:flex-row items-center ${isEven ? "md:flex-row-reverse" : ""}`}>
+                  
+                  {/* SPACER (Desktop) */}
+                  <div className="hidden md:block w-1/2"></div>
+
+                  {/* CENTRAL NODE */}
+                  <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-4 h-4 bg-[#050505] border-2 border-cyan-500 rounded-full z-20 shadow-[0_0_10px_rgba(34,211,238,0.8)]"></div>
+
+                  {/* CARD CONTENT */}
+                  <div className="w-full md:w-1/2 pl-20 md:pl-0 md:px-12">
+                    <div className={`
+                      group relative p-1 rounded-2xl bg-gradient-to-br from-white/10 to-transparent 
+                      hover:from-cyan-500/50 hover:to-purple-500/50 transition-all duration-500
+                    `}>
+                      <div className="relative h-full bg-[#0a0a0a] rounded-xl p-6 md:p-8 overflow-hidden">
+                        
+                        {/* Background Grid inside card */}
+                        <div className="absolute inset-0 opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+                        
+                        <div className="relative z-10 flex items-start gap-4">
+                           {/* Icon Box */}
+                           <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-500 group-hover:text-black transition-colors duration-300">
+                             {cert.icon}
+                           </div>
+
+                           <div>
+                             <div className="flex items-center gap-3 mb-1">
+                               <span className="text-xs font-mono text-gray-500 bg-white/5 px-2 py-0.5 rounded border border-white/5">
+                                 {cert.year}
+                               </span>
+                               <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider">
+                                 {cert.issuer}
+                               </span>
+                             </div>
+                             
+                             <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-200 transition-colors">
+                               {cert.title}
+                             </h3>
+                             <p className="text-sm text-gray-400 leading-relaxed">
+                               {cert.desc}
+                             </p>
+                           </div>
+                        </div>
+
+                        {/* Decoration: Corner Accent */}
+                        <div className="absolute top-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                           <BadgeCheck className="w-5 h-5 text-cyan-500" />
+                        </div>
+
+                      </div>
                     </div>
-                    <span className="ml-3 text-indigo-600 font-bold text-sm tracking-wide">
-                      {cert.year}
-                    </span>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-semibold">{cert.title}</h3>
-                  <p className="text-sm text-gray-500">{cert.issuer}</p>
-                  <p className="text-gray-600 mt-2 sm:mt-3 text-sm sm:text-base">{cert.desc}</p>
+
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+
         </div>
       </div>
-
-      <style>{`
-        .animate-fadeInUp {
-          animation: fadeInUp 0.8s ease forwards;
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        @keyframes fadeInUp {
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </section>
   );
 };

@@ -1,142 +1,145 @@
 import React from 'react';
-import { Code, Palette, Zap, Users } from 'lucide-react';
+import { Code, Palette, Zap, Users, ArrowUpRight, Terminal, Cpu, Globe } from 'lucide-react';
 
-const About: React.FC = () => {
+const About = () => {
+  // Highlight cards data
   const highlights = [
     {
       icon: Code,
       title: 'UI/UX Design',
-      description:
-        'Designing intuitive and user-friendly interfaces for web and mobile applications.',
+      desc: 'Crafting intuitive interfaces that delight users.',
+      color: 'text-cyan-400',
+      bg: 'bg-cyan-400/10'
     },
     {
       icon: Palette,
       title: 'Graphic Design',
-      description:
-        'Creating visually appealing graphics and visual content to enhance user engagement.',
+      desc: 'Visual storytelling through pixel-perfect graphics.',
+      color: 'text-purple-400',
+      bg: 'bg-purple-400/10'
     },
     {
       icon: Zap,
-      title: 'Web Development',
-      description:
-        'Developing scalable and responsive websites using modern technologies.',
+      title: 'Web Dev',
+      desc: 'High-performance, scalable web solutions.',
+      color: 'text-amber-400',
+      bg: 'bg-amber-400/10'
     },
     {
       icon: Users,
-      title: 'Digital Marketing',
-      description:
-        'Managing SEO, social media campaigns, and digital strategies to drive growth.',
+      title: 'Marketing',
+      desc: 'Data-driven strategies for brand growth.',
+      color: 'text-pink-400',
+      bg: 'bg-pink-400/10'
     },
   ];
 
-  const skills = [
-    'UI/UX Design',
-    'Graphic Design',
-    'Web Development',
-    'No-Code Tools',
-    'Digital Marketing',
-    'Python',
-    'Ethical Hacking',
+  // Stats data
+  const stats = [
+    { value: '2', label: 'Years Exp.' },
+    { value: '6+', label: 'Projects' },
+    { value: '3', label: 'Internships' },
+    { value: '7', label: 'Certs' },
   ];
 
-  // Tailwind gradient / color classes
-  const colors = [
-    'bg-gradient-to-r from-indigo-500 to-purple-500 text-white',
-    'bg-gradient-to-r from-pink-500 to-rose-500 text-white',
-    'bg-gradient-to-r from-cyan-500 to-blue-500 text-white',
-    'bg-gradient-to-r from-green-500 to-emerald-500 text-white',
-    'bg-gradient-to-r from-orange-500 to-amber-500 text-white',
-    'bg-gradient-to-r from-slate-600 to-gray-800 text-white',
-    'bg-gradient-to-r from-red-500 to-pink-600 text-white',
+  const skills = [
+    'React ', 'UIUX', 'Figma', 'Python', 'Ethical Hacking', 'DigitalMarketing', 'No-Code'
   ];
 
   return (
-    <section
-      id="about"
-      className="relative min-h-screen py-24 bg-gradient-to-b from-white via-gray-200 to-gray-400 text-gray-900 flex items-center px-4 sm:px-6 md:px-10 lg:px-16"
-    >
-      <div className="relative max-w-[1600px] mx-auto w-full">
-        {/* Section Header */}
-        <div className="text-center mb-16 sm:mb-20">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
-            About Me
-          </h2>
-          <div className="w-20 sm:w-24 h-1 bg-gray-400/40 mx-auto rounded-full mb-6 sm:mb-8" />
-          <p className="max-w-xl sm:max-w-2xl mx-auto text-base sm:text-lg md:text-xl leading-relaxed">
-            I am <span className="font-semibold">Prasanth D</span>, a Computer Science Engineer skilled in
-            <span className="text-indigo-500 font-semibold"> UI/UX design</span>,
-            <span className="text-pink-500 font-semibold"> web development</span>,
-            <span className="text-cyan-500 font-semibold"> digital marketing</span>, and
-            <span className="text-green-500 font-semibold"> no-code development</span>.
-            I create user-friendly designs, optimize web experiences, and deliver scalable solutions.
-          </p>
+    <section id="about" className="relative min-h-screen py-24 bg-[#030712] overflow-hidden text-gray-300">
+      
+      {/* --- BACKGROUND DECORATION --- */}
+      {/* Grid Pattern */}
+      <div className="absolute inset-0 opacity-20"
+        style={{
+            backgroundImage: `linear-gradient(#1f2937 1px, transparent 1px), linear-gradient(to right, #1f2937 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+        }}
+      ></div>
+      
+      {/* Glowing Orbs */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
+        
+        {/* --- HEADER --- */}
+        <div className="mb-20">
+            <h2 className="text-sm font-mono text-cyan-400 tracking-widest uppercase mb-3">Who I Am</h2>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight">
+              About <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-500">Prasanth.</span>
+            </h1>
         </div>
 
-        {/* Grid: Description & Highlights */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          {/* Description */}
-          <div className="space-y-6">
-            <h3 className="text-2xl sm:text-3xl font-bold">Passionate Developer & Designer</h3>
-            <p className="text-gray-700 text-base sm:text-lg md:text-xl leading-relaxed">
-              Experienced in designing interfaces, managing digital campaigns, and delivering high-quality web solutions.
-            </p>
-            <p className="text-gray-700 text-base sm:text-lg md:text-xl leading-relaxed">
-              My work spans <span className="font-semibold">UI/UX design</span>,
-              <span className="font-semibold"> graphic design</span>,
-              <span className="font-semibold"> Python development</span>, and
-              <span className="font-semibold"> ethical hacking</span>.
-            </p>
+        {/* --- MAIN GRID CONTENT --- */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          
+          {/* LEFT COLUMN: BIO & STATS (Span 5) */}
+          <div className="lg:col-span-5 flex flex-col justify-between space-y-12">
+            
+            {/* Bio Text */}
+            <div className="space-y-6 text-lg leading-relaxed text-gray-400">
+              <p>
+                I am <strong className="text-white">Prasanth D</strong>, a Computer Science Engineer driven by a passion for building digital products that look good and work even better.
+              </p>
+              <p>
+                My journey sits at the intersection of <span className="text-cyan-300">Design</span> and <span className="text-indigo-300">Engineering</span>. Whether I'm designing a sleek UI in Figma, coding a complex React app, or optimizing SEO strategies, I bring a holistic approach to every project.
+              </p>
+              
+              {/* Skills Tags */}
+              <div className="flex flex-wrap gap-2 pt-4">
+                {skills.map((skill, idx) => (
+                  <span key={idx} className="px-3 py-1 rounded-full text-xs font-medium bg-gray-800/50 border border-gray-700 text-gray-300 hover:border-cyan-500/50 hover:text-cyan-400 transition-colors cursor-default">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-            {/* Skills */}
-            <div className="flex flex-wrap gap-3 sm:gap-4 md:gap-6 mt-6 sm:mt-10 justify-center lg:justify-start">
-              {skills.map((skill, index) => (
-                <span
-                  key={skill}
-                  className={`px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm md:text-base font-medium shadow-md ${colors[index % colors.length]}`}
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 gap-4">
+              {stats.map((stat, idx) => (
+                <div key={idx} className="p-6 bg-gray-900/40 border border-gray-800 rounded-2xl backdrop-blur-sm hover:bg-gray-800/40 transition-colors">
+                  <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
+                  <div className="text-sm text-gray-500 font-medium uppercase tracking-wide">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Download CV Button */}
+            <div>
+              <button className="group flex items-center gap-3 px-6 py-3 bg-white text-black rounded-full font-bold hover:bg-cyan-400 transition-colors">
+                Download Resume
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </button>
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN: HIGHLIGHT CARDS (Span 7) */}
+          <div className="lg:col-span-7">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
+              {highlights.map((item, index) => (
+                <div 
+                  key={index} 
+                  className="group relative p-8 bg-gray-900/30 border border-gray-800 rounded-3xl overflow-hidden hover:border-gray-600 transition-all duration-300 hover:-translate-y-1"
                 >
-                  {skill}
-                </span>
+                  {/* Hover Gradient Blob */}
+                  <div className={`absolute -right-10 -top-10 w-32 h-32 rounded-full blur-[50px] opacity-0 group-hover:opacity-40 transition-opacity duration-500 ${item.bg}`}></div>
+
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${item.bg} ${item.color}`}>
+                    <item.icon className="w-6 h-6" />
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Highlights */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
-            {highlights.map((highlight, index) => (
-              <div
-                key={index}
-                className="group p-5 sm:p-6 bg-white/10 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
-              >
-                <div className="absolute -inset-2 bg-indigo-400/20 rounded-2xl blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none" />
-
-                <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <highlight.icon className="w-6 h-6 text-indigo-500" />
-                </div>
-                <h4 className="text-lg font-semibold mb-2">{highlight.title}</h4>
-                <p className="text-gray-700 text-sm sm:text-base leading-relaxed">{highlight.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Stats */}
-        <div className="mt-12 sm:mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 text-center">
-          <div>
-            <div className="text-2xl sm:text-3xl font-bold text-indigo-500 mb-1 sm:mb-2">1.5</div>
-            <div className="text-gray-700 text-sm sm:text-base">Year Experience</div>
-          </div>
-          <div>
-            <div className="text-2xl sm:text-3xl font-bold text-pink-500 mb-1 sm:mb-2">6+</div>
-            <div className="text-gray-700 text-sm sm:text-base">Projects Completed</div>
-          </div>
-          <div>
-            <div className="text-2xl sm:text-3xl font-bold text-indigo-500 mb-1 sm:mb-2">3</div>
-            <div className="text-gray-700 text-sm sm:text-base">Internships</div>
-          </div>
-          <div>
-            <div className="text-2xl sm:text-3xl font-bold text-pink-500 mb-1 sm:mb-2">7</div>
-            <div className="text-gray-700 text-sm sm:text-base">Certifications</div>
-          </div>
         </div>
       </div>
     </section>

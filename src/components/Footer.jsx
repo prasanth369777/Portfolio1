@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, ArrowUp, Mail, Phone } from 'lucide-react';
+import { Heart, ArrowUp, Mail, Phone, ArrowRight, Instagram, Twitter, Linkedin } from 'lucide-react';
 import LogoImg from '../assets/pdlogo-02-01.png';
 
 const Footer = () => {
@@ -8,133 +8,162 @@ const Footer = () => {
   };
 
   const footerLinks = {
-    'Quick Links': [
+    'Explore': [
       { name: 'Home', href: '#home' },
       { name: 'About', href: '#about' },
       { name: 'Portfolio', href: '#portfolio' },
-      { name: 'Contact', href: '#contact' },
+      { name: 'Services', href: '#services' },
     ],
     'Services': [
       { name: 'UI/UX Design', href: '#services' },
-      { name: 'Mobile Apps', href: '#services' },
-      { name: 'Web Design', href: '#services' },
-      { name: 'Prototyping', href: '#services' },
+      { name: 'Web Development', href: '#services' },
+      { name: 'Brand Identity', href: '#services' },
+      { name: 'SEO Strategy', href: '#services' },
     ],
-    'Resources': [
-      { name: 'Design Blog', href: '#' },
-      { name: 'Case Studies', href: '#' },
-      { name: 'Design Tips', href: '#' },
-      { name: 'Free Resources', href: '#' },
+    'Socials': [
+      { name: 'LinkedIn', href: '#', icon: <Linkedin className="w-4 h-4"/> },
+      { name: 'Instagram', href: '#', icon: <Instagram className="w-4 h-4"/> },
+      { name: 'Twitter', href: '#', icon: <Twitter className="w-4 h-4"/> },
     ],
   };
 
   return (
-    <footer className="relative bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300 border-t border-gray-400">
-      {/* Background gradient */}
-      <div className="absolute inset-0 opacity-10 -z-10"></div>
+    <footer className="relative bg-[#050505] text-white border-t border-white/10 overflow-hidden font-sans selection:bg-cyan-500 selection:text-black">
+      
+      {/* --- BACKGROUND TEXTURES --- */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
+      </div>
+      <div className="absolute -top-20 left-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute -bottom-20 right-1/4 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Main Footer Content */}
-        <div className="py-16">
-          <div className="grid lg:grid-cols-4 gap-12">
-            
-            {/* Brand Column */}
-            <div className="lg:col-span-1">
-              <div className="flex items-center mb-6">
-                <img
-                  src={LogoImg}
-                  alt="PD Logo"
-                  className="w-24 h-auto object-contain"
-                />
+      {/* CHANGE: Increased max-w to 1600px */}
+      <div className="relative z-10 max-w-[1600px] mx-auto px-6 lg:px-12 pt-20 pb-12">
+        
+        {/* --- MAIN GRID --- */}
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 mb-20">
+          
+          {/* BRAND COLUMN (Span 4) */}
+          <div className="lg:col-span-4 space-y-8">
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                 <div className="absolute inset-0 bg-cyan-500 blur-lg opacity-20 rounded-full"></div>
+                 <img
+                    src={LogoImg}
+                    alt="PD Logo"
+                    className="relative w-16 h-auto object-contain brightness-200"
+                  />
               </div>
-
-              <p className="text-gray-700 mb-6 leading-relaxed">
-                Crafting digital experiences that inspire, engage, and convert. 
-                Let's create something extraordinary together.
-              </p>
-
-              <div className="space-y-3">
-                <div className="flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200">
-                  <Mail className="w-4 h-4 mr-3" />
-                  <span className="text-sm">mrprasanthh@gmail.com</span>
-                </div>
-                <div className="flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200">
-                  <Phone className="w-4 h-4 mr-3" />
-                  <span className="text-sm">+91 8531985733</span>
-                </div>
-              </div>
+              <span className="text-xl font-bold tracking-tighter">PRASANTH.D</span>
             </div>
 
-            {/* Links Columns */}
-            {Object.entries(footerLinks).map(([category, links]) => (
-              <div key={category}>
-                <h3 className="text-gray-900 font-semibold mb-6">{category}</h3>
-                <ul className="space-y-3">
-                  {links.map((link) => (
-                    <li key={link.name}>
-                      <a
-                        href={link.href}
-                        className="text-gray-700 hover:text-gray-900 transition-colors duration-200 text-sm"
-                      >
-                        {link.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+            <p className="text-gray-400 leading-relaxed max-w-sm">
+              Designing the future, one pixel at a time. Creating digital experiences that blend aesthetics with performance.
+            </p>
+
+            <div className="flex flex-col gap-3">
+               <a href="mailto:mrprasanthh@gmail.com" className="flex items-center gap-3 text-gray-400 hover:text-cyan-400 transition-colors group">
+                 <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-cyan-500/50">
+                   <Mail className="w-4 h-4" />
+                 </div>
+                 <span className="text-sm">mrprasanthh@gmail.com</span>
+               </a>
+               <a href="tel:+918531985733" className="flex items-center gap-3 text-gray-400 hover:text-cyan-400 transition-colors group">
+                 <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-cyan-500/50">
+                   <Phone className="w-4 h-4" />
+                 </div>
+                 <span className="text-sm">+91 8531985733</span>
+               </a>
+            </div>
+          </div>
+
+          {/* LINKS COLUMNS (Span 2 each) */}
+          <div className="lg:col-span-2">
+            <h3 className="text-sm font-mono text-cyan-400 uppercase tracking-widest mb-6">Explore</h3>
+            <ul className="space-y-4">
+              {footerLinks['Explore'].map((link) => (
+                <li key={link.name}>
+                  <a href={link.href} className="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 text-sm flex items-center gap-2">
+                    <span className="w-1 h-1 rounded-full bg-cyan-500 opacity-0 hover:opacity-100 transition-opacity"></span>
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="lg:col-span-2">
+            <h3 className="text-sm font-mono text-purple-400 uppercase tracking-widest mb-6">Services</h3>
+            <ul className="space-y-4">
+              {footerLinks['Services'].map((link) => (
+                <li key={link.name}>
+                  <a href={link.href} className="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 text-sm flex items-center gap-2">
+                     <span className="w-1 h-1 rounded-full bg-purple-500 opacity-0 hover:opacity-100 transition-opacity"></span>
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* NEWSLETTER (Span 4) */}
+          <div className="lg:col-span-4">
+            <div className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm hover:border-white/20 transition-colors">
+              <h3 className="text-xl font-bold text-white mb-2">Join the Signal</h3>
+              <p className="text-gray-400 text-sm mb-6">Get the latest design trends and updates sent to your inbox.</p>
+              
+              <div className="space-y-3">
+                <input
+                  type="email"
+                  placeholder="enter_your_email"
+                  className="w-full px-5 py-4 bg-[#0a0a0a] border border-white/10 rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 transition-all font-mono"
+                />
+                <button className="w-full py-4 bg-white text-black font-bold rounded-xl hover:bg-cyan-400 transition-colors flex items-center justify-center gap-2 group">
+                  Subscribe
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </button>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* --- BOTTOM BAR --- */}
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <p className="text-gray-500 text-sm font-mono">
+            © 2025 Prasanth.D // Engineered in India
+          </p>
+
+          <div className="flex items-center gap-1 text-gray-500 text-sm">
+            <span>Built with</span>
+            <Heart className="w-3 h-3 text-red-500 fill-current animate-pulse mx-1" />
+            <span>and React</span>
+          </div>
+
+          {/* Social Icons */}
+          <div className="flex gap-4">
+            {footerLinks['Socials'].map((social) => (
+              <a 
+                key={social.name} 
+                href={social.href} 
+                className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full border border-transparent hover:border-white/10"
+              >
+                {social.icon}
+              </a>
             ))}
           </div>
         </div>
 
-        {/* Newsletter Section */}
-        <div className="py-12 border-t border-gray-300">
-          <div className="text-center max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Stay Updated</h3>
-            <p className="text-gray-700 mb-6">
-              Get the latest design insights, tips, and project updates delivered to your inbox.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
-              />
-              <button className="px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-900 text-white font-semibold rounded-xl hover:from-gray-800 hover:to-gray-950 transition-all duration-300 hover:scale-105">
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="py-8 border-t border-gray-300">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="flex items-center text-gray-700 mb-4 md:mb-0">
-              <span>Made with</span>
-              <Heart className="w-4 h-4 mx-2 text-red-500 fill-current animate-pulse" />
-              <span>by a passionate designer</span>
-            </div>
-            
-            <div className="flex items-center space-x-6">
-              <div className="text-gray-500 text-sm">
-                © 2025 UI Designer Portfolio. All rights reserved.
-              </div>
-              
-             <button
-  onClick={scrollToTop}
-  className="fixed bottom-10 right-6 p-3 bg-gray-200 border border-gray-300 rounded-full 
-             hover:border-gray-400 hover:bg-gray-300 transition-all duration-300 
-             text-gray-700 hover:text-gray-900 group shadow-lg "
-  aria-label="Scroll to top"
->
-  <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-200 " />
-</button>
-
-            </div>
-          </div>
-        </div>
       </div>
+
+      {/* --- SCROLL TO TOP --- */}
+      <button
+        onClick={scrollToTop}
+        className="fixed bottom-8 right-8 p-4 bg-white/5 border border-white/10 backdrop-blur-md rounded-full text-white hover:bg-cyan-500 hover:text-black hover:border-cyan-500 transition-all duration-300 shadow-2xl group z-50"
+        aria-label="Scroll to top"
+      >
+        <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
+      </button>
+
     </footer>
   );
 };
