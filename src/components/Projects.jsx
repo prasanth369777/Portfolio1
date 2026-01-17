@@ -47,7 +47,7 @@ const Projects = () => {
     >
       {/* --- OPTIMIZED BACKGROUND LAYERS --- */}
       
-      {/* 1. Static Noise Texture (Replaces heavy SVG Filter) */}
+      {/* 1. Static Noise Texture */}
       <div className="absolute inset-0 opacity-[0.04] pointer-events-none z-0"
            style={{ 
              backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")`,
@@ -55,11 +55,8 @@ const Projects = () => {
            }}
       ></div>
 
-      {/* 2. Radial Gradients (Replaces heavy Blur effects) */}
-      {/* Top Right Purple Glow */}
+      {/* 2. Radial Gradients */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(147,51,234,0.1)_0%,transparent_70%)] pointer-events-none"></div>
-      
-      {/* Bottom Left Lime Glow */}
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(132,204,22,0.1)_0%,transparent_70%)] pointer-events-none"></div>
 
       <div className="relative z-10 max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12">
@@ -77,9 +74,10 @@ const Projects = () => {
             </h2>
           </div>
           
+          {/* FIXED COMMENT ERROR HERE */}
           <p className="text-gray-400 max-w-xs md:max-w-sm text-left md:text-right font-mono text-xs md:text-sm leading-relaxed">
-            // High-impact digital experiences. <br className="hidden md:block"/>
-            // Engineered for performance & aesthetics.
+            {"// High-impact digital experiences."} <br className="hidden md:block"/>
+            {"// Engineered for performance & aesthetics."}
           </p>
         </div>
 
@@ -101,7 +99,7 @@ const Projects = () => {
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0"
                   loading="lazy"
-                  decoding="async" // Async decoding prevents main thread blocking
+                  decoding="async" 
                 />
               </div>
 

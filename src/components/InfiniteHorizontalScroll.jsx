@@ -67,9 +67,9 @@ const InfiniteHorizontalScroll = () => {
           ))}
         </div>
         
-        {/* Interaction Hint */}
+        {/* Interaction Hint - FIXED HERE */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-8 text-xs font-mono text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity">
-          // Paused
+          {"// Paused"}
         </div>
       </div>
 
@@ -85,10 +85,6 @@ const InfiniteHorizontalScroll = () => {
           animation-play-state: paused;
         }
 
-        /* This animation moves from 0 to -50%. 
-           Because we duplicated the array, moving 50% shifts it exactly to the start of the second set,
-           creating a seamless loop without jumps.
-        */
         @keyframes scrollHorizontal {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
