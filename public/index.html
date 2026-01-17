@@ -1,58 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Basic Meta -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- Favicon & App Icons -->
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-    <!-- Primary Meta Tags -->
-    <title>Portfolio </title>
+    <title>Prasanth D | Portfolio & Digital Design</title>
     <meta
       name="description"
-      content="Transform your brand identity with stunning, professional logo designs crafted to leave a lasting impression. Creative, modern, and memorable logos tailored to your business."
+      content="Portfolio of Prasanth D - Computer Science Engineer, UI/UX Designer, and Developer. Crafting high-performance digital experiences and brand identities."
     />
-    <meta name="keywords" content="logo design, brand identity, creative logos, business branding, graphic design, custom logo, professional designer" />
-    <meta name="author" content="[Your Name or Studio]" />
-    <meta name="theme-color" content="#0f172a" />
+    <meta name="keywords" content="UI/UX design, React Developer, Prasanth D, Portfolio, Web Development, Branding, Coimbatore" />
+    <meta name="author" content="Prasanth D" />
+    
+    <meta name="theme-color" content="#050505" />
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://yourwebsite.com/" />
-    <meta property="og:title" content="Creative Logo Designs | Professional Branding by [Prasanth]" />
+    <meta property="og:url" content="https://prasanthportfoliofz.netlify.app/" />
+    <meta property="og:title" content="Prasanth D | Digital Designer & Developer" />
     <meta
       property="og:description"
-      content="Professional logo design and branding services that make your business stand out. Modern, minimal, and impactful designs for every industry."
+      content="Exploring the intersection of Design and Engineering. View selected works in UI/UX, Web Dev, and Branding."
     />
     <meta property="og:image" content="%PUBLIC_URL%/preview-image.jpg" />
 
-    <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Creative Logo Designs | [Your Brand]" />
+    <meta name="twitter:title" content="Prasanth D | Portfolio" />
     <meta
       name="twitter:description"
-      content="Stand out with powerful logo designs and branding tailored to your business vision."
+      content="Exploring the intersection of Design and Engineering."
     />
     <meta name="twitter:image" content="%PUBLIC_URL%/preview-image.jpg" />
 
-    <!-- Fonts & Styles (Optional) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Canonical Link -->
-    <link rel="canonical" href="https://yourwebsite.com/" />
+    <link rel="canonical" href="https://prasanthportfoliofz.netlify.app/" />
 
-    <!-- Robots -->
     <meta name="robots" content="index, follow" />
+
+    <style>
+      /* 1. Sets background to dark immediately (Stops White Flash) */
+      body {
+        background-color: #050505; 
+        color: white;
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      /* 2. Prevents Horizontal Scrollbar caused by glowing orbs */
+      html, body {
+        overflow-x: hidden;
+        width: 100%;
+        -webkit-font-smoothing: antialiased; /* Makes text sharper */
+      }
+
+      /* 3. Simple loading state (Optional but recommended) */
+      #root:empty::before {
+        content: "Loading...";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: #4b5563;
+        font-family: monospace;
+      }
+    </style>
   </head>
 
   <body>
