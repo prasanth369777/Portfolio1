@@ -1,4 +1,3 @@
-
 import figmaLogo from "../assets/DJ1-01.png";
 import photoshopLogo from "../assets/GREENSAND LOGO-01.png";
 import illustratorLogo from "../assets/KAIPULLA-01.png";
@@ -36,7 +35,6 @@ const LogoSection = () => {
         <div className="flex flex-col md:flex-row items-end justify-between mb-20 border-b border-white/10 pb-8 gap-8">
            <div className="max-w-2xl">
               <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-4 block">
-                // The Stack
               </span>
               <h2 className="text-4xl md:text-6xl font-serif text-white leading-[1.1]">
                 Technical <span className="italic text-zinc-600">Ecosystem.</span>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Minus } from "lucide-react";
+import { ArrowRight} from "lucide-react";
 import storyImage from "../assets/hero-person.webp"; 
 
 const chapters = [
@@ -41,7 +41,6 @@ const StorytellingSection = () => {
         {/* --- NAVIGATION (Top Line) --- */}
         <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-white/10 pb-8 mb-20 gap-6">
            <h2 className="text-sm font-mono tracking-widest text-zinc-500 uppercase">
-             // The Narrative Archive
            </h2>
            
            {/* Minimal Tab System */}

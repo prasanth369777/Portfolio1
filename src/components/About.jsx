@@ -75,7 +75,8 @@ const About = () => {
            {/* LEFT: TITLE (Span 5) */}
            <div className="lg:col-span-5">
               <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-6 block">
-                // The Profile
+                {/* */}
+                 {"// The Profile"}
               </span>
               <h1 className="text-5xl md:text-7xl font-serif text-white leading-[1.1] mb-8">
                 Design <br/>
@@ -138,7 +139,8 @@ const About = () => {
         <div className="mt-24">
            <div className="flex items-end justify-between mb-8">
               <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest">
-                 // Core Competencies
+                {/* */}
+                 {"// Core Competencies"}
               </span>
            </div>
 

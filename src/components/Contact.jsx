@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, ArrowRight, Send, CheckCircle2 } from "lucide-react";
+// REMOVE 'Send' from here
+import { ArrowUpRight, ArrowRight, CheckCircle2 } from "lucide-react"; 
 
 export default function Contact() {
   const [result, setResult] = useState("");
@@ -57,7 +58,8 @@ export default function Contact() {
           <div className="lg:col-span-5 flex flex-col justify-between">
              <div>
                 <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-6 block">
-                   // Project Inquiry
+                   {/* FIXED: Wrapped comment-like text in braces and quotes */}
+                   {"// Project Inquiry"}
                 </span>
                 <h2 className="text-5xl md:text-7xl font-serif text-white leading-[1.1] mb-8">
                    Let's start a <br/>
