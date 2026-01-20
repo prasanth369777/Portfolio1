@@ -1,6 +1,7 @@
-import React from "react";
 
-// Import your logos (Keep your existing imports)
+import { ArrowRight } from "lucide-react";
+
+// Logos
 import figmaLogo from "../assets/DJ1-01.png";
 import photoshopLogo from "../assets/GREENSAND LOGO-01.png";
 import illustratorLogo from "../assets/KAIPULLA-01.png";
@@ -12,86 +13,117 @@ import logo9 from "../assets/sss logo-01.png";
 import logo10 from "../assets/Untitled design (1).png";
 
 const logos = [
-  figmaLogo, photoshopLogo, illustratorLogo, webDesignLogo, 
-  canvaLogo, marketingLogo, logo7, logo9, logo10,
+  { src: figmaLogo, name: "Figma" },
+  { src: photoshopLogo, name: "Photoshop" },
+  { src: illustratorLogo, name: "Illustrator" },
+  { src: webDesignLogo, name: "WebFlow" },
+  { src: canvaLogo, name: "Canva" },
+  { src: marketingLogo, name: "Marketing" },
+  { src: logo7, name: "Cyberfox" },
+  { src: logo9, name: "SSS" },
+  { src: logo10, name: "Studio" },
 ];
 
 const InfiniteHorizontalScroll = () => {
-  // Create a massive array to ensure it covers wide screens easily
-  const repeatedLogos = [...logos, ...logos, ...logos, ...logos];
+  // Triple the array for seamless infinity on ultrawide monitors
+  const repeatedLogos = [...logos, ...logos, ...logos];
 
   return (
-    <section className="relative py-24 bg-[#050505] overflow-hidden select-none font-sans">
+    <section className="relative py-32 bg-[#080808] overflow-hidden font-sans selection:bg-white selection:text-black">
       
-      {/* --- BACKGROUND FX --- */}
-      {/* Mesh Gradient Blob */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-indigo-600/20 rounded-full blur-[120px] -z-10 opacity-60"></div>
-      
-      {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] -z-10"></div>
+      {/* --- BACKGROUND TEXTURE --- */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:64px_64px] opacity-50 pointer-events-none"></div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 mb-12 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-4">
-           <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
-           <span className="text-xs font-mono text-gray-400 uppercase tracking-widest">Trusted Partners</span>
-        </div>
-        <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
-          Collaborating with <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Industry Leaders</span>
-        </h2>
-      </div>
-
-      {/* --- SCROLL CONTAINER --- */}
-      {/* 'mask-image' creates the fade out effect on left/right */}
-      <div className="relative w-full overflow-hidden mask-gradient-horizontal group">
-        
-        {/* The Track */}
-        <div className="flex w-max gap-6 md:gap-12 animate-scroll-horizontal group-hover:paused">
-          {repeatedLogos.map((logo, idx) => (
-            <div
-              key={`logo-${idx}`}
-              className="group/card relative w-40 h-24 md:w-52 md:h-32 flex items-center justify-center p-6 
-                         bg-white/5 border border-white/5 rounded-2xl backdrop-blur-sm
-                         hover:bg-white/10 hover:border-white/20 hover:shadow-[0_0_30px_rgba(99,102,241,0.2)]
-                         transition-all duration-300"
-            >
-              <img
-                src={logo}
-                alt={`Partner logo ${idx}`}
-                className="w-full h-full object-contain filter grayscale opacity-60 
-                           group-hover/card:grayscale-0 group-hover/card:opacity-100 group-hover/card:scale-110 
-                           transition-all duration-500"
-                loading="lazy"
-                draggable={false}
-              />
+      {/* --- HEADER --- */}
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 mb-16 md:mb-24 flex flex-col md:flex-row items-end justify-between gap-8">
+         <div className="max-w-2xl">
+            <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-6 block">
+               // Partnership Index
+            </span>
+            <h2 className="text-5xl md:text-8xl font-serif text-white leading-[0.9]">
+               Trusted <br/> <span className="italic text-zinc-600">Network.</span>
+            </h2>
+         </div>
+         <div className="hidden md:flex flex-col items-end text-right">
+            <p className="text-zinc-500 text-sm font-mono max-w-xs leading-relaxed mb-4">
+               Collaborating with industry leaders to build scalable digital ecosystems.
+            </p>
+            <div className="flex items-center gap-2 text-white text-xs font-bold uppercase tracking-widest">
+               Scroll to Explore <ArrowRight className="w-4 h-4" />
             </div>
-          ))}
-        </div>
+         </div>
+      </div>
+
+      {/* --- THE TICKER TAPE --- */}
+      <div className="w-full border-t border-b border-white/10 bg-[#080808]">
         
-        {/* Interaction Hint - FIXED HERE */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-8 text-xs font-mono text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity">
-          {"// Paused"}
+        {/* The Moving Track */}
+        <div className="relative flex overflow-hidden group">
+           
+           {/* Gradient Masks for edges */}
+           <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-[#080808] to-transparent z-20"></div>
+           <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-[#080808] to-transparent z-20"></div>
+
+           <div className="flex animate-marquee group-hover:paused">
+              {repeatedLogos.map((item, idx) => (
+                <div 
+                   key={`${item.name}-${idx}`}
+                   className="
+                     relative flex-shrink-0 w-[200px] md:w-[280px] h-[160px] md:h-[200px] 
+                     border-r border-white/10 flex items-center justify-center 
+                     group/item hover:bg-white/[0.02] transition-colors duration-300
+                   "
+                >
+                   {/* Logo */}
+                   <img 
+                      src={item.src} 
+                      alt={item.name} 
+                      className="
+                        w-24 md:w-32 h-auto object-contain 
+                        filter grayscale opacity-40 mix-blend-screen
+                        transition-all duration-500 ease-out
+                        group-hover/item:grayscale-0 group-hover/item:opacity-100 group-hover/item:scale-110
+                      "
+                   />
+
+                   {/* Technical Label (Hidden until hover) */}
+                   <div className="absolute bottom-4 left-4 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300">
+                      <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest">
+                         REF: {idx < 9 ? `0${idx+1}` : idx+1}
+                      </span>
+                   </div>
+                   
+                   {/* Name Label (Hidden until hover) */}
+                   <div className="absolute top-4 right-4 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300">
+                      <span className="text-[10px] font-bold text-zinc-300 uppercase tracking-widest">
+                         {item.name}
+                      </span>
+                   </div>
+
+                </div>
+              ))}
+           </div>
         </div>
       </div>
 
-      {/* --- STYLES --- */}
-      <style>{`
-        /* Fade edges */
-        .mask-gradient-horizontal {
-          mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-          -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        }
+      {/* --- BOTTOM METADATA --- */}
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mt-4 flex justify-between text-[10px] font-mono text-zinc-600 uppercase tracking-widest">
+         <span>Total Active Partners: {logos.length}</span>
+         <span className="hidden md:inline">Global Reach // 2024-25</span>
+      </div>
 
+      <style>{`
         .paused {
           animation-play-state: paused;
         }
 
-        @keyframes scrollHorizontal {
+        @keyframes marquee {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          100% { transform: translateX(-33.33%); } /* Move 1/3rd because we triplicated the array */
         }
 
-        .animate-scroll-horizontal {
-          animation: scrollHorizontal 40s linear infinite;
+        .animate-marquee {
+          animation: marquee 60s linear infinite;
           will-change: transform;
         }
       `}</style>

@@ -1,178 +1,146 @@
-import React from 'react';
-import { Heart, ArrowUp, Mail, Phone, ArrowRight, Instagram, Twitter, Linkedin } from 'lucide-react';
-import LogoImg from '../assets/pdlogo-02-01.png';
+import React, { useState, useEffect } from 'react';
+import { ArrowUpRight, Copy, Check, Github, Linkedin, Twitter, Globe, Clock } from 'lucide-react';
 
 const Footer = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const [copied, setCopied] = useState(false);
+  const [time, setTime] = useState("");
 
-  const footerLinks = {
-    'Explore': [
-      { name: 'Home', href: '#home' },
-      { name: 'About', href: '#about' },
-      { name: 'Portfolio', href: '#portfolio' },
-      { name: 'Services', href: '#services' },
-    ],
-    'Services': [
-      { name: 'UI/UX Design', href: '#services' },
-      { name: 'Web Development', href: '#services' },
-      { name: 'Brand Identity', href: '#services' },
-      { name: 'SEO Strategy', href: '#services' },
-    ],
-    'Socials': [
-      { name: 'LinkedIn', href: '#', icon: <Linkedin className="w-4 h-4"/> },
-      { name: 'Instagram', href: '#', icon: <Instagram className="w-4 h-4"/> },
-      { name: 'Twitter', href: '#', icon: <Twitter className="w-4 h-4"/> },
-    ],
+  // Live Clock Logic
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setTime(now.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        timeZone: 'Asia/Kolkata', // Set to IST based on context
+        hour12: false 
+      }));
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText("mrprasanthh@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <footer className="relative bg-[#050505] text-white border-t border-white/10 overflow-hidden font-sans selection:bg-cyan-500 selection:text-black">
+    <footer className="relative bg-[#050505] text-zinc-400 font-sans border-t border-white/5 pt-20 pb-6">
       
-      {/* --- OPTIMIZED BACKGROUND TEXTURES --- */}
-      
-      {/* 1. Static Noise Grain (Replaces heavy SVG filter) */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-0"
-           style={{ 
-             backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")`,
-             backgroundSize: "100px 100px" 
-           }}>
-      </div>
+      {/* --- BACKGROUND GRID --- */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
 
-      {/* 2. Radial Gradients (Replaces heavy blur-[120px]) */}
-      <div className="absolute -top-20 left-1/4 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(147,51,234,0.1)_0%,transparent_70%)] pointer-events-none"></div>
-      <div className="absolute -bottom-20 right-1/4 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(6,182,212,0.1)_0%,transparent_70%)] pointer-events-none"></div>
-
-      {/* CHANGE: Increased max-w to 1600px */}
-      <div className="relative z-10 max-w-[1600px] mx-auto px-6 lg:px-12 pt-20 pb-12">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
         
-        {/* --- MAIN GRID --- */}
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 mb-20">
-          
-          {/* BRAND COLUMN (Span 4) */}
-          <div className="lg:col-span-4 space-y-8">
-            <div className="flex items-center gap-3">
-              <div className="relative">
-                 {/* Optimized Glow */}
-                 <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(6,182,212,0.4)_0%,transparent_70%)] rounded-full"></div>
-                 <img
-                    src={LogoImg}
-                    alt="PD Logo"
-                    className="relative w-16 h-auto object-contain brightness-200"
-                    loading="lazy"
-                  />
-              </div>
-              <span className="text-xl font-bold tracking-tighter">PRASANTH.D</span>
-            </div>
+        {/* --- TOP SECTION: MAIN CTA --- */}
+        <div className="mb-24">
+           <div className="flex items-center gap-2 mb-6">
+              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+              <span className="text-xs font-mono uppercase tracking-widest text-emerald-500">Available for work</span>
+           </div>
 
-            <p className="text-gray-400 leading-relaxed max-w-sm">
-              Designing the future, one pixel at a time. Creating digital experiences that blend aesthetics with performance.
-            </p>
-
-            <div className="flex flex-col gap-3">
-               <a href="mailto:mrprasanthh@gmail.com" className="flex items-center gap-3 text-gray-400 hover:text-cyan-400 transition-colors group">
-                 <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-cyan-500/50 transition-colors">
-                   <Mail className="w-4 h-4" />
-                 </div>
-                 <span className="text-sm">mrprasanthh@gmail.com</span>
-               </a>
-               <a href="tel:+918531985733" className="flex items-center gap-3 text-gray-400 hover:text-cyan-400 transition-colors group">
-                 <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-cyan-500/50 transition-colors">
-                   <Phone className="w-4 h-4" />
-                 </div>
-                 <span className="text-sm">+91 8531985733</span>
-               </a>
-            </div>
-          </div>
-
-          {/* LINKS COLUMNS (Span 2 each) */}
-          <div className="lg:col-span-2">
-            <h3 className="text-sm font-mono text-cyan-400 uppercase tracking-widest mb-6">Explore</h3>
-            <ul className="space-y-4">
-              {footerLinks['Explore'].map((link) => (
-                <li key={link.name}>
-                  <a href={link.href} className="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 text-sm flex items-center gap-2">
-                    <span className="w-1 h-1 rounded-full bg-cyan-500 opacity-0 hover:opacity-100 transition-opacity"></span>
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="lg:col-span-2">
-            <h3 className="text-sm font-mono text-purple-400 uppercase tracking-widest mb-6">Services</h3>
-            <ul className="space-y-4">
-              {footerLinks['Services'].map((link) => (
-                <li key={link.name}>
-                  <a href={link.href} className="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 text-sm flex items-center gap-2">
-                     <span className="w-1 h-1 rounded-full bg-purple-500 opacity-0 hover:opacity-100 transition-opacity"></span>
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* NEWSLETTER (Span 4) */}
-          <div className="lg:col-span-4">
-            <div className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm hover:border-white/20 transition-colors">
-              <h3 className="text-xl font-bold text-white mb-2">Join the Signal</h3>
-              <p className="text-gray-400 text-sm mb-6">Get the latest design trends and updates sent to your inbox.</p>
+           {/* Giant Email Interaction */}
+           <div className="group relative inline-block cursor-pointer" onClick={handleCopy}>
+              <h2 className="text-5xl md:text-7xl lg:text-9xl font-bold text-white tracking-tighter group-hover:text-zinc-500 transition-colors duration-300">
+                 LET'S TALK
+              </h2>
               
-              <div className="space-y-3">
-                <input
-                  type="email"
-                  placeholder="enter_your_email"
-                  className="w-full px-5 py-4 bg-[#0a0a0a] border border-white/10 rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 transition-all font-mono"
-                />
-                <button className="w-full py-4 bg-white text-black font-bold rounded-xl hover:bg-cyan-400 transition-colors flex items-center justify-center gap-2 group">
-                  Subscribe
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
+              {/* Hover Floating Badge */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                 <div className="bg-white text-black px-4 py-2 rounded-full flex items-center gap-2 font-mono text-sm font-bold shadow-2xl transform scale-90 group-hover:scale-100 transition-transform">
+                    {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
+                    <span>{copied ? "COPIED TO CLIPBOARD" : "CLICK TO COPY EMAIL"}</span>
+                 </div>
               </div>
-            </div>
-          </div>
+           </div>
         </div>
 
-        {/* --- BOTTOM BAR --- */}
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="text-gray-500 text-sm font-mono">
-            © 2025 Prasanth.D // Engineered in India
-          </p>
+        {/* --- MIDDLE SECTION: COLUMNS --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 border-t border-white/10 pt-12 pb-24">
+           
+           {/* Column 1: ID */}
+           <div>
+              <h4 className="text-white font-bold mb-6">PRASANTH D.</h4>
+              <p className="text-sm leading-relaxed max-w-xs">
+                 Senior UI/UX Designer & Frontend Developer focused on building brands and digital experiences.
+              </p>
+           </div>
 
-          <div className="flex items-center gap-1 text-gray-500 text-sm">
-            <span>Built with</span>
-            <Heart className="w-3 h-3 text-red-500 fill-current animate-pulse mx-1" />
-            <span>and React</span>
-          </div>
+           {/* Column 2: NAVIGATION */}
+           <div>
+              <h4 className="text-xs font-mono text-zinc-600 uppercase tracking-widest mb-6">Directory</h4>
+              <ul className="space-y-3">
+                 {['Home', 'Projects', 'About', 'Contact'].map((item) => (
+                    <li key={item}>
+                       <a href={`#${item.toLowerCase()}`} className="text-sm hover:text-white transition-colors flex items-center gap-2 group">
+                          {item}
+                          <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-zinc-500" />
+                       </a>
+                    </li>
+                 ))}
+              </ul>
+           </div>
 
-          {/* Social Icons */}
-          <div className="flex gap-4">
-            {footerLinks['Socials'].map((social) => (
-              <a 
-                key={social.name} 
-                href={social.href} 
-                className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full border border-transparent hover:border-white/10"
-              >
-                {social.icon}
-              </a>
-            ))}
-          </div>
+           {/* Column 3: SOCIALS */}
+           <div>
+              <h4 className="text-xs font-mono text-zinc-600 uppercase tracking-widest mb-6">Connect</h4>
+              <ul className="space-y-3">
+                 {[
+                    { name: 'LinkedIn', icon: Linkedin },
+                    { name: 'GitHub', icon: Github },
+                    { name: 'Twitter', icon: Twitter }
+                 ].map((item) => (
+                    <li key={item.name}>
+                       <a href="#" className="text-sm hover:text-white transition-colors flex items-center gap-2 group">
+                          <item.icon className="w-4 h-4" />
+                          <span>{item.name}</span>
+                       </a>
+                    </li>
+                 ))}
+              </ul>
+           </div>
+
+           {/* Column 4: TECHNICAL */}
+           <div>
+              <h4 className="text-xs font-mono text-zinc-600 uppercase tracking-widest mb-6">Tech Stack</h4>
+              <div className="flex flex-wrap gap-2">
+                 {['React + AI', 'UIUX Designer', 'Digital Marketing', 'Figma', 'Ethical Hacking'].map((tech) => (
+                    <span key={tech} className="px-2 py-1 border border-white/10 rounded text-xs font-mono hover:bg-white/5 cursor-default transition-colors">
+                       {tech}
+                    </span>
+                 ))}
+              </div>
+           </div>
+
+        </div>
+
+        {/* --- BOTTOM SECTION: SYSTEM STATUS BAR --- */}
+        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-mono uppercase tracking-widest text-zinc-600">
+           
+           <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2">
+                 <Globe className="w-3 h-3" />
+                 <span>Coimbatore, IN</span>
+              </div>
+              <div className="flex items-center gap-2">
+                 <Clock className="w-3 h-3" />
+                 <span>{time} IST</span>
+              </div>
+           </div>
+
+           <div className="flex items-center gap-6">
+              <span>© 2025 Prasanth.D</span>
+              <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-white transition-colors">
+                 [ Back to Top ]
+              </button>
+           </div>
+
         </div>
 
       </div>
-
-      {/* --- SCROLL TO TOP --- */}
-      <button
-        onClick={scrollToTop}
-        className="fixed bottom-8 right-8 p-4 bg-white/5 border border-white/10 backdrop-blur-md rounded-full text-white hover:bg-cyan-500 hover:text-black hover:border-cyan-500 transition-all duration-300 shadow-2xl group z-50"
-        aria-label="Scroll to top"
-      >
-        <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
-      </button>
-
     </footer>
   );
 };

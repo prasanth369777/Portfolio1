@@ -1,18 +1,23 @@
-import React from "react";
-import { Mail, Github, Linkedin, Send, MapPin, ArrowRight } from "lucide-react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowUpRight, ArrowRight, Send, CheckCircle2 } from "lucide-react";
 
 export default function Contact() {
-  const [result, setResult] = React.useState("");
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [result, setResult] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [activeService, setActiveService] = useState(null);
+
+  // Common tags for "Senior" project inquiries
+  const services = ["UI/UX Design", "Web Development", "Brand Identity", "No-Code", "Other"];
 
   const onSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
-    setResult("Transmission started...");
+    setResult("Sending...");
     
     const formData = new FormData(event.target);
-    // Added your access key here
     formData.append("access_key", "86c1a356-7d8f-47ec-b523-6d02ef8d5996");
+    if (activeService) formData.append("service_interest", activeService);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -23,173 +28,169 @@ export default function Contact() {
       const data = await response.json();
 
       if (data.success) {
-        setResult("Transmission Received. Over & Out.");
+        setResult("Message Sent");
         event.target.reset();
+        setActiveService(null);
       } else {
-        console.log("Error", data);
-        setResult(data.message);
+        setResult("Error");
       }
     } catch (error) {
-      console.log("Fetch Error", error);
-      setResult("Connection Failed. Retrying...");
+      setResult("Error");
     } finally {
       setIsSubmitting(false);
+      setTimeout(() => setResult(""), 5000);
     }
   };
 
   return (
-    <section
-      id="contact"
-      className="relative py-24 bg-[#050505] overflow-hidden text-gray-300 font-sans selection:bg-cyan-500 selection:text-black"
-    >
-      {/* --- OPTIMIZED BACKGROUND TEXTURES --- */}
+    <section id="contact" className="relative py-32 bg-[#080808] overflow-hidden font-sans selection:bg-white selection:text-black">
       
-      {/* 1. Static Noise Grain (Replaces heavy SVG filter) */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-           style={{ 
-             backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")`,
-             backgroundSize: "100px 100px" 
-           }}
-      ></div>
+      {/* --- NOISE TEXTURE --- */}
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
 
-      {/* 2. Radial Gradients (Replaces heavy blur-[120px]) */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(8,145,178,0.1)_0%,transparent_70%)] pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(147,51,234,0.1)_0%,transparent_70%)] pointer-events-none"></div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        {/* --- GRID LAYOUT --- */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
           
-          {/* --- LEFT COLUMN: CONTEXT & SOCIALS --- */}
-          <div className="space-y-10">
-            
-            {/* Status Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 backdrop-blur-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span className="text-xs font-mono text-emerald-400 uppercase tracking-widest">System Operational</span>
-            </div>
+          {/* LEFT COLUMN: EDITORIAL CONTENT (Span 5) */}
+          <div className="lg:col-span-5 flex flex-col justify-between">
+             <div>
+                <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-6 block">
+                   // Project Inquiry
+                </span>
+                <h2 className="text-5xl md:text-7xl font-serif text-white leading-[1.1] mb-8">
+                   Let's start a <br/>
+                   <span className="italic text-zinc-600">conversation.</span>
+                </h2>
+                <p className="text-zinc-400 text-lg font-light leading-relaxed max-w-md mb-12">
+                   I am currently available for select freelance projects. I specialize in building digital products that blend aesthetics with architectural precision.
+                </p>
 
-            {/* Headlines */}
-            <div className="space-y-4">
-              <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-[0.9]">
-                Initiate <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Protocol.</span>
-              </h2>
-              <p className="text-lg text-gray-400 max-w-md leading-relaxed">
-                Ready to collaborate on high-impact digital projects? Send a transmission and let's build the future together.
-              </p>
-            </div>
-
-            {/* Contact Info Block */}
-            <div className="flex flex-col gap-6">
-              <a href="mailto:mrprasanthh@gmail.com" className="group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-cyan-500/30 transition-all duration-300">
-                <div className="p-3 rounded-xl bg-[#0a0a0a] border border-white/10 text-cyan-400 group-hover:text-white transition-colors">
-                  <Mail className="w-6 h-6" />
+                {/* Contact Details */}
+                <div className="space-y-8">
+                   <div>
+                      <h4 className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-2">Write</h4>
+                      <a href="mailto:mrprasanthh@gmail.com" className="text-xl text-white hover:text-zinc-400 transition-colors border-b border-zinc-800 pb-1">
+                         mrprasanthh@gmail.com
+                      </a>
+                   </div>
+                   <div>
+                      <h4 className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-2">Connect</h4>
+                      <div className="flex gap-6">
+                         <a href="https://www.linkedin.com/in/prasanth-d-/" target="_blank" rel="noreferrer" className="text-white hover:text-zinc-400 flex items-center gap-1 transition-colors">
+                            LinkedIn <ArrowUpRight className="w-3 h-3" />
+                         </a>
+                         <a href="https://github.com/prasanth369777" target="_blank" rel="noreferrer" className="text-white hover:text-zinc-400 flex items-center gap-1 transition-colors">
+                            GitHub <ArrowUpRight className="w-3 h-3" />
+                         </a>
+                      </div>
+                   </div>
                 </div>
-                <div>
-                  <p className="text-xs font-mono text-gray-500 uppercase tracking-widest">Email Channel</p>
-                  <p className="text-white font-semibold group-hover:text-cyan-400 transition-colors">mrprasanthh@gmail.com</p>
-                </div>
-                <ArrowRight className="w-5 h-5 ml-auto text-gray-600 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" />
-              </a>
-
-              <div className="group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-purple-500/30 transition-all duration-300 cursor-default">
-                <div className="p-3 rounded-xl bg-[#0a0a0a] border border-white/10 text-purple-400 group-hover:text-white transition-colors">
-                  <MapPin className="w-6 h-6" />
-                </div>
-                <div>
-                  <p className="text-xs font-mono text-gray-500 uppercase tracking-widest">Base of Operations</p>
-                  <p className="text-white font-semibold group-hover:text-purple-400 transition-colors">Coimbatore, Tamil Nadu</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Social Row */}
-            <div className="flex gap-4">
-               {[
-                 { icon: Github, href: "https://github.com/prasanth369777", color: "hover:text-white hover:border-white" },
-                 { icon: Linkedin, href: "https://www.linkedin.com/in/prasanth-d-/", color: "hover:text-blue-400 hover:border-blue-400" },
-               ].map((social, i) => (
-                 <a
-                   key={i}
-                   href={social.href}
-                   target="_blank"
-                   rel="noreferrer"
-                   className={`p-4 rounded-xl bg-[#0a0a0a] border border-white/10 text-gray-400 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${social.color}`}
-                 >
-                   <social.icon className="w-6 h-6" />
-                 </a>
-               ))}
-            </div>
-
+             </div>
           </div>
 
-          {/* --- RIGHT COLUMN: THE FORM --- */}
-          <div className="relative">
-             {/* Optimized Glow behind form (Radial Gradient) */}
-             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.15)_0%,transparent_70%)] rounded-3xl -z-10 transform rotate-2 scale-105"></div>
-
-             <div className="bg-[#0a0a0a]/80 backdrop-blur-md border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl">
-                <form className="space-y-6" onSubmit={onSubmit}>
-                  
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                       <label className="text-xs font-mono text-cyan-400 uppercase tracking-widest ml-1">Identity</label>
-                       <input
-                        type="text"
-                        name="name"
-                        placeholder="John Doe"
-                        required
-                        className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none transition-all"
+          {/* RIGHT COLUMN: CLEAN FORM (Span 7) */}
+          <div className="lg:col-span-7 pt-4">
+             <form onSubmit={onSubmit} className="space-y-12">
+                
+                {/* 1. INPUT FIELDS (Underlined Style) */}
+                <div className="grid md:grid-cols-2 gap-12">
+                   <div className="group relative">
+                      <input 
+                        type="text" 
+                        name="name" 
+                        required 
+                        placeholder=" "
+                        className="peer w-full bg-transparent border-b border-zinc-800 py-4 text-white text-lg focus:border-white focus:outline-none transition-colors"
                       />
-                    </div>
-                    <div className="space-y-2">
-                       <label className="text-xs font-mono text-purple-400 uppercase tracking-widest ml-1">Frequency</label>
-                       <input
-                        type="email"
-                        name="email"
-                        placeholder="john@example.com"
-                        required
-                        className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all"
+                      <label className="absolute left-0 top-4 text-zinc-500 text-sm transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-white peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-white pointer-events-none">
+                         Your Name
+                      </label>
+                   </div>
+                   <div className="group relative">
+                      <input 
+                        type="email" 
+                        name="email" 
+                        required 
+                        placeholder=" "
+                        className="peer w-full bg-transparent border-b border-zinc-800 py-4 text-white text-lg focus:border-white focus:outline-none transition-colors"
                       />
-                    </div>
-                  </div>
+                      <label className="absolute left-0 top-4 text-zinc-500 text-sm transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-white peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-white pointer-events-none">
+                         Email Address
+                      </label>
+                   </div>
+                </div>
 
-                  <div className="space-y-2">
-                     <label className="text-xs font-mono text-gray-500 uppercase tracking-widest ml-1">Data Packet</label>
-                     <textarea
-                      name="message"
-                      rows={5}
-                      placeholder="Enter your message parameters here..."
-                      required
-                      className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none transition-all resize-none"
+                {/* 2. SERVICES SELECTION */}
+                <div className="space-y-4">
+                   <label className="text-xs font-mono text-zinc-500 uppercase tracking-widest block">I'm interested in...</label>
+                   <div className="flex flex-wrap gap-3">
+                      {services.map((service, i) => (
+                         <button
+                           key={i}
+                           type="button"
+                           onClick={() => setActiveService(service)}
+                           className={`
+                             px-4 py-2 rounded-full border text-sm transition-all duration-300
+                             ${activeService === service 
+                                ? "bg-white text-black border-white" 
+                                : "bg-transparent text-zinc-400 border-zinc-800 hover:border-zinc-600 hover:text-white"
+                             }
+                           `}
+                         >
+                            {service}
+                         </button>
+                      ))}
+                   </div>
+                </div>
+
+                {/* 3. MESSAGE AREA */}
+                <div className="group relative">
+                    <textarea 
+                      name="message" 
+                      rows={4}
+                      required 
+                      placeholder=" "
+                      className="peer w-full bg-transparent border-b border-zinc-800 py-4 text-white text-lg focus:border-white focus:outline-none transition-colors resize-none"
                     ></textarea>
-                  </div>
+                    <label className="absolute left-0 top-4 text-zinc-500 text-sm transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-white peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-white pointer-events-none">
+                       Tell me about the project
+                    </label>
+                </div>
 
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="group relative w-full flex items-center justify-center gap-3 px-8 py-4 bg-white text-black rounded-xl font-bold text-lg overflow-hidden transition-all hover:scale-[1.02]"
-                  >
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-white to-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
-                    <span className="relative z-10 flex items-center gap-2">
-                       {isSubmitting ? "Transmitting..." : "Send Transmission"}
-                       {!isSubmitting && <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
-                    </span>
-                  </button>
+                {/* 4. SUBMIT BUTTON */}
+                <div className="flex items-center justify-between pt-8">
+                   
+                   {/* Status Message */}
+                   <div className="h-6">
+                      {result && (
+                         <motion.div 
+                           initial={{ opacity: 0, x: -10 }}
+                           animate={{ opacity: 1, x: 0 }}
+                           className={`flex items-center gap-2 text-sm ${result.includes("Error") ? "text-red-400" : "text-emerald-400"}`}
+                         >
+                            {result.includes("Error") ? null : <CheckCircle2 className="w-4 h-4" />}
+                            {result}
+                         </motion.div>
+                      )}
+                   </div>
 
-                  {result && (
-                    <div className={`text-center p-3 rounded-lg text-sm font-mono border ${result.includes("Success") ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" : "bg-red-500/10 border-red-500/20 text-red-400"}`}>
-                      {result}
-                    </div>
-                  )}
-                </form>
-             </div>
+                   {/* Action */}
+                   <button 
+                     type="submit" 
+                     disabled={isSubmitting}
+                     className="group flex items-center gap-4 text-white text-xl font-light hover:text-zinc-300 transition-colors disabled:opacity-50"
+                   >
+                      <span>{isSubmitting ? "Sending" : "Send Request"}</span>
+                      <div className="relative w-12 h-12 rounded-full border border-zinc-700 flex items-center justify-center overflow-hidden group-hover:border-white transition-colors">
+                         <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                         <ArrowRight className="w-5 h-5 relative z-10 text-white group-hover:text-black transition-colors" />
+                      </div>
+                   </button>
+                </div>
+
+             </form>
           </div>
 
         </div>

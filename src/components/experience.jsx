@@ -1,5 +1,5 @@
-import React from "react";
-import { GraduationCap, Briefcase, MapPin } from "lucide-react";
+
+import { GraduationCap, Briefcase, MapPin} from "lucide-react";
 
 const timeline = [
   {
@@ -7,6 +7,7 @@ const timeline = [
     title: "UI/UX & Digital Marketing",
     institution: "CareerLadder, Coimbatore",
     desc: "Leading design initiatives, crafting user interfaces, and managing SEO/growth strategies.",
+    tags: ["Leadership", "SEO", "UI Design"],
     type: "experience",
   },
   {
@@ -14,6 +15,7 @@ const timeline = [
     title: "B.E. CSE (IoT & Cyber Security)",
     institution: "SNS College of Engineering",
     desc: "Graduated with distinction (8.89 CGPA). Focus on Blockchain & IoT Security.",
+    tags: ["Blockchain", "IoT", "Distinction"],
     type: "education",
   },
   {
@@ -21,6 +23,7 @@ const timeline = [
     title: "Tech Internships",
     institution: "Multiple Companies",
     desc: "Gained hands-on experience in Web Development, Java, and Python via Appin Technology.",
+    tags: ["Java", "Python", "Web Dev"],
     type: "experience",
   },
   {
@@ -28,6 +31,7 @@ const timeline = [
     title: "Diploma in Computer Science",
     institution: "CSI Polytechnic College, Salem",
     desc: "Specialized in core computing principles. Secured 72%.",
+    tags: ["Core CS", "Networking"],
     type: "education",
   },
   {
@@ -35,112 +39,135 @@ const timeline = [
     title: "Secondary School (SSLC)",
     institution: "Bharathi Vidyalaya Hr. Sec. School",
     desc: "Achieved 68% with a focus on foundational sciences.",
+    tags: ["Science", "Math"],
     type: "education",
   },
 ];
 
 const TimelineSection = () => {
   return (
-    <section id="experience" className="relative py-24 bg-[#050505] overflow-hidden">
+    <section id="experience" className="relative py-32 bg-zinc-950 overflow-hidden font-sans">
       
-      {/* --- OPTIMIZATION 1: Lightweight Noise Texture --- */}
-      {/* Replaced heavy SVG calculation with a static background image */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-0"
-           style={{ 
-             backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")`,
-             backgroundSize: "100px 100px" 
-           }}>
-      </div>
-      
-      {/* --- OPTIMIZATION 2: Radial Gradients instead of Blur --- */}
-      {/* Radial gradients perform much better than filter: blur() */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(16,185,129,0.1)_0%,transparent_70%)] pointer-events-none"></div>
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(168,85,247,0.1)_0%,transparent_70%)] pointer-events-none"></div>
+      {/* --- BACKGROUND ATMOSPHERE --- */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none"></div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-12">
         
         {/* --- HEADER --- */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-4">
-             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-             <span className="text-xs font-mono text-gray-400 uppercase tracking-widest">My Journey</span>
+        <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-8">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-4">
+               <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
+               <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">Career Path</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter">
+              Professional <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400">Experience.</span>
+            </h2>
           </div>
-          <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter">
-            Career <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-purple-500">Roadmap</span>
-          </h2>
+          <p className="text-zinc-400 max-w-sm text-sm leading-relaxed text-right hidden md:block">
+            A timeline of my educational background and professional milestones shaping my expertise.
+          </p>
         </div>
 
-        {/* --- TIMELINE CONTAINER --- */}
-        <div className="relative">
+        {/* --- MODERN TIMELINE GRID --- */}
+        <div className="relative flex flex-col gap-8 md:gap-0">
           
-          {/* Central Line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald-500 via-purple-500 to-emerald-500 opacity-30 md:-translate-x-1/2"></div>
+          {/* Continuous Vertical Line (Desktop) */}
+          <div className="absolute left-[140px] top-4 bottom-4 w-px bg-gradient-to-b from-white/20 via-white/5 to-transparent hidden md:block"></div>
 
-          <div className="flex flex-col gap-12 md:gap-24">
-            {timeline.map((item, idx) => {
-              const isEven = idx % 2 === 0;
-              const isEdu = item.type === "education";
-              const accentColor = isEdu ? "text-emerald-400 border-emerald-500/30" : "text-purple-400 border-purple-500/30";
-              const bgColor = isEdu ? "bg-emerald-500/10" : "bg-purple-500/10";
-              const Icon = isEdu ? GraduationCap : Briefcase;
+          {timeline.map((item, idx) => {
+            const isEdu = item.type === "education";
+            const Icon = isEdu ? GraduationCap : Briefcase;
+            const accentColor = isEdu ? "text-emerald-400" : "text-indigo-400";
+            const borderColor = isEdu ? "group-hover:border-emerald-500/30" : "group-hover:border-indigo-500/30";
+            const glowColor = isEdu ? "group-hover:shadow-emerald-900/20" : "group-hover:shadow-indigo-900/20";
 
-              return (
-                <div key={idx} className={`relative flex flex-col md:flex-row items-center ${isEven ? "md:flex-row-reverse" : ""}`}>
-                  
-                  {/* SPACER (Desktop only) */}
-                  <div className="hidden md:block w-1/2"></div>
-
-                  {/* ICON NODE */}
-                  <div className="absolute left-8 md:left-1/2 -translate-x-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-[#0a0a0a] border border-white/20 shadow-[0_0_20px_rgba(0,0,0,0.5)] z-20 group">
-                    <div className={`w-full h-full rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${bgColor}`}>
-                        <Icon className={`w-5 h-5 ${isEdu ? "text-emerald-400" : "text-purple-400"}`} />
-                    </div>
-                  </div>
-
-                  {/* CARD CONTENT */}
-                  <div className="w-full md:w-1/2 pl-20 md:pl-0 md:px-12">
-                    <div className={`
-                        group relative p-6 md:p-8 rounded-2xl 
-                        bg-[#0a0a0a]/80 backdrop-blur-md border border-white/10
-                        transition-all duration-300 hover:-translate-y-1 hover:border-opacity-50
-                        ${isEven ? "md:text-right" : "md:text-left"}
-                        hover:${accentColor.split(' ')[1]}
-                    `}>
-                      
-                      {/* OPTIMIZATION 3: Radial Gradient for Hover Glow (Faster than blur) */}
-                      <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_70%)] pointer-events-none`}></div>
-
-                      {/* Year Badge */}
-                      <div className={`inline-flex items-center gap-2 mb-3 ${isEven ? "md:flex-row-reverse" : ""}`}>
-                         <span className={`px-3 py-1 rounded text-xs font-mono font-bold bg-white/5 ${accentColor.split(' ')[0]}`}>
-                           {item.year}
-                         </span>
-                         <span className="h-px w-8 bg-white/10"></span>
-                      </div>
-
-                      <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
-                        {item.title}
-                      </h3>
-                      
-                      <div className={`flex items-center gap-2 text-sm text-gray-400 mb-4 ${isEven ? "md:justify-end" : "md:justify-start"}`}>
-                        {!isEven && <MapPin className="w-3 h-3" />}
-                        <span>{item.institution}</span>
-                        {isEven && <MapPin className="w-3 h-3" />}
-                      </div>
-
-                      <p className="text-gray-400 text-sm md:text-base leading-relaxed border-t border-white/5 pt-4">
-                        {item.desc}
-                      </p>
-
-                    </div>
-                  </div>
-
+            return (
+              <div key={idx} className="relative grid grid-cols-1 md:grid-cols-[140px_1fr] group">
+                
+                {/* 1. DATE COLUMN (Sticky on Desktop) */}
+                <div className="relative hidden md:flex flex-col items-end pr-8 py-8">
+                   <span className={`text-sm font-mono font-bold ${accentColor} opacity-70 group-hover:opacity-100 transition-opacity`}>
+                     {item.year.split('–')[0]}
+                   </span>
+                   {item.year.includes('–') && (
+                     <span className="text-xs text-zinc-500 font-mono mt-1">
+                       {item.year.split('–')[1] || "Now"}
+                     </span>
+                   )}
+                   {/* Connector Dot */}
+                   <div className={`absolute right-[-4px] top-10 w-2 h-2 rounded-full bg-zinc-900 border border-zinc-600 z-10 transition-colors duration-300 ${isEdu ? 'group-hover:border-emerald-400 group-hover:bg-emerald-950' : 'group-hover:border-indigo-400 group-hover:bg-indigo-950'}`}></div>
                 </div>
-              );
-            })}
-          </div>
 
+                {/* 2. CARD CONTENT */}
+                <div className="relative pl-0 md:pl-12 py-4">
+                  
+                  {/* Mobile Date Header */}
+                  <div className="flex items-center gap-3 mb-3 md:hidden">
+                    <span className="px-2 py-1 rounded bg-white/5 text-xs text-zinc-300 border border-white/10">
+                      {item.year}
+                    </span>
+                    <div className="h-px flex-1 bg-white/10"></div>
+                  </div>
+
+                  {/* Main Card */}
+                  <div className={`
+                      relative p-6 md:p-8 rounded-2xl bg-zinc-900/40 backdrop-blur-sm border border-white/5 
+                      transition-all duration-500 ease-out
+                      ${borderColor} ${glowColor} hover:shadow-xl hover:-translate-y-1
+                  `}>
+                    
+                    {/* Header Row */}
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="flex items-center gap-3">
+                         <div className={`p-2.5 rounded-lg bg-white/5 border border-white/5 ${accentColor}`}>
+                            <Icon size={18} />
+                         </div>
+                         <div>
+                            <h3 className="text-lg font-bold text-white leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-zinc-400 transition-all">
+                                {item.title}
+                            </h3>
+                            <div className="flex items-center gap-1 text-zinc-500 text-xs font-medium mt-0.5">
+                                <MapPin size={10} />
+                                <span>{item.institution}</span>
+                            </div>
+                         </div>
+                      </div>
+                      
+                      {/* Type Badge */}
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600 border border-zinc-800 px-2 py-1 rounded hidden sm:block">
+                        {item.type}
+                      </span>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-zinc-400 text-sm leading-relaxed mb-6 border-l-2 border-white/5 pl-4 group-hover:border-white/20 transition-colors">
+                      {item.desc}
+                    </p>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2">
+                      {item.tags && item.tags.map((tag, tIdx) => (
+                        <span key={tIdx} className="px-2.5 py-1 text-[11px] font-medium text-zinc-400 bg-white/5 rounded-md border border-white/5 group-hover:border-white/10 transition-colors">
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Hover Gradient Overlay */}
+                    <div className={`absolute inset-0 bg-gradient-to-r ${isEdu ? 'from-emerald-500/5' : 'from-indigo-500/5'} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl`}></div>
+
+                  </div>
+                </div>
+
+              </div>
+            );
+          })}
         </div>
+
       </div>
     </section>
   );

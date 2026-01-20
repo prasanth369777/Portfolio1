@@ -6,6 +6,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import InfiniteHorizontalScroll from './components/InfiniteHorizontalScroll'; // fixed
 import SkillsSection from '../components/SkillsSection';
+import Storytelling from '../components/storytelling';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <InfiniteHorizontalScroll /> {/* fixed */}
       <About />
       <Projects />
+      <Storytelling />
       <SkillsSection />
       <Contact />
       <Footer />

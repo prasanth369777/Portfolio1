@@ -1,146 +1,181 @@
-import React from 'react';
-import { Code, Palette, Zap, Users, ArrowUpRight } from 'lucide-react';
+import React, { useRef, useEffect } from 'react';
+import { ArrowUpRight, Download, Disc, Layers, Zap, PenTool } from 'lucide-react';
+import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
-// --- DATA MOVED OUTSIDE COMPONENT (Performance Best Practice) ---
-const highlights = [
-  {
-    icon: Code,
-    title: 'UI/UX Design',
-    desc: 'Crafting intuitive interfaces that delight users.',
-    color: 'text-cyan-400',
-    bg: 'bg-cyan-400/10'
+// --- SUB-COMPONENT: ANIMATED COUNTER ---
+const Counter = ({ value }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-20px" });
+  const motionValue = useMotionValue(0);
+  const springValue = useSpring(motionValue, { damping: 40, stiffness: 90 });
+  const rounded = useTransform(springValue, (latest) => Math.round(latest));
+  
+  const numericValue = parseInt(value.replace(/\D/g, '')) || 0;
+  const suffix = value.replace(/[0-9]/g, '');
+
+  useEffect(() => {
+    if (isInView) {
+      motionValue.set(numericValue);
+    }
+  }, [isInView, numericValue, motionValue]);
+
+  return <span ref={ref} className="flex"><motion.span>{rounded}</motion.span>{suffix}</span>;
+};
+
+// --- DATA ---
+const expertise = [
+  { 
+    id: "01", 
+    title: "Product Design", 
+    desc: "End-to-end design systems and prototyping.", 
+    icon: PenTool 
   },
-  {
-    icon: Palette,
-    title: 'Graphic Design',
-    desc: 'Visual storytelling through pixel-perfect graphics.',
-    color: 'text-purple-400',
-    bg: 'bg-purple-400/10'
+  { 
+    id: "02", 
+    title: "Frontend Eng", 
+    desc: "React ecosystems with performance focus.", 
+    icon: Layers 
   },
-  {
-    icon: Zap,
-    title: 'Web Dev',
-    desc: 'High-performance, scalable web solutions.',
-    color: 'text-amber-400',
-    bg: 'bg-amber-400/10'
+  { 
+    id: "03", 
+    title: "Interaction", 
+    desc: "Micro-animations and fluid user journeys.", 
+    icon: Disc 
   },
-  {
-    icon: Users,
-    title: 'Marketing',
-    desc: 'Data-driven strategies for brand growth.',
-    color: 'text-pink-400',
-    bg: 'bg-pink-400/10'
+  { 
+    id: "04", 
+    title: "Growth", 
+    desc: "Technical SEO and conversion optimization.", 
+    icon: Zap 
   },
 ];
 
 const stats = [
-  { value: '2', label: 'Years Exp.' },
-  { value: '6+', label: 'Projects' },
-  { value: '3', label: 'Internships' },
-  { value: '7', label: 'Certs' },
+  { value: '2+', label: 'Years Experience' },
+  { value: '6+', label: 'Projects Shipped' },
+  { value: '7', label: 'Certifications' },
 ];
 
-const skills = [
-  'React ', 'UIUX', 'Figma', 'Python', 'Ethical Hacking', 'DigitalMarketing', 'No-Code'
-];
+const skills = ['React & AI', 'UIUX Designing', 'Digital Marketing', 'Figma', 'Meta', 'Python', 'System Design'];
 
+// --- MAIN COMPONENT ---
 const About = () => {
   return (
-    <section id="about" className="relative min-h-screen py-24 bg-[#030712] overflow-hidden text-gray-300 font-sans">
+    <section id="about" className="relative py-32 bg-[#080808] text-zinc-300 font-sans selection:bg-white selection:text-black overflow-hidden">
       
-      {/* --- OPTIMIZED BACKGROUND --- */}
-      
-      {/* 1. Grid Pattern (Lightweight CSS) */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none"
-        style={{
-            backgroundImage: `linear-gradient(#1f2937 1px, transparent 1px), linear-gradient(to right, #1f2937 1px, transparent 1px)`,
-            backgroundSize: '40px 40px'
-        }}
-      ></div>
-      
-      {/* 2. Radial Gradients (Replaces heavy 'blur-[100px]' effects) */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(79,70,229,0.15)_0%,transparent_70%)] pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.15)_0%,transparent_70%)] pointer-events-none"></div>
+      {/* --- BACKGROUND GRID --- */}
+      {/* Architectural grid lines instead of gradients */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none"></div>
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12">
         
-        {/* --- HEADER --- */}
-        <div className="mb-20">
-            <h2 className="text-sm font-mono text-cyan-400 tracking-widest uppercase mb-3">Who I Am</h2>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight">
-              About <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-500">Prasanth.</span>
-            </h1>
-        </div>
-
-        {/* --- MAIN GRID CONTENT --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          
-          {/* LEFT COLUMN: BIO & STATS (Span 5) */}
-          <div className="lg:col-span-5 flex flex-col justify-between space-y-12">
-            
-            {/* Bio Text */}
-            <div className="space-y-6 text-lg leading-relaxed text-gray-400">
-              <p>
-                I am <strong className="text-white">Prasanth D</strong>, a Computer Science Engineer driven by a passion for building digital products that look good and work even better.
-              </p>
-              <p>
-                My journey sits at the intersection of <span className="text-cyan-300">Design</span> and <span className="text-indigo-300">Engineering</span>. Whether I'm designing a sleek UI in Figma, coding a complex React app, or optimizing SEO strategies, I bring a holistic approach to every project.
-              </p>
+        {/* --- HEADER SECTION --- */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-white/10 pt-12">
+           
+           {/* LEFT: TITLE (Span 5) */}
+           <div className="lg:col-span-5">
+              <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-6 block">
+                // The Profile
+              </span>
+              <h1 className="text-5xl md:text-7xl font-serif text-white leading-[1.1] mb-8">
+                Design <br/>
+                <span className="italic text-zinc-600">Technologist.</span>
+              </h1>
               
-              {/* Skills Tags */}
-              <div className="flex flex-wrap gap-2 pt-4">
-                {skills.map((skill, idx) => (
-                  <span key={idx} className="px-3 py-1 rounded-full text-xs font-medium bg-gray-800/50 border border-gray-700 text-gray-300 hover:border-cyan-500/50 hover:text-cyan-400 transition-colors cursor-default">
-                    {skill}
-                  </span>
-                ))}
+              <div className="flex flex-col gap-8">
+                 {/* Bio */}
+                 <p className="text-lg md:text-xl font-light leading-relaxed text-zinc-400 max-w-md">
+                    I bridge the gap between <span className="text-white border-b border-zinc-700 pb-0.5">aesthetic intuition</span> and <span className="text-white border-b border-zinc-700 pb-0.5">engineering rigor</span>. My work focuses on building scalable design systems and high-performance interfaces.
+                 </p>
+                 
+                 {/* Download Button */}
+                 <motion.button 
+                    whileHover={{ x: 5 }}
+                    className="group w-fit flex items-center gap-3 text-sm font-mono uppercase tracking-widest text-white hover:text-zinc-400 transition-colors"
+                 >
+                    <span className="border-b border-white group-hover:border-zinc-400 pb-1">Download CV</span>
+                    <Download className="w-4 h-4" />
+                 </motion.button>
               </div>
-            </div>
+           </div>
 
-            {/* Stats Grid */}
-            <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat, idx) => (
-                <div key={idx} className="p-6 bg-gray-900/40 border border-gray-800 rounded-2xl backdrop-blur-sm hover:bg-gray-800/40 transition-colors">
-                  <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-gray-500 font-medium uppercase tracking-wide">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+           {/* RIGHT: STATS & SKILLS (Span 7) */}
+           <div className="lg:col-span-7 flex flex-col justify-between">
+              
+              {/* Stats Row */}
+              <div className="grid grid-cols-3 gap-8 border-b border-white/10 pb-12">
+                 {stats.map((stat, i) => (
+                    <div key={i}>
+                       <div className="text-4xl md:text-5xl font-light text-white mb-2">
+                          <Counter value={stat.value} />
+                       </div>
+                       <div className="text-xs font-mono text-zinc-600 uppercase tracking-widest">
+                          {stat.label}
+                       </div>
+                    </div>
+                 ))}
+              </div>
 
-            {/* Download CV Button */}
-            <div>
-              <button className="group flex items-center gap-3 px-6 py-3 bg-white text-black rounded-full font-bold hover:bg-cyan-400 transition-colors">
-                Download Resume
-                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </button>
-            </div>
-          </div>
+              {/* Skills Area */}
+              <div className="pt-12">
+                 <h3 className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-6">Technical Arsenal</h3>
+                 <div className="flex flex-wrap gap-x-8 gap-y-4">
+                    {skills.map((skill, i) => (
+                       <div key={i} className="group flex items-center gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-zinc-800 group-hover:bg-white transition-colors"></div>
+                          <span className="text-lg font-light text-zinc-400 group-hover:text-white transition-colors cursor-default">
+                             {skill}
+                          </span>
+                       </div>
+                    ))}
+                 </div>
+              </div>
 
-          {/* RIGHT COLUMN: HIGHLIGHT CARDS (Span 7) */}
-          <div className="lg:col-span-7">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
-              {highlights.map((item, index) => (
-                <div 
-                  key={index} 
-                  className="group relative p-8 bg-gray-900/30 border border-gray-800 rounded-3xl overflow-hidden hover:border-gray-600 transition-all duration-300 hover:-translate-y-1 will-change-transform"
-                >
-                  {/* Optimized Hover Gradient (Radial instead of Blur) */}
-                  <div className={`absolute -right-10 -top-10 w-48 h-48 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(circle,rgba(255,255,255,1)_0%,transparent_70%)] ${item.color.replace('text-', 'text-')}`}></div>
-
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${item.bg} ${item.color}`}>
-                    <item.icon className="w-6 h-6" />
-                  </div>
-                  
-                  <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
+           </div>
         </div>
+
+        {/* --- EXPERTISE GRID (Bottom Section) --- */}
+        <div className="mt-24">
+           <div className="flex items-end justify-between mb-8">
+              <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest">
+                 // Core Competencies
+              </span>
+           </div>
+
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-l border-white/10">
+              {expertise.map((item, i) => (
+                 <div 
+                    key={i} 
+                    className="group relative p-8 border-r border-b border-white/10 hover:bg-zinc-900/50 transition-colors duration-500"
+                 >
+                    {/* Hover Reveal Line */}
+                    <div className="absolute top-0 left-0 w-full h-0.5 bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+
+                    <div className="flex justify-between items-start mb-12">
+                       <span className="text-xs font-mono text-zinc-600">
+                          {item.id}
+                       </span>
+                       <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-white transition-colors" />
+                    </div>
+
+                    <div>
+                       <h3 className="text-xl font-medium text-white mb-2 group-hover:translate-x-2 transition-transform duration-300">
+                          {item.title}
+                       </h3>
+                       <p className="text-sm text-zinc-500 font-light leading-relaxed">
+                          {item.desc}
+                       </p>
+                    </div>
+
+                    {/* Corner Arrow */}
+                    <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                       <ArrowUpRight className="w-4 h-4 text-white" />
+                    </div>
+                 </div>
+              ))}
+           </div>
+        </div>
+
       </div>
     </section>
   );

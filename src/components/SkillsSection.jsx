@@ -1,166 +1,149 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Figma, Image, PenTool, Globe, Cpu } from "lucide-react";
 
-// Data
+import { motion } from "framer-motion";
+import { Figma, Image, PenTool, Layout, Cpu, Globe, ArrowUpRight } from "lucide-react";
+
 const skills = [
   { 
     name: "Figma", 
-    level: 95, 
-    color: "from-pink-500 to-rose-500",
-    shadow: "shadow-pink-500/20",
-    icon: <Figma className="w-6 h-6 text-white" /> 
+    category: "Product Design",
+    level: "95", 
+    desc: "Systems & Prototyping",
+    color: "group-hover:text-pink-400",
+    bar: "bg-pink-400",
+    icon: <Figma strokeWidth={1.5} className="w-6 h-6" /> 
   },
   { 
     name: "Photoshop", 
-    level: 85, 
-    color: "from-blue-500 to-cyan-500",
-    shadow: "shadow-blue-500/20",
-    icon: <Image className="w-6 h-6 text-white" /> 
+    category: "Visual Design",
+    level: "85", 
+    desc: "Compositing & Retouching",
+    color: "group-hover:text-cyan-400",
+    bar: "bg-cyan-400",
+    icon: <Image strokeWidth={1.5} className="w-6 h-6" /> 
   },
   { 
     name: "Illustrator", 
-    level: 80, 
-    color: "from-orange-500 to-yellow-500",
-    shadow: "shadow-orange-500/20",
-    icon: <PenTool className="w-6 h-6 text-white" /> 
+    category: "Vector Art",
+    level: "80", 
+    desc: "Brand Identity & Illustration",
+    color: "group-hover:text-amber-400",
+    bar: "bg-amber-400",
+    icon: <PenTool strokeWidth={1.5} className="w-6 h-6" /> 
   },
   { 
     name: "Canva", 
-    level: 90, 
-    color: "from-teal-400 to-emerald-500",
-    shadow: "shadow-teal-500/20",
-    icon: <Image className="w-6 h-6 text-white" /> 
+    category: "Rapid Layout",
+    level: "90", 
+    desc: "Social Media Assets",
+    color: "group-hover:text-teal-400",
+    bar: "bg-teal-400",
+    icon: <Layout strokeWidth={1.5} className="w-6 h-6" /> 
   },
   { 
-    name: "AI & No-Code", 
-    level: 75, 
-    color: "from-purple-500 to-indigo-500",
-    shadow: "shadow-purple-500/20",
-    icon: <Cpu className="w-6 h-6 text-white" /> 
+    name: "AI / No-Code", 
+    category: "Development",
+    level: "75", 
+    desc: "Prompt Eng & Automation",
+    color: "group-hover:text-violet-400",
+    bar: "bg-violet-400",
+    icon: <Cpu strokeWidth={1.5} className="w-6 h-6" /> 
   },
   { 
-    name: "Digital Marketing", 
-    level: 70, 
-    color: "from-red-500 to-orange-500",
-    shadow: "shadow-red-500/20",
-    icon: <Globe className="w-6 h-6 text-white" /> 
+    name: "Marketing", 
+    category: "Growth",
+    level: "70", 
+    desc: "SEO & Digital Strategy",
+    color: "group-hover:text-rose-400",
+    bar: "bg-rose-400",
+    icon: <Globe strokeWidth={1.5} className="w-6 h-6" /> 
   },
 ];
 
 const SkillsRoadmap = () => {
   return (
-    <section id="skills" className="relative py-24 overflow-hidden bg-black">
+    <section id="skills" className="relative py-32 bg-[#080808] overflow-hidden font-sans selection:bg-white selection:text-black">
       
-      {/* --- BACKGROUND OPTIMIZATION --- */}
+      {/* --- BACKGROUND TEXTURE --- */}
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
       
-      {/* 1. Gray Gradient Background (Replaces flat color) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-[#111] to-black z-0"></div>
-
-      {/* 2. Static Noise (Replaces heavy SVG calculation) */}
-      <div className="absolute inset-0 opacity-[0.04] pointer-events-none z-0 mix-blend-overlay"
-           style={{ 
-             backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")`,
-             backgroundSize: "100px 100px" 
-           }}>
-      </div>
-      
-      <div className="relative z-10 max-w-5xl mx-auto px-4">
+      {/* --- CONTAINER --- */}
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
         
-        {/* Header */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-700 bg-gray-800/50 backdrop-blur-md mb-4">
-             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-             <span className="text-xs font-mono text-gray-300 uppercase tracking-widest">Tech Stack</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter">
-            Skill <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-500">Highway</span>
-          </h2>
+        {/* --- HEADER --- */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 border-b border-white/10 pb-8">
+           <div className="max-w-2xl">
+              <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-4 block">
+                // Proficiency Index
+              </span>
+              <h2 className="text-5xl md:text-7xl font-serif text-white leading-tight">
+                Digital <span className="italic text-zinc-600">Toolset</span>
+              </h2>
+           </div>
+           <div className="hidden md:block text-right">
+              <p className="text-zinc-500 text-sm font-light max-w-xs leading-relaxed">
+                A quantitative breakdown of technical capabilities and creative software mastery.
+              </p>
+           </div>
         </div>
 
-        {/* --- THE ROAD STRUCTURE --- */}
-        <div className="relative">
-          
-          {/* 1. CENTRAL SPINE (The Road) */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-gray-800 rounded-full md:-translate-x-1/2 overflow-hidden">
-            {/* Animated Beam flowing down the road */}
-            <motion.div 
-              className="absolute top-0 left-0 w-full h-[30%] bg-gradient-to-b from-transparent via-cyan-400 to-transparent blur-md"
-              animate={{ top: ["-30%", "130%"] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              style={{ willChange: "top" }} // Performance Hint
-            />
-          </div>
-
-          <div className="flex flex-col gap-12 md:gap-16">
-            {skills.map((skill, idx) => {
-              const isEven = idx % 2 === 0;
-
-              return (
-                <div key={idx} className={`relative flex flex-col md:flex-row items-center ${isEven ? "md:flex-row-reverse" : ""}`}>
-                  
-                  {/* SPACER for Desktop Layout */}
-                  <div className="hidden md:block w-1/2"></div>
-
-                  {/* 2. THE NODE (Intersection) */}
-                  <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 bg-gray-900 border-2 border-cyan-500 rounded-full z-20 shadow-[0_0_10px_rgba(34,211,238,0.8)]"></div>
-
-                  {/* 3. THE CURVED CONNECTOR (The "Off-Ramp") */}
-                  <div className={`
-                    hidden md:block absolute h-1/2 w-1/2 top-1/2 border-t-2 border-gray-800 -z-10
-                    ${isEven 
-                      ? "left-1/2 rounded-tr-[30px] border-r-2 border-gray-800 translate-x-0" 
-                      : "right-1/2 rounded-tl-[30px] border-l-2 border-gray-800 -translate-x-0"
-                    }
-                  `}></div>
-
-                  {/* 4. THE SKILL CARD */}
-                  <div className="w-full md:w-1/2 pl-12 md:pl-0 md:px-12">
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-50px" }}
-                      transition={{ delay: idx * 0.1 }}
-                      className={`
-                        group relative overflow-hidden rounded-2xl bg-gray-900/50 backdrop-blur-sm border border-gray-800 p-5
-                        hover:border-gray-600 transition-all duration-300 ${skill.shadow} hover:shadow-2xl
-                      `}
-                    >
-                      {/* Hover Gradient Background */}
-                      <div className={`absolute inset-0 bg-gradient-to-r ${skill.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
-
-                      <div className="flex items-center justify-between mb-4 relative z-10">
-                        <div className="flex items-center gap-4">
-                           {/* Icon Box */}
-                           <div className={`p-3 rounded-xl bg-gradient-to-br ${skill.color} shadow-lg`}>
-                             {skill.icon}
-                           </div>
-                           <h3 className="text-xl font-bold text-white tracking-wide">{skill.name}</h3>
-                        </div>
-                        <span className="text-xl font-mono font-bold text-gray-500 group-hover:text-white transition-colors">{skill.level}%</span>
+        {/* --- EDITORIAL GRID --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 border border-white/10">
+           {skills.map((skill, idx) => (
+             <motion.div
+               key={idx}
+               initial={{ opacity: 0, y: 20 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               viewport={{ once: true }}
+               transition={{ delay: idx * 0.1, duration: 0.5 }}
+               className="group relative bg-[#080808] h-[320px] p-8 flex flex-col justify-between overflow-hidden hover:bg-[#0a0a0a] transition-colors duration-500"
+             >
+                {/* 1. TOP: Header Info */}
+                <div className="flex justify-between items-start z-10">
+                   <div>
+                      <div className={`mb-4 text-zinc-400 transition-colors duration-300 ${skill.color}`}>
+                         {skill.icon}
                       </div>
-
-                      {/* Progress Bar Container */}
-                      <div className="h-2 w-full bg-gray-800 rounded-full overflow-hidden relative z-10">
-                        {/* Animated Fill */}
-                        <motion.div 
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${skill.level}%` }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
-                          className={`h-full rounded-full bg-gradient-to-r ${skill.color}`}
-                        />
-                      </div>
-                      
-                    </motion.div>
-                  </div>
-
+                      <h3 className="text-xl font-medium text-white mb-1">{skill.name}</h3>
+                      <p className="text-xs font-mono text-zinc-500 uppercase tracking-wider">{skill.category}</p>
+                   </div>
+                   
+                   {/* Arrow Icon that appears on hover */}
+                   <ArrowUpRight className={`w-5 h-5 text-zinc-600 transition-all duration-300 opacity-0 -translate-x-2 translate-y-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 ${skill.color}`} />
                 </div>
-              );
-            })}
-          </div>
 
+                {/* 2. MIDDLE: Description (Hidden until hover) */}
+                <div className="z-10 relative">
+                   <p className="text-sm text-zinc-400 opacity-0 transform translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
+                      {skill.desc}
+                   </p>
+                </div>
+
+                {/* 3. BOTTOM: Giant Number (The Hero Element) */}
+                <div className="relative z-0">
+                   <span className={`
+                      block text-[120px] leading-[0.8] font-serif font-light tracking-tighter text-zinc-800 
+                      transition-all duration-500 group-hover:translate-y-[-10px] ${skill.color}
+                   `}>
+                      {skill.level}
+                   </span>
+                   {/* Percentage Symbol */}
+                   <span className="absolute top-2 right-0 text-xl font-mono text-zinc-700">%</span>
+                </div>
+
+                {/* 4. PROGRESS LINE (Minimalist) */}
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-zinc-900">
+                   <motion.div 
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${skill.level}%` }}
+                      transition={{ duration: 1.5, ease: "circOut", delay: 0.2 }}
+                      className={`h-full ${skill.bar}`}
+                   />
+                </div>
+
+             </motion.div>
+           ))}
         </div>
+
       </div>
     </section>
   );

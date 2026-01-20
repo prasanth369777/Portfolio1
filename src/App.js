@@ -11,6 +11,7 @@ import LogoSection from './components/logosec';
 import ExperienceSection from './components/experience';
 import CertificationSection from './components/certification';
 import VerticalPosterScroll from './components/posterproject';
+import StorytellingSection from './components/storytelling';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <InfiniteHorizontalScroll /> {/* fixed */}
       <About />
       <Projects />
+      <StorytellingSection />
       <VerticalPosterScroll />
       <LogoSection />
       <ExperienceSection />

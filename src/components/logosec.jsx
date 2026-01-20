@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from "react";
-import heroPerson from "../assets/hero-person.webp";
 
-// Logos
 import figmaLogo from "../assets/DJ1-01.png";
 import photoshopLogo from "../assets/GREENSAND LOGO-01.png";
 import illustratorLogo from "../assets/KAIPULLA-01.png";
@@ -13,101 +10,105 @@ import logo8 from "../assets/hero-person.webp";
 import logo9 from "../assets/sss logo-01.png";
 import logo10 from "../assets/Untitled design (1).png";
 
-const logosOuter = [
-  { src: figmaLogo, name: "Figma" },
-  { src: photoshopLogo, name: "Photoshop" },
-  { src: illustratorLogo, name: "Illustrator" },
-  { src: webDesignLogo, name: "Web Design" },
-  { src: canvaLogo, name: "Canva" },
-  { src: marketingLogo, name: "Digital Marketing" },
-  { src: logo7, name: "Logo 7" },
-  { src: logo8, name: "Logo 8" },
-  { src: logo9, name: "Logo 9" },
-  { src: logo10, name: "Logo 10" },
+const ecosystem = [
+  { id: "01", name: "Figma", category: "Design", src: figmaLogo },
+  { id: "02", name: "Photoshop", category: "Visual", src: photoshopLogo },
+  { id: "03", name: "Illustrator", category: "Vector", src: illustratorLogo },
+  { id: "04", name: "Web Flow", category: "Dev", src: webDesignLogo },
+  { id: "05", name: "Canva", category: "Social", src: canvaLogo },
+  { id: "06", name: "Marketing", category: "Growth", src: marketingLogo },
+  { id: "07", name: "Cyberfox", category: "Security", src: logo7 },
+  { id: "08", name: "Brand X", category: "Identity", src: logo8 },
+  { id: "09", name: "SSS Corp", category: "System", src: logo9 },
+  { id: "10", name: "Studio", category: "Creative", src: logo10 },
 ];
 
 const LogoSection = () => {
-  const [radius, setRadius] = useState(120);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768) setRadius(240);
-      else if (window.innerWidth >= 640) setRadius(180);
-      else setRadius(120);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
-    <section className="relative py-24 bg-gradient-to-b from-white to-gray-100 overflow-hidden">
-      <div className="max-w-[95%] mx-auto flex flex-col items-center justify-center relative h-[800px] sm:h-[900px] md:h-[950px]">
+    <section className="relative py-32 bg-[#080808] overflow-hidden font-sans selection:bg-white selection:text-black">
+      
+      {/* --- BACKGROUND TEXTURE --- */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+      
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
+        
+        {/* --- HEADER --- */}
+        <div className="flex flex-col md:flex-row items-end justify-between mb-20 border-b border-white/10 pb-8 gap-8">
+           <div className="max-w-2xl">
+              <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-4 block">
+                // The Stack
+              </span>
+              <h2 className="text-4xl md:text-6xl font-serif text-white leading-[1.1]">
+                Technical <span className="italic text-zinc-600">Ecosystem.</span>
+              </h2>
+           </div>
+           <div className="hidden md:block text-right">
+              <p className="text-zinc-500 text-sm font-mono leading-relaxed">
+                INTEGRATIONS: {ecosystem.length} <br/>
+                STATUS: OPTIMIZED
+              </p>
+           </div>
+        </div>
 
-        {/* Background Title */}
-        <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[50px] sm:text-[70px] md:text-[100px] lg:text-[120px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-500 opacity-20 select-none tracking-wider whitespace-nowrap">
-          LOGO CREATIONS
-        </h1>
+        {/* --- THE FOCUS GRID --- */}
+        {/* 'group/grid' allows us to detect when the user enters the entire grid area */}
+        <div className="group/grid grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 border-t border-l border-white/5">
+           
+           {ecosystem.map((item, index) => (
+             <div 
+                key={index}
+                className="
+                  group/card relative aspect-square border-r border-b border-white/5 bg-transparent
+                  transition-all duration-500 ease-out
+                  hover:bg-[#0a0a0a]
+                  /* The Magic: When grid is hovered, dim everyone. But restore opacity for the hovered card. */
+                  group-hover/grid:opacity-30 hover:!opacity-100
+                "
+             >
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
+                   
+                   {/* Logo Image */}
+                   <img 
+                      src={item.src} 
+                      alt={item.name} 
+                      className="w-1/2 h-1/2 object-contain filter grayscale opacity-60 transition-all duration-500 group-hover/card:grayscale-0 group-hover/card:opacity-100 group-hover/card:scale-110" 
+                   />
 
-        {/* Foreground Title */}
-        <h2 className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-12 sm:mb-16 z-10 text-center">
-          LOGO CREATION
-        </h2>
+                </div>
 
-        {/* Center Image */}
-        <div className="relative w-[200px] sm:w-[280px] md:w-[400px] lg:w-[460px] z-10">
+                {/* --- HOVER METADATA --- */}
+                {/* Top Left: ID */}
+                <div className="absolute top-4 left-4 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
+                   <span className="text-[10px] font-mono text-zinc-500">{item.id}</span>
+                </div>
 
-          <img src={heroPerson} alt="Hero person" className="w-full h-auto object-contain relative z-20 mx-auto" />
+                {/* Bottom Left: Name */}
+                <div className="absolute bottom-4 left-4 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover/card:translate-y-0">
+                   <span className="block text-sm font-medium text-white tracking-wide">{item.name}</span>
+                </div>
 
-          {/* Radial Logos Around Image */}
-          {logosOuter.map((logo, idx) => {
-            const angle = (360 / logosOuter.length) * idx;
-            const rad = (angle * Math.PI) / 180;
-            return (
-              <div
-                key={logo.name}
-                className="absolute top-1/2 left-1/2 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-white shadow-lg flex items-center justify-center transition-transform duration-500 hover:scale-110"
-                style={{
-                  transform: `translate(${radius * Math.cos(rad)}px, ${radius * Math.sin(rad)}px)`,
-                }}
-              >
-                <img src={logo.src} alt={logo.name} className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 object-contain" />
-              </div>
-            );
-          })}
+                {/* Top Right: Category Tag */}
+                <div className="absolute top-4 right-4 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
+                   <span className="text-[9px] uppercase tracking-widest text-zinc-600 border border-zinc-800 px-1.5 py-0.5 rounded">
+                      {item.category}
+                   </span>
+                </div>
 
-          {/* Horizontal Outer Logos Behind Image */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex space-x-3 sm:space-x-4 md:space-x-6 z-0 justify-center">
-            {logosOuter.map((logo, idx) => (
-              <div
-                key={`outer-${logo.name}`}
-                className="rounded-full flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-white opacity-30 shadow-md animate-bounce"
-                style={{ animationDelay: `${idx * 0.1}s` }}
-              >
-                <img src={logo.src} alt={logo.name} className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 object-contain" />
-              </div>
-            ))}
-          </div>
+                {/* Corner Accent (Decorative) */}
+                <div className="absolute bottom-0 right-0 w-2 h-2 border-l border-t border-white/20 opacity-0 group-hover/card:opacity-100 transition-opacity"></div>
+
+             </div>
+           ))}
 
         </div>
 
-        {/* Text below image - pinned at bottom on mobile */}
-        <p className="mt-8 sm:mt-10 text-sm sm:text-base md:text-lg text-gray-700 max-w-md mx-auto z-10 text-center 
-                      absolute bottom-6 sm:relative">
-          Bringing your brand to life with creative, professional, and unique logo creations that make a lasting impression.
-        </p>
+        {/* --- BOTTOM FOOTER --- */}
+        <div className="mt-16 flex items-center justify-between text-zinc-600 text-xs font-mono uppercase tracking-widest">
+           <span>* Selected Tools & Technologies</span>
+           <span className="hidden md:inline">System Architecture v2.4</span>
+        </div>
 
       </div>
-
-      <style>
-        {`
-          @keyframes bounce {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0); }
-          }
-        `}
-      </style>
     </section>
   );
 };

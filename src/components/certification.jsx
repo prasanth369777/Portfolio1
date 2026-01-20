@@ -1,153 +1,179 @@
-import React from "react";
-import { BadgeCheck, ShieldCheck, Award, Terminal, PenTool, LayoutTemplate } from "lucide-react";
 
-// Updated data with Lucide icons
+import { motion } from "framer-motion";
+import { 
+  BadgeCheck, 
+  ShieldCheck, 
+  Award, 
+  Terminal, 
+  PenTool, 
+  LayoutTemplate, 
+  ArrowUpRight,
+  Hash
+} from "lucide-react";
+
 const certifications = [
   { 
+    id: "01",
     year: "2024", 
-    title: "UI/UX Design Master", 
+    title: "UI/UX DESIGN MASTER", 
     issuer: "Skill Dragon", 
-    desc: "Advanced prototyping, user research, and design systems.", 
-    icon: <PenTool className="w-5 h-5" /> 
+    desc: "Advanced Systems & Research", 
+    color: "group-hover:text-pink-500",
+    gradient: "from-pink-500/20 to-transparent",
+    icon: <PenTool className="w-6 h-6" /> 
   },
   { 
+    id: "02",
     year: "2024", 
-    title: "No-Code Developer", 
+    title: "NO-CODE ARCHITECT", 
     issuer: "Skill Dragon", 
-    desc: "Building scalable applications without writing traditional code.", 
-    icon: <LayoutTemplate className="w-5 h-5" /> 
+    desc: "Scalable Web Applications", 
+    color: "group-hover:text-cyan-500",
+    gradient: "from-cyan-500/20 to-transparent",
+    icon: <LayoutTemplate className="w-6 h-6" /> 
   },
   { 
+    id: "03",
     year: "2024", 
-    title: "Graphic Designing", 
+    title: "GRAPHIC DESIGNING", 
     issuer: "Skill Dragon", 
-    desc: "Mastery of Adobe Suite and visual communication principles.", 
-    icon: <PenTool className="w-5 h-5" /> 
+    desc: "Visual Communication Principles", 
+    color: "group-hover:text-purple-500",
+    gradient: "from-purple-500/20 to-transparent",
+    icon: <PenTool className="w-6 h-6" /> 
   },
   { 
+    id: "04",
     year: "2023", 
-    title: "Google Digital Marketing", 
+    title: "DIGITAL STRATEGY", 
     issuer: "Google", 
-    desc: "Certified in SEO, SEM, Analytics, and digital strategy.", 
-    icon: <Award className="w-5 h-5" /> 
+    desc: "SEO, Analytics & Growth", 
+    color: "group-hover:text-orange-500",
+    gradient: "from-orange-500/20 to-transparent",
+    icon: <Award className="w-6 h-6" /> 
   },
   { 
+    id: "05",
     year: "2020", 
-    title: "Ethical Hacking", 
-    issuer: "LIVEWIRE", 
-    desc: "Penetration testing and network security fundamentals.", 
-    icon: <ShieldCheck className="w-5 h-5" /> 
+    title: "ETHICAL HACKING", 
+    issuer: "LiveWire", 
+    desc: "Network Security & Pentesting", 
+    color: "group-hover:text-emerald-500",
+    gradient: "from-emerald-500/20 to-transparent",
+    icon: <ShieldCheck className="w-6 h-6" /> 
   },
   { 
+    id: "06",
     year: "2020", 
-    title: "CCNA Networking", 
-    issuer: "LIVEWIRE", 
-    desc: "Cisco Certified Network Associate routing & switching.", 
-    icon: <Terminal className="w-5 h-5" /> 
+    title: "CCNA NETWORKING", 
+    issuer: "LiveWire", 
+    desc: "Cisco Routing & Switching", 
+    color: "group-hover:text-blue-500",
+    gradient: "from-blue-500/20 to-transparent",
+    icon: <Terminal className="w-6 h-6" /> 
   },
 ];
 
 const CertificationRoadmap = () => {
   return (
-    <section id="certification" className="relative py-24 bg-[#050505] overflow-hidden">
+    <section id="certification" className="relative py-24 bg-[#050505] overflow-hidden font-sans">
       
-      {/* --- OPTIMIZED BACKGROUND FX --- */}
-      
-      {/* 1. Static Noise Texture (Replaces heavy SVG calculation) */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-0"
-           style={{ 
-             backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")`,
-             backgroundSize: "100px 100px" 
-           }}>
-      </div>
-      
-      {/* 2. Radial Gradients (Replaces heavy blur-[120px] effects) */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(6,182,212,0.1)_0%,transparent_70%)] pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(168,85,247,0.1)_0%,transparent_70%)] pointer-events-none"></div>
+      {/* --- BACKGROUND --- */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
+      <div className="relative z-10 max-w-[1800px] mx-auto px-6 lg:px-12">
         
-        {/* Header */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-4">
-             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-             <span className="text-xs font-mono text-gray-400 uppercase tracking-widest">Verified Skills</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter">
-            Credential <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Vault</span>
-          </h2>
+        {/* --- HEADER --- */}
+        <div className="flex flex-col md:flex-row items-end justify-between mb-16 pb-6 border-b border-white/10">
+           <div>
+              <span className="text-xs font-mono text-gray-500 tracking-widest uppercase mb-2 block">// Credentials</span>
+              <h2 className="text-5xl md:text-8xl font-black text-white tracking-tighter uppercase leading-[0.85]">
+                 Verified <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-600">Talent.</span>
+              </h2>
+           </div>
+           
+           {/* Decorative Badge */}
+           <div className="hidden md:flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
+              <BadgeCheck className="w-4 h-4 text-green-400 animate-pulse" />
+              <span className="text-xs font-mono text-gray-300">100% VERIFIED ISSUERS</span>
+           </div>
         </div>
 
-        {/* --- TIMELINE STRUCTURE --- */}
-        <div className="relative">
-          
-          {/* Central Line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-500/50 via-purple-500/50 to-transparent md:-translate-x-1/2"></div>
+        {/* --- BLADE LIST CONTAINER --- */}
+        {/* 'group/list' allows us to dim siblings when one is hovered */}
+        <div className="group/list flex flex-col">
+           
+           {certifications.map((cert, idx) => (
+             <motion.div
+               key={idx}
+               initial={{ opacity: 0, x: -20 }}
+               whileInView={{ opacity: 1, x: 0 }}
+               viewport={{ once: true }}
+               transition={{ delay: idx * 0.1 }}
+               className="group relative"
+             >
+                {/* BLADE ITEM */}
+                <div className={`
+                    relative w-full border-b border-white/5 py-8 md:py-10 px-4 md:px-8
+                    transition-all duration-500 ease-out
+                    hover:bg-[#0a0a0a] hover:pl-12
+                    group-hover/list:opacity-30 group-hover:opacity-100
+                `}>
+                    
+                    {/* Hover Gradient Background */}
+                    <div className={`absolute inset-0 bg-gradient-to-r ${cert.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+                    
+                    {/* Left Accent Bar */}
+                    <div className={`absolute left-0 top-0 bottom-0 w-1 bg-current ${cert.color} scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-center`}></div>
 
-          <div className="flex flex-col gap-8 md:gap-12">
-            {certifications.map((cert, idx) => {
-              const isEven = idx % 2 === 0;
-
-              return (
-                <div key={idx} className={`relative flex flex-col md:flex-row items-center ${isEven ? "md:flex-row-reverse" : ""}`}>
-                  
-                  {/* SPACER (Desktop) */}
-                  <div className="hidden md:block w-1/2"></div>
-
-                  {/* CENTRAL NODE */}
-                  <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-4 h-4 bg-[#050505] border-2 border-cyan-500 rounded-full z-20 shadow-[0_0_10px_rgba(34,211,238,0.8)]"></div>
-
-                  {/* CARD CONTENT */}
-                  <div className="w-full md:w-1/2 pl-20 md:pl-0 md:px-12">
-                    <div className={`
-                      group relative p-1 rounded-2xl bg-gradient-to-br from-white/10 to-transparent 
-                      hover:from-cyan-500/50 hover:to-purple-500/50 transition-colors duration-500
-                    `}>
-                      <div className="relative h-full bg-[#0a0a0a] rounded-xl p-6 md:p-8 overflow-hidden">
+                    <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                         
-                        {/* Background Grid inside card */}
-                        <div className="absolute inset-0 opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none"></div>
-                        
-                        <div className="relative z-10 flex items-start gap-4">
-                           {/* Icon Box */}
-                           <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-500 group-hover:text-black transition-colors duration-300">
-                             {cert.icon}
-                           </div>
+                        {/* 1. ID & YEAR */}
+                        <div className="flex items-center gap-6 md:w-[200px]">
+                            <span className="text-sm font-mono text-gray-600 group-hover:text-white transition-colors">
+                                <Hash className="w-3 h-3 inline mr-1" />{cert.id}
+                            </span>
+                            <span className="px-2 py-1 rounded bg-white/5 border border-white/5 text-xs font-mono text-gray-400 group-hover:text-white group-hover:bg-white/10 transition-colors">
+                                {cert.year}
+                            </span>
+                        </div>
 
-                           <div>
-                             <div className="flex items-center gap-3 mb-1">
-                               <span className="text-xs font-mono text-gray-500 bg-white/5 px-2 py-0.5 rounded border border-white/5">
-                                 {cert.year}
-                               </span>
-                               <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider">
-                                 {cert.issuer}
-                               </span>
+                        {/* 2. MAIN TITLE */}
+                        <div className="flex-1">
+                            <h3 className={`text-2xl md:text-4xl font-black text-white uppercase tracking-tight transition-colors duration-300 ${cert.color}`}>
+                                {cert.title}
+                            </h3>
+                            <p className="text-sm text-gray-500 mt-1 font-mono hidden md:block group-hover:text-gray-300 transition-colors">
+                                {cert.desc}
+                            </p>
+                        </div>
+
+                        {/* 3. ISSUER & ICON */}
+                        <div className="flex items-center justify-between w-full md:w-auto md:justify-end gap-8">
+                             <div className="text-left md:text-right">
+                                 <span className="block text-xs font-mono text-gray-600 uppercase tracking-widest">ISSUED BY</span>
+                                 <span className="block text-sm font-bold text-white">{cert.issuer}</span>
                              </div>
                              
-                             <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-200 transition-colors">
-                               {cert.title}
-                             </h3>
-                             <p className="text-sm text-gray-400 leading-relaxed">
-                               {cert.desc}
-                             </p>
-                           </div>
+                             {/* Floating Icon Circle */}
+                             <div className={`
+                                w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center
+                                group-hover:scale-110 group-hover:border-white/30 transition-all duration-300
+                                ${cert.color}
+                             `}>
+                                 {cert.icon}
+                             </div>
+
+                             {/* Interaction Arrow */}
+                             <ArrowUpRight className="w-6 h-6 text-gray-700 group-hover:text-white group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-300" />
                         </div>
 
-                        {/* Decoration: Corner Accent */}
-                        <div className="absolute top-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                           <BadgeCheck className="w-5 h-5 text-cyan-500" />
-                        </div>
-
-                      </div>
                     </div>
-                  </div>
-
                 </div>
-              );
-            })}
-          </div>
-
+             </motion.div>
+           ))}
         </div>
+
       </div>
     </section>
   );

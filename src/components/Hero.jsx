@@ -1,158 +1,153 @@
-import React from 'react';
+
+import {  ArrowDownRight } from 'lucide-react';
 import heroPortrait from '../assets/hero-person.webp';
 
 const HeroSection = () => {
-  const skills = ['React', 'TypeScript', 'Tailwind', 'Next.js', 'Figma'];
-
   return (
-    <section
-      id="home"
-      className="relative w-full min-h-screen flex items-center bg-slate-950 overflow-hidden font-sans selection:bg-cyan-500 selection:text-white py-20 lg:py-0"
-    >
-      {/* --- BACKGROUND EFFECTS --- */}
+    <section id="home" className="relative min-h-screen bg-[#080808] text-white font-sans selection:bg-white selection:text-black pt-20 lg:pt-28 flex flex-col justify-between overflow-hidden">
       
-      {/* 1. Dotted Grid Overlay */}
-      <div className="absolute inset-0 z-0 opacity-20"
-        style={{
-            backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)',
-            backgroundSize: '30px 30px'
-        }}
-      ></div>
+      {/* --- BACKGROUND TEXTURE --- */}
+      {/* Architectural Grid Lines */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none"></div>
+      
+      {/* Vignette */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#080808_100%)] pointer-events-none"></div>
 
-      {/* 2. Glowing Aurora Orbs */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/30 rounded-full blur-[120px] animate-pulse"></div>
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-600/20 rounded-full blur-[120px] animate-pulse delay-1000"></div>
-
-      {/* --- CONTENT CONTAINER --- */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="relative z-10 max-w-[1600px] mx-auto px-6 lg:px-12 w-full h-full flex-grow flex flex-col">
         
-        {/* LEFT COLUMN: TEXT CONTENT */}
-        <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
-          
-          {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 backdrop-blur-md animate-fadeIn cursor-default hover:border-cyan-500/50 transition-colors">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
-            </span>
-            <span className="text-cyan-300 text-sm font-medium tracking-wide">Available for projects</span>
-          </div>
-
-          {/* Typography Block */}
-          <div className="space-y-4">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white animate-slideUp">
-              I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Prasanth.</span>
-            </h1>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-gray-300 animate-slideUp delay-100">
-              Creative Designer & <br className="hidden sm:block" />
-              <span className="font-semibold text-white">UX Developer</span>
-            </h2>
-            <p className="text-base sm:text-lg text-gray-400 max-w-lg leading-relaxed animate-slideUp delay-200">
-              I craft scalable digital products and immersive web experiences that 
-              bridge the gap between <strong className="text-gray-100">art</strong> and <strong className="text-gray-100">engineering</strong>.
-            </p>
-          </div>
-
-          {/* Call to Action Area */}
-          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto animate-slideUp delay-300">
-            <button 
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 bg-white text-gray-900 rounded-full font-bold shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] hover:scale-105 transition-all duration-300"
-            >
-              View My Work
-            </button>
-            <button className="px-8 py-4 rounded-full font-bold text-white border border-gray-700 hover:bg-white/5 hover:border-gray-500 transition-all duration-300">
-              Contact Me
-            </button>
-          </div>
-          
-          {/* Tech Stack Indicators */}
-          <div className="pt-6 animate-slideUp delay-400">
-             <p className="text-sm text-gray-500 uppercase tracking-widest mb-3">Tech Stack</p>
-             <div className="flex flex-wrap justify-center lg:justify-start gap-3">
-                {skills.map((skill, i) => (
-                   <span key={i} className="px-3 py-1 text-xs font-mono text-cyan-300 bg-cyan-950/50 border border-cyan-900 rounded hover:border-cyan-500/50 transition-colors cursor-default">
-                     {skill}
-                   </span>
-                ))}
-             </div>
-          </div>
+        {/* --- TOP ROW: STATUS & LOCATION --- */}
+        <div className="flex justify-between items-start mb-12 border-b border-white/10 pb-6">
+           <div className="flex items-center gap-3">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+              </span>
+              <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest">
+                 System Online // Open for Work
+              </span>
+           </div>
+           <div className="hidden md:flex flex-col text-right">
+              <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest">Location</span>
+              <span className="text-sm font-medium">Coimbatore, IN (IST)</span>
+           </div>
         </div>
 
-        {/* RIGHT COLUMN: VISUALS */}
-        <div className="relative flex justify-center lg:justify-end animate-fadeIn delay-500">
-          
-          {/* Abstract Geometric Shapes Background */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-gray-800 rounded-full animate-[spin_20s_linear_infinite]"></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] border border-dashed border-gray-700 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+        {/* --- MIDDLE ROW: MAIN CONTENT --- */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0 h-full">
+           
+           {/* LEFT: HEADLINE (Span 7) */}
+           <div className="lg:col-span-7 flex flex-col justify-center lg:pr-16 lg:border-r border-white/10 relative">
+              
+              {/* Decorative Tag */}
+              <div className="inline-flex items-center gap-2 mb-8">
+                 <div className="px-3 py-1 rounded-full border border-white/20 bg-white/5 text-[10px] font-mono uppercase tracking-widest text-zinc-300">
+                    Version 2.5
+                 </div>
+              </div>
 
-          {/* Main Portrait Card */}
-          <div className="relative group">
-            {/* Glow effect behind image */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-600 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
-            
-            {/* Image Container */}
-            <div className="relative w-72 sm:w-80 md:w-96 aspect-[3/4] bg-slate-900 rounded-xl overflow-hidden border border-slate-800">
-               <img
-                  src={heroPortrait}
-                  alt="Prasanth"
-                  className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-100 group-hover:scale-110"
-               />
-               
-               {/* Overlay Gradient */}
-               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
-               
-               {/* Bottom Info inside Image */}
-               <div className="absolute bottom-6 left-6 text-left">
-                 <p className="text-cyan-400 text-xs font-bold tracking-widest uppercase mb-1">Lead Designer</p>
-                 <p className="text-white text-xl font-bold">Based in India</p>
-               </div>
-            </div>
+              {/* Big Typography */}
+              <h1 className="text-6xl sm:text-7xl lg:text-9xl font-serif font-light leading-[0.9] tracking-tight mb-8">
+                 Design <br/>
+                 <span className="italic text-zinc-600">Engineer.</span>
+              </h1>
 
-            {/* Floating Glass Cards */}
-            <div className="absolute -left-6 bottom-10 bg-slate-900/80 backdrop-blur-md border border-slate-700 p-4 rounded-xl shadow-xl animate-float hidden sm:block">
-               <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
-                  <span className="text-sm font-semibold text-white">6+ Projects Done</span>
-               </div>
-            </div>
-          </div>
+              <p className="text-lg text-zinc-400 max-w-lg leading-relaxed font-light mb-10">
+                 I bridge the gap between <span className="text-white">aesthetic intuition</span> and <span className="text-white">software architecture</span>. Building digital products that feel inevitable.
+              </p>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap gap-4">
+                 <button 
+                    onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="group relative px-8 py-4 bg-white text-black text-sm font-bold uppercase tracking-wider overflow-hidden hover:bg-zinc-200 transition-colors"
+                 >
+                    <span className="relative z-10 flex items-center gap-2">
+                       View Projects <ArrowDownRight className="w-4 h-4" />
+                    </span>
+                 </button>
+                 <button className="px-8 py-4 border border-white/20 text-white text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-colors">
+                    Contact Me
+                 </button>
+              </div>
+
+           </div>
+
+           {/* RIGHT: IMAGE & TECH (Span 5) */}
+           <div className="lg:col-span-5 flex flex-col lg:pl-16 justify-center relative">
+              
+              {/* Technical Frame around Image */}
+              <div className="relative w-full aspect-[4/5] bg-zinc-900 border border-white/10 p-2 group">
+                 
+                 {/* Corner Brackets */}
+                 <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-white/50"></div>
+                 <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-white/50"></div>
+                 <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-white/50"></div>
+                 <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-white/50"></div>
+
+                 {/* Image */}
+                 <div className="relative w-full h-full overflow-hidden bg-black">
+                    <img 
+                       src={heroPortrait} 
+                       alt="Portrait" 
+                       className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" 
+                    />
+                    
+                    {/* Overlay Grid */}
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent_99%,rgba(255,255,255,0.1)_1px),linear-gradient(to_bottom,transparent_99%,rgba(255,255,255,0.1)_1px)] bg-[size:20%_20%] pointer-events-none"></div>
+                 </div>
+
+                 {/* Floating Label */}
+                 <div className="absolute bottom-6 left-[-20px] bg-white text-black px-4 py-2 text-xs font-bold font-mono uppercase tracking-widest rotate-[-90deg] origin-left border border-white">
+                    Prasanth.D
+                 </div>
+              </div>
+
+              {/* Tech Stack List */}
+              <div className="mt-8 flex gap-6 text-zinc-500 font-mono text-xs uppercase tracking-widest justify-center lg:justify-start">
+                 <span className="hover:text-white transition-colors cursor-default">React & AI</span>
+                 <span>//</span>
+                 <span className="hover:text-white transition-colors cursor-default">UIUX DESIGNER</span>
+                 <span>//</span>
+                 <span className="hover:text-white transition-colors cursor-default">DIGITAL MARKETING</span>
+                 <span>//</span>
+                 <span className="hover:text-white transition-colors cursor-default">CREATOR</span>
+              </div>
+
+           </div>
         </div>
+
+        {/* --- BOTTOM ROW: CLIENTS STRIP --- */}
+        <div className="mt-auto pt-16 pb-8 border-t border-white/10">
+           <p className="text-zinc-600 text-[10px] font-mono uppercase tracking-[0.2em] mb-6">
+              Trusted by market leaders
+           </p>
+           <div className="flex flex-wrap justify-between items-end gap-8 opacity-60">
+              
+              {/* Client 1 */}
+              <div className="group cursor-default">
+                 <h3 className="text-xl font-serif text-zinc-400 group-hover:text-white transition-colors">Astra Interior</h3>
+              </div>
+
+              {/* Client 2 */}
+              <div className="group cursor-default">
+                 <h3 className="text-lg font-black uppercase tracking-tighter text-zinc-400 group-hover:text-emerald-400 transition-colors">Greenfield</h3>
+              </div>
+
+              {/* Client 3 */}
+              <div className="group cursor-default">
+                 <h3 className="text-xl italic font-light text-zinc-400 group-hover:text-purple-300 transition-colors">XPerfume</h3>
+              </div>
+
+              {/* Client 4 */}
+              <div className="group cursor-default text-right">
+                 <h3 className="text-sm font-bold text-zinc-400 group-hover:text-blue-300 transition-colors">Agathiyas Kathir</h3>
+                 <span className="text-[9px] uppercase tracking-widest text-zinc-600 block mt-0.5">Health Care</span>
+              </div>
+
+           </div>
+        </div>
+
       </div>
-
-      {/* --- ANIMATION STYLES --- */}
-      <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-        .animate-float {
-          animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes slideUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-slideUp {
-          animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-        }
-        
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 1.5s ease-out forwards;
-        }
-
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .delay-500 { animation-delay: 0.5s; }
-        .delay-1000 { animation-delay: 1s; }
-      `}</style>
     </section>
   );
 };
