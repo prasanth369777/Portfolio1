@@ -1,4 +1,3 @@
-
 import { ArrowRight } from "lucide-react";
 
 // Logos
@@ -25,91 +24,78 @@ const logos = [
 ];
 
 const InfiniteHorizontalScroll = () => {
-  // Triple the array for seamless infinity on ultrawide monitors
   const repeatedLogos = [...logos, ...logos, ...logos];
 
   return (
     <section className="relative py-32 bg-[#080808] overflow-hidden font-sans selection:bg-white selection:text-black">
-      
       {/* --- BACKGROUND TEXTURE --- */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:64px_64px] opacity-50 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:64px_64px] opacity-50 pointer-events-none" />
 
       {/* --- HEADER --- */}
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 mb-16 md:mb-24 flex flex-col md:flex-row items-end justify-between gap-8">
-         <div className="max-w-2xl">
-            <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-6 block">
-               // Partnership Index
-            </span>
-            <h2 className="text-5xl md:text-8xl font-serif text-white leading-[0.9]">
-               Trusted <br/> <span className="italic text-zinc-600">Network.</span>
-            </h2>
-         </div>
-         <div className="hidden md:flex flex-col items-end text-right">
-            <p className="text-zinc-500 text-sm font-mono max-w-xs leading-relaxed mb-4">
-               Collaborating with industry leaders to build scalable digital ecosystems.
-            </p>
-            <div className="flex items-center gap-2 text-white text-xs font-bold uppercase tracking-widest">
-               Scroll to Explore <ArrowRight className="w-4 h-4" />
-            </div>
-         </div>
-      </div>
+        <div className="max-w-2xl">
+          <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-6 block">
+            {'//'} Partnership Index
+          </span>
 
-      {/* --- THE TICKER TAPE --- */}
-      <div className="w-full border-t border-b border-white/10 bg-[#080808]">
-        
-        {/* The Moving Track */}
-        <div className="relative flex overflow-hidden group">
-           
-           {/* Gradient Masks for edges */}
-           <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-[#080808] to-transparent z-20"></div>
-           <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-[#080808] to-transparent z-20"></div>
+          <h2 className="text-5xl md:text-8xl font-serif text-white leading-[0.9]">
+            Trusted <br />
+            <span className="italic text-zinc-600">Network.</span>
+          </h2>
+        </div>
 
-           <div className="flex animate-marquee group-hover:paused">
-              {repeatedLogos.map((item, idx) => (
-                <div 
-                   key={`${item.name}-${idx}`}
-                   className="
-                     relative flex-shrink-0 w-[200px] md:w-[280px] h-[160px] md:h-[200px] 
-                     border-r border-white/10 flex items-center justify-center 
-                     group/item hover:bg-white/[0.02] transition-colors duration-300
-                   "
-                >
-                   {/* Logo */}
-                   <img 
-                      src={item.src} 
-                      alt={item.name} 
-                      className="
-                        w-24 md:w-32 h-auto object-contain 
-                        filter grayscale opacity-40 mix-blend-screen
-                        transition-all duration-500 ease-out
-                        group-hover/item:grayscale-0 group-hover/item:opacity-100 group-hover/item:scale-110
-                      "
-                   />
-
-                   {/* Technical Label (Hidden until hover) */}
-                   <div className="absolute bottom-4 left-4 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300">
-                      <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest">
-                         REF: {idx < 9 ? `0${idx+1}` : idx+1}
-                      </span>
-                   </div>
-                   
-                   {/* Name Label (Hidden until hover) */}
-                   <div className="absolute top-4 right-4 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300">
-                      <span className="text-[10px] font-bold text-zinc-300 uppercase tracking-widest">
-                         {item.name}
-                      </span>
-                   </div>
-
-                </div>
-              ))}
-           </div>
+        <div className="hidden md:flex flex-col items-end text-right">
+          <p className="text-zinc-500 text-sm font-mono max-w-xs leading-relaxed mb-4">
+            Collaborating with industry leaders to build scalable digital
+            ecosystems.
+          </p>
+          <div className="flex items-center gap-2 text-white text-xs font-bold uppercase tracking-widest">
+            Scroll to Explore <ArrowRight className="w-4 h-4" />
+          </div>
         </div>
       </div>
 
-      {/* --- BOTTOM METADATA --- */}
+      {/* --- TICKER --- */}
+      <div className="w-full border-t border-b border-white/10 bg-[#080808]">
+        <div className="relative flex overflow-hidden group">
+          <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-[#080808] to-transparent z-20" />
+          <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-[#080808] to-transparent z-20" />
+
+          <div className="flex animate-marquee group-hover:paused">
+            {repeatedLogos.map((item, idx) => (
+              <div
+                key={`${item.name}-${idx}`}
+                className="relative flex-shrink-0 w-[200px] md:w-[280px] h-[160px] md:h-[200px] border-r border-white/10 flex items-center justify-center group/item hover:bg-white/[0.02] transition-colors duration-300"
+              >
+                <img
+                  src={item.src}
+                  alt={item.name}
+                  className="w-24 md:w-32 h-auto object-contain grayscale opacity-40 mix-blend-screen transition-all duration-500 group-hover/item:grayscale-0 group-hover/item:opacity-100 group-hover/item:scale-110"
+                />
+
+                <div className="absolute bottom-4 left-4 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300">
+                  <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest">
+                    REF: {idx < 9 ? `0${idx + 1}` : idx + 1}
+                  </span>
+                </div>
+
+                <div className="absolute top-4 right-4 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300">
+                  <span className="text-[10px] font-bold text-zinc-300 uppercase tracking-widest">
+                    {item.name}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* --- FOOTER META --- */}
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mt-4 flex justify-between text-[10px] font-mono text-zinc-600 uppercase tracking-widest">
-         <span>Total Active Partners: {logos.length}</span>
-         <span className="hidden md:inline">Global Reach // 2024-25</span>
+        <span>Total Active Partners: {logos.length}</span>
+        <span className="hidden md:inline">
+          Global Reach {'//'} 2024–25
+        </span>
       </div>
 
       <style>{`
@@ -119,7 +105,7 @@ const InfiniteHorizontalScroll = () => {
 
         @keyframes marquee {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-33.33%); } /* Move 1/3rd because we triplicated the array */
+          100% { transform: translateX(-33.33%); }
         }
 
         .animate-marquee {
