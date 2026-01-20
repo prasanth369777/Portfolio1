@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Pause, Play } from "lucide-react";
+// CHANGE THIS LINE:
+import { Play } from "lucide-react"; // Removed 'Pause'
 
+// ... rest of the code remains the same
 // Import posters
 import poster1 from "../assets/poster1.webp";
 import poster2 from "../assets/poster2.webp";

@@ -86,7 +86,10 @@ const CertificationRoadmap = () => {
         {/* --- HEADER --- */}
         <div className="flex flex-col md:flex-row items-end justify-between mb-16 pb-6 border-b border-white/10">
            <div>
-              <span className="text-xs font-mono text-gray-500 tracking-widest uppercase mb-2 block">// Credentials</span>
+             // Wrap the text in braces and quotes
+<span className="text-xs font-mono text-gray-500 tracking-widest uppercase mb-2 block">
+  {"// Credentials"}
+</span>
               <h2 className="text-5xl md:text-8xl font-black text-white tracking-tighter uppercase leading-[0.85]">
                  Verified <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-600">Talent.</span>
               </h2>

@@ -79,7 +79,9 @@ const LogoSection = () => {
                 {/* --- HOVER METADATA --- */}
                 {/* Top Left: ID */}
                 <div className="absolute top-4 left-4 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
-                   <span className="text-[10px] font-mono text-zinc-500">{item.id}</span>
+                   <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-4 block">
+  {"// The Stack"}
+</span>
                 </div>
 
                 {/* Bottom Left: Name */}
