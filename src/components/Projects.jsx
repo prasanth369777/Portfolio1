@@ -39,19 +39,19 @@ const projectList = [
   },
   {
     id: "05",
-    title: "E-Commerce App",
+    title: "E-Commerce",
     category: "React Native",
     image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80",
-    link: "/",
+    link: "https://www.coolmaxscent.com/",
     span: "md:col-span-1",
     aspect: "aspect-square",
   },
   {
     id: "06",
-    title: "Dashboard System",
-    category: "SaaS UI Kit",
+    title: "Bloomfield",
+    category: "Digital profile",
     image: "https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&w=800&q=80",
-    link: "/",
+    link: "https://www.bloomfieldorg.com",
     span: "md:col-span-1",
     aspect: "aspect-square",
   },
@@ -148,7 +148,7 @@ const Projects = () => {
         {/* --- FOOTER --- */}
         <div className="mt-32 text-center">
           <a
-            href="https://github.com/prasanth369777"
+            href="/contact"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors text-sm font-mono uppercase tracking-widest border-b border-transparent hover:border-white pb-1"

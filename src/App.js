@@ -12,7 +12,7 @@ import ExperienceSection from './components/experience';
 import CertificationSection from './components/certification';
 import VerticalPosterScroll from './components/posterproject';
 import StorytellingSection from './components/storytelling';
-
+import Uxpage from "./components/Uxpage";
 function App() {
   return (
     <div className="font-sans text-gray-800">
@@ -22,6 +22,7 @@ function App() {
       <InfiniteHorizontalScroll /> {/* fixed */}
       <About />
       <Projects />
+      <Uxpage />
       <StorytellingSection />
       <VerticalPosterScroll />
       <LogoSection />

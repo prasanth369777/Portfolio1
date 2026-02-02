@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 import InfiniteHorizontalScroll from './components/InfiniteHorizontalScroll'; // fixed
 import SkillsSection from '../components/SkillsSection';
 import Storytelling from '../components/storytelling';
-
+import Uxpage from "../components/Uxpage"
 function App() {
   return (
     <div className="font-sans text-gray-800">
@@ -16,6 +16,7 @@ function App() {
       <InfiniteHorizontalScroll /> {/* fixed */}
       <About />
       <Projects />
+      <Uxpage />
       <Storytelling />
       <SkillsSection />
       <Contact />
