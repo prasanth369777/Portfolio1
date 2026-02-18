@@ -5,7 +5,7 @@ const projectList = [
     id: "01",
     title: "Career Ladder",
     category: "Edutech Platform",
-    image: "https://www.careerladderedu.com/static/media/java.c6b2c6adf12ccb3814f5.webp",
+    image: "https://media.istockphoto.com/id/2190572363/photo/diverse-team-engages-in-a-friendly-business-discussion-in-modern-office-setting.webp?a=1&b=1&s=612x612&w=0&k=20&c=sm7aFBD7nkAOcoHHuTUyN03SsIdkGkSTXhqowFr5rmU=",
     link: "https://www.careerladderedu.com/",
     span: "md:col-span-2",
     aspect: "aspect-[16/9]",

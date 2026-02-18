@@ -1,10 +1,13 @@
 import { ArrowDownRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import heroPortrait from '../assets/hero-person.webp';
 
 const HeroSection = () => {
-  // Replace XXXXXXXXXX with your actual WhatsApp number (e.g., 919876543210)
   const whatsappLink = "https://wa.me/9600985733?text=Hi%20Prasanth,%20I'm%20interested%20in%20working%20with%20you!";
+
+  // --- SCROLL ANIMATION FOR CIRCULAR TEXT ---
+  const { scrollY } = useScroll();
+  const rotate = useTransform(scrollY, [0, 1000], [0, 360]);
 
   return (
     <section
@@ -13,8 +16,7 @@ const HeroSection = () => {
     >
       {/* --- BACKGROUND TEXTURE --- */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#080808_100%)] pointer-events-none" />
-
+      
       <div className="relative z-10 max-w-[1600px] mx-auto px-6 lg:px-12 w-full h-full flex-grow flex flex-col">
         {/* --- TOP ROW --- */}
         <div className="flex justify-between items-start mb-12 border-b border-white/10 pb-6">
@@ -23,103 +25,107 @@ const HeroSection = () => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
             </span>
-            <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest">
-              Available for New Projects
-            </span>
+            <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest">Available for New Projects</span>
           </div>
-
-          <div className="hidden md:flex flex-col text-right">
-            <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest">
-              Location
-            </span>
-            <span className="text-sm font-medium text-zinc-300">Coimbatore, India</span>
+          <div className="hidden md:flex flex-col text-right text-xs font-mono text-zinc-500 uppercase tracking-widest">
+            <span>Location</span>
+            <span className="text-white mt-1 uppercase tracking-normal font-sans">Coimbatore, India</span>
           </div>
         </div>
 
         {/* --- MAIN CONTENT --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0 h-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0 h-full items-center">
+          
           {/* LEFT CONTENT */}
-          <div className="lg:col-span-7 flex flex-col justify-center lg:pr-16 lg:border-r border-white/10">
+          <div className="lg:col-span-7 flex flex-col justify-center lg:pr-16">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-6xl sm:text-7xl lg:text-9xl font-serif font-light leading-[0.9] tracking-tight mb-8">
+              <h1 className="text-7xl sm:text-8xl lg:text-[10rem] font-serif font-light leading-[0.85] tracking-tighter mb-10">
                 Digital <br />
-                <span className="italic text-zinc-600">Creator.</span>
+                <span className="italic text-zinc-700">Creator.</span>
               </h1>
 
-              <p className="text-lg text-zinc-400 max-w-lg leading-relaxed font-light mb-10">
-                I help brands grow by combining <span className="text-white font-medium">creative design</span> with <span className="text-white font-medium">modern technology</span>. I build high-performing websites and digital content that gets results.
+              <p className="text-lg md:text-xl text-zinc-400 max-w-lg leading-relaxed font-light mb-12">
+                I help brands grow by combining <span className="text-white font-medium">creative design</span> with <span className="text-white font-medium">modern technology</span>.
               </p>
 
-              <div className="flex flex-wrap gap-4">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() =>
-                    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
-                  }
-                  className="group px-8 py-4 bg-white text-black text-sm font-bold uppercase tracking-wider hover:bg-zinc-200 transition-colors flex items-center gap-2"
+              <div className="flex items-center gap-8">
+                <button
+                  onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="group px-10 py-5 bg-white text-black text-xs font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all flex items-center gap-3"
                 >
-                  My Work <ArrowDownRight className="w-4 h-4" />
-                </motion.button>
-
-                <motion.a
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  href={whatsappLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-4 border border-white/20 text-white text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-colors inline-block text-center"
-                >
-                  Let's Talk
-                </motion.a>
+                  My Work <ArrowDownRight className="w-4 h-4 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform" />
+                </button>
               </div>
             </motion.div>
           </div>
 
-          {/* RIGHT IMAGE */}
-          <div className="lg:col-span-5 flex flex-col lg:pl-16 justify-center">
+          {/* RIGHT IMAGE + DRAW CIRCLE TEXT */}
+          <div className="lg:col-span-5 relative flex justify-center items-center">
+            
+            {/* --- CIRCULAR DRAWING TEXT BADGE --- */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
+              style={{ rotate }}
+              className="absolute -top-10 -right-10 md:-top-20 md:-right-20 z-20 pointer-events-none"
+            >
+              <svg viewBox="0 0 200 200" className="w-40 h-40 md:w-64 md:h-64">
+                <path
+                  id="circlePath"
+                  d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
+                  fill="none"
+                />
+                <text className="text-[14px] font-mono uppercase tracking-[0.4em] fill-emerald-500 font-bold">
+                  <textPath href="#circlePath">
+                    • UI/UX DESIGN • DIGITAL MARKETING • VIDEO EDITING • REACT & AI
+                  </textPath>
+                </text>
+              </svg>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1 }}
-              className="relative w-full aspect-[4/5] bg-zinc-900 border border-white/10 p-2 group"
+              className="relative w-full max-w-[450px] aspect-[4/5] bg-zinc-900 border border-white/10 p-3 group overflow-hidden"
             >
-              {/* Corner Accents */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-white/50" />
-                <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-white/50" />
-                <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-white/50" />
-                <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-white/50" />
-              </div>
-
               <div className="relative w-full h-full overflow-hidden bg-black">
                 <img
                   src={heroPortrait}
                   alt="Prasanth D"
-                  className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                  className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-[1.5s] ease-out"
                 />
               </div>
-
-              <div className="absolute bottom-6 left-[-20px] bg-white text-black px-4 py-2 text-xs font-bold font-mono uppercase tracking-widest rotate-[-90deg] origin-left border border-white shadow-xl">
-                Prasanth D.
+              
+              {/* Overlay ID Card Style */}
+              <div className="absolute bottom-10 left-[-10px] bg-white text-black px-6 py-3 text-[10px] font-bold font-mono uppercase tracking-[0.3em] rotate-[-90deg] origin-left border border-white shadow-2xl">
+                Prasanth D. // 2026
               </div>
             </motion.div>
-
-            {/* --- REFINED SKILLS --- */}
-            <div className="mt-10 flex flex-wrap gap-y-3 gap-x-6 text-zinc-500 font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] justify-center lg:justify-start">
-              <span className="text-zinc-300">UI/UX Designing</span>
-              <span className="hidden sm:inline opacity-20" aria-hidden>|</span>
-              <span className="text-zinc-300">Digital Marketing</span>
-              <span className="hidden sm:inline opacity-20" aria-hidden>|</span>
-              <span className="text-zinc-300">Video Editing</span>
-              <span className="hidden sm:inline opacity-20" aria-hidden>|</span>
-              <span className="text-zinc-300">React & AI</span>
-            </div>
           </div>
+
+        </div>
+
+        {/* --- BOTTOM ROW: SKILLS BAR --- */}
+        <div className="mt-auto py-10 flex flex-wrap justify-between items-center border-t border-white/10 gap-6">
+           <div className="flex gap-12 overflow-hidden whitespace-nowrap group">
+              {['UI/UX', 'MARKETING', 'EDITING', 'REACT'].map((skill, i) => (
+                <span key={i} className="text-[10px] font-mono text-zinc-600 uppercase tracking-[0.5em] group-hover:text-zinc-300 transition-colors">
+                  {skill}
+                </span>
+              ))}
+           </div>
+           
+           <a 
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-bold uppercase tracking-widest text-emerald-500 hover:text-white transition-colors flex items-center gap-2"
+           >
+             Contact via WhatsApp <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+           </a>
         </div>
       </div>
     </section>
