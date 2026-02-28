@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { ArrowUpRight, Download, Video, Layers, Zap, PenTool } from 'lucide-react';
-import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useInView, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
+import heroPortrait from '../assets/hero-person.webp';
 
 // --- SUB-COMPONENT: ANIMATED COUNTER ---
 const Counter = ({ value }) => {
@@ -24,187 +25,135 @@ const Counter = ({ value }) => {
 
 // --- DATA ---
 const expertise = [
-  { 
-    id: "01", 
-    title: "UI/UX Design", 
-    desc: "Creating clean, user-friendly interfaces in Figma.", 
-    icon: PenTool 
-  },
-  { 
-    id: "02", 
-    title: "React & AI", 
-    desc: "Building smart web apps with AI-assisted coding.", 
-    icon: Layers 
-  },
-  { 
-    id: "03", 
-    title: "Video Editing", 
-    desc: "High-quality visual storytelling and post-production.", 
-    icon: Video 
-  },
-  { 
-    id: "04", 
-    title: "Digital Marketing", 
-    desc: "Driving growth through SEO and social strategies.", 
-    icon: Zap 
-  },
+  { id: "01", title: "UI/UX Design", desc: "Architecting high-fidelity, user-centric interfaces in Figma.", icon: PenTool },
+  { id: "02", title: "React & AI", desc: "Engineering scalable web applications with AI-driven workflows.", icon: Layers },
+  { id: "03", title: "Video Editing", desc: "Crafting immersive narratives through cinematic storytelling.", icon: Video },
+  { id: "04", title: "Digital Marketing", desc: "Developing performance-driven growth and brand positioning.", icon: Zap },
 ];
 
 const stats = [
-  { value: '2+', label: 'Years Active' },
-  { value: '7+', label: 'Total Projects' },
-  { value: '20+', label: 'Happy Clients' },
+  { value: '02+', label: 'Years Active' },
+  { value: '10+', label: 'Total Projects' },
+  { value: '25+', label: 'Happy Clients' },
 ];
 
-const skills = ['UI/UX Designing', 'Digital Marketing', 'Video Editing', 'React using AI', 'Figma', 'Meta Ads', 'Technical SEO'];
+const skills = ['Graphical Designer', 'UI Systems', 'User Research', 'Figma', 'React', 'Digital Marketer'];
 
 const About = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Parallax effect for the overlay image
+  const y = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [-2, 5]);
+
   return (
-    <section id="about" className="relative py-32 bg-[#050505] text-zinc-300 font-sans selection:bg-white selection:text-black overflow-hidden">
-      
-      {/* --- UI MODIFICATION: ROTATING HIGHLIGHTS --- */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <motion.div 
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-[#ffffff03] rounded-full blur-[120px]"
-        />
-        <motion.div 
-          animate={{ rotate: -360 }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute -bottom-[20%] -right-[10%] w-[50%] h-[50%] bg-[#ffffff02] rounded-full blur-[100px]"
-        />
+    <section 
+      id="about" 
+      ref={containerRef}
+      className="relative py-40 bg-white text-[#1a1a1a] font-sans selection:bg-black selection:text-white overflow-hidden"
+    >
+      {/* --- BACKGROUND ACCENTS --- */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-[size:40px_40px] opacity-[0.3]" />
       </div>
 
-      {/* --- UI MODIFICATION: MESH GRID BG --- */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(15,15,15,1)_0%,rgba(5,5,5,1)_100%)]"></div>
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
-
-      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
         
-        {/* --- HEADER SECTION --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-white/5 pt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
             
-           {/* LEFT: TITLE */}
-           <div className="lg:col-span-5">
-              <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-6 block">
-                  {"// The Profile"}
-              </span>
-              
-              {/* UI MODIFICATION: TEXT DROPS FOR HEADING */}
-              <motion.h1 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-5xl md:text-7xl font-serif text-white leading-[1.1] mb-8 drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]"
+           {/* --- LEFT: PORTRAIT OVERLAY (REALISTIC INTERACTION) --- */}
+           <div className="lg:col-span-5 relative group">
+              <motion.div 
+                style={{ y, rotate }}
+                className="relative z-20 w-full max-w-[450px] aspect-[3/4] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] rounded-sm border border-zinc-100 bg-zinc-50"
               >
-                Digital <br/>
-                <span className="italic text-zinc-600">Expert.</span>
-              </motion.h1>
-              
-              <div className="flex flex-col gap-8">
-                 <p className="text-lg md:text-xl font-light leading-relaxed text-zinc-400 max-w-md">
-                    I help brands grow by mixing <span className="text-white">creative design</span> with <span className="text-white">smart technology</span>. I focus on making websites and content that are fast, beautiful, and get results.
-                 </p>
-                 
-                 <motion.button 
-                    whileHover={{ x: 10 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="group w-fit flex items-center gap-4 text-[10px] font-mono uppercase tracking-[0.3em] text-white hover:text-zinc-400 transition-colors bg-white/5 px-6 py-3 rounded-full backdrop-blur-md border border-white/10"
-                 >
-                    <span className="pb-0.5">Download CV</span>
-                    <Download className="w-3.5 h-3.5" />
-                 </motion.button>
-              </div>
+                <img
+                  src={heroPortrait}
+                  alt="Prasanth D"
+                  className="w-full h-full object-cover grayscale brightness-110 contrast-110 group-hover:grayscale-0 transition-all duration-1000 ease-in-out"
+                />
+                {/* Glassmorphism Badge Overlay */}
+                <div className="absolute bottom-6 left-6 right-6 backdrop-blur-xl bg-white/70 border border-white/20 p-6 shadow-xl">
+                   <div className="flex justify-between items-center">
+                      <div>
+                        <p className="text-[10px] font-mono font-bold text-blue-600 uppercase tracking-widest">Web Designer</p>
+                        <h4 className="text-sm font-bold text-black uppercase">Prasanth D.</h4>
+                      </div>
+                      <div className="h-8 w-8 rounded-full bg-emerald-500 flex items-center justify-center">
+                         <Zap className="w-4 h-4 text-white fill-current" />
+                      </div>
+                   </div>
+                </div>
+              </motion.div>
+
+              {/* Decorative Background Elements behind image */}
+              <div className="absolute -top-10 -left-10 w-32 h-32 border-l-2 border-t-2 border-blue-500/20" />
+              <div className="absolute -bottom-10 -right-10 w-32 h-32 border-r-2 border-b-2 border-emerald-500/20" />
            </div>
 
-           {/* RIGHT: STATS & SKILLS */}
-           <div className="lg:col-span-7 flex flex-col justify-between">
+           {/* --- RIGHT: CONTENT --- */}
+           <div className="lg:col-span-7 pt-10">
+              <span className="text-[11px] font-mono text-blue-600 font-black uppercase tracking-[0.5em] mb-10 block">
+                  {"// STRATEGIC PROFILE"}
+              </span>
               
-              <div className="grid grid-cols-3 gap-8 border-b border-white/5 pb-12">
+              <h2 className="text-6xl md:text-9xl font-serif text-black leading-[0.8] tracking-tighter mb-12">
+                Design <br/>
+                <span className="italic bg-gradient-to-r from-blue-600 via-emerald-500 to-emerald-400 bg-clip-text text-transparent">Expertise.</span>
+              </h2>
+
+              <p className="text-xl md:text-2xl font-medium leading-[1.6] text-[#333] max-w-2xl mb-12">
+                I help brands grow by mixing <span className="text-black font-bold underline decoration-blue-500/20 underline-offset-8">creative design</span> with <span className="text-black font-bold">smart technology</span>. Focusing on scalable design systems and high-performance interfaces.
+              </p>
+
+              {/* STATS BAR */}
+              <div className="grid grid-cols-3 gap-8 border-y-2 border-zinc-100 py-12 mb-12">
                  {stats.map((stat, i) => (
-                    <motion.div 
-                      key={i}
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{ delay: i * 0.1 }}
-                    >
-                       <div className="text-4xl md:text-6xl font-light text-white mb-2 tracking-tighter">
+                    <div key={i}>
+                       <div className="text-5xl md:text-7xl font-light text-black flex items-baseline">
                           <Counter value={stat.value} />
+                          <span className="text-blue-500 font-mono text-3xl">.</span>
                        </div>
-                       <div className="text-[10px] font-mono text-zinc-600 uppercase tracking-[0.2em] font-bold">
-                          {stat.label}
-                       </div>
-                    </motion.div>
+                       <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest font-black">{stat.label}</p>
+                    </div>
                  ))}
               </div>
 
-              <div className="pt-12">
-                 <h3 className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-6">Expertise</h3>
-                 <div className="flex flex-wrap gap-x-10 gap-y-6">
-                    {skills.map((skill, i) => (
-                       <motion.div 
-                        key={i} 
-                        whileHover={{ scale: 1.05, color: "#fff" }}
-                        className="group flex items-center gap-3"
-                       >
-                          <div className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-white group-hover:shadow-[0_0_8px_#fff] transition-all"></div>
-                          <span className="text-base font-light text-zinc-500 transition-colors cursor-default">
-                             {skill}
-                          </span>
-                       </motion.div>
-                    ))}
-                 </div>
+              <div className="flex flex-wrap gap-4 mb-16">
+                 {skills.map((skill, i) => (
+                    <span key={i} className="px-4 py-2 border border-zinc-200 text-[10px] font-bold uppercase tracking-widest text-zinc-500 hover:border-blue-500 hover:text-blue-600 transition-all">
+                       {skill}
+                    </span>
+                 ))}
               </div>
+
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center gap-6 text-[11px] font-bold uppercase tracking-[0.4em] text-white bg-black px-12 py-6 rounded-sm shadow-2xl"
+              >
+                Request Access <Download className="w-4 h-4" />
+              </motion.button>
            </div>
         </div>
 
-        {/* --- EXPERTISE GRID --- */}
-        <div className="mt-32">
-           <div className="flex items-end justify-between mb-12">
-              <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest">
-                  {"// Services"}
-              </span>
-           </div>
-
-           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-l border-white/5 backdrop-blur-sm">
-              {expertise.map((item, i) => (
-                 <motion.div 
-                    key={i} 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                    className="group relative p-10 border-r border-b border-white/5 hover:bg-white/[0.02] transition-all duration-700"
-                 >
-                    {/* Animated Border Reveal */}
-                    <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-1000"></div>
-
-                    <div className="flex justify-between items-start mb-16">
-                       <span className="text-[10px] font-mono text-zinc-600 tracking-widest">
-                          {item.id}
-                       </span>
-                       <div className="p-3 rounded-full bg-white/5 group-hover:bg-white group-hover:text-black transition-all duration-500">
-                          <item.icon className="w-4 h-4" />
-                       </div>
-                    </div>
-
-                    <div>
-                       <h3 className="text-xl font-medium text-white mb-4 group-hover:translate-x-2 transition-transform duration-500">
-                          {item.title}
-                       </h3>
-                       <p className="text-sm text-zinc-500 font-light leading-relaxed group-hover:text-zinc-400 transition-colors">
-                          {item.desc}
-                       </p>
-                    </div>
-
-                    <div className="absolute bottom-8 right-8 opacity-0 group-hover:opacity-100 group-hover:translate-y-[-8px] transition-all duration-500">
-                       <ArrowUpRight className="w-5 h-5 text-zinc-400" />
-                    </div>
-                 </motion.div>
-              ))}
-           </div>
+        {/* --- SERVICES GRID --- */}
+        <div className="mt-40 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t-2 border-zinc-100">
+           {expertise.map((item, i) => (
+              <div key={i} className="group p-12 border-r border-b border-zinc-100 hover:bg-zinc-50 transition-all duration-500">
+                 <div className="flex justify-between items-start mb-16">
+                    <span className="text-[10px] font-mono text-zinc-300 font-bold">{item.id}</span>
+                    <item.icon className="w-5 h-5 text-zinc-400 group-hover:text-blue-600 transition-colors" />
+                 </div>
+                 <h3 className="text-xl font-bold mb-4">{item.title}</h3>
+                 <p className="text-sm text-zinc-500 leading-relaxed">{item.desc}</p>
+                 <ArrowUpRight className="mt-8 w-5 h-5 opacity-0 group-hover:opacity-100 text-blue-500 transition-all" />
+              </div>
+           ))}
         </div>
-
       </div>
     </section>
   );

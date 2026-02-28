@@ -27,61 +27,65 @@ const InfiniteHorizontalScroll = () => {
   const repeatedLogos = [...logos, ...logos, ...logos];
 
   return (
-    <section className="relative py-32 bg-[#080808] overflow-hidden font-sans selection:bg-white selection:text-black">
-      {/* --- BACKGROUND TEXTURE --- */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:64px_64px] opacity-50 pointer-events-none" />
+    <section className="relative py-32 overflow-hidden font-sans selection:bg-black selection:text-white transition-all duration-1000
+      /* MONOLITHIC GRAPHITE BACKGROUND (No gradients/blur) */
+      bg-[#0a0a0c]">
+      
+      {/* --- REFINED MICRO-DOTS TEXTURE ONLY (Reduced intensity) --- */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Soft Micro-Dots */}
+        <div className="absolute inset-0 opacity-[0.04]" 
+          style={{ backgroundImage: `radial-gradient(circle, #fff 0.5px, transparent 0.5px)`, backgroundSize: '30px 30px' }} 
+        />
+        {/* Fine Grain Texture */}
+        <div className="absolute inset-0 opacity-[0.02] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      </div>
 
       {/* --- HEADER --- */}
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 mb-16 md:mb-24 flex flex-col md:flex-row items-end justify-between gap-8">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 mb-16 md:mb-24 flex flex-col md:flex-row items-end justify-between gap-8 border-b border-white/5 pb-12">
         <div className="max-w-2xl">
-          <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-6 block">
-            {'//'} Partnership Index
+          <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-[0.4em] mb-6 block">
+            SELECTED PARTNERSHIPS
           </span>
 
-          <h2 className="text-5xl md:text-8xl font-serif text-white leading-[0.9]">
-            Trusted <br />
-            <span className="italic text-zinc-600">Network.</span>
+          <h2 className="text-6xl md:text-9xl font-serif text-white leading-[0.8] tracking-tighter">
+            Strategic <br />
+            <span className="italic bg-gradient-to-r from-zinc-500 via-zinc-200 to-white bg-clip-text text-transparent">Network.</span>
           </h2>
         </div>
 
         <div className="hidden md:flex flex-col items-end text-right">
-          <p className="text-zinc-500 text-sm font-mono max-w-xs leading-relaxed mb-4">
-            Collaborating with industry leaders to build scalable digital
-            ecosystems.
+          <p className="text-zinc-500 text-sm font-light max-w-xs leading-relaxed mb-6">
+            Building meaningful digital value through high-integrity collaborations and design systems.
           </p>
-          <div className="flex items-center gap-2 text-white text-xs font-bold uppercase tracking-widest">
-            Scroll to Explore <ArrowRight className="w-4 h-4" />
+          <div className="flex items-center gap-4 text-zinc-300 text-[10px] font-bold uppercase tracking-[0.3em] group cursor-default">
+            Explore Ecosystem <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-500" />
           </div>
         </div>
       </div>
 
-      {/* --- TICKER --- */}
-      <div className="w-full border-t border-b border-white/10 bg-[#080808]">
+      {/* --- TICKER (CLASSIC METALLIC BORDER - SHARPER EDGES) --- */}
+      <div className="w-full bg-white/[0.01]">
         <div className="relative flex overflow-hidden group">
-          <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-[#080808] to-transparent z-20" />
-          <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-[#080808] to-transparent z-20" />
+          
+          {/* Edge Blur and Gradients Removed from Here */}
 
-          <div className="flex animate-marquee group-hover:paused">
+          <div className="flex animate-marquee group-hover:paused py-4">
             {repeatedLogos.map((item, idx) => (
               <div
                 key={`${item.name}-${idx}`}
-                className="relative flex-shrink-0 w-[200px] md:w-[280px] h-[160px] md:h-[200px] border-r border-white/10 flex items-center justify-center group/item hover:bg-white/[0.02] transition-colors duration-300"
+                className="relative flex-shrink-0 w-[200px] md:w-[320px] h-[180px] md:h-[240px] flex items-center justify-center group/item transition-all duration-700"
               >
                 <img
                   src={item.src}
                   alt={item.name}
-                  className="w-24 md:w-32 h-auto object-contain grayscale opacity-40 mix-blend-screen transition-all duration-500 group-hover/item:grayscale-0 group-hover/item:opacity-100 group-hover/item:scale-110"
+                  className="w-28 md:w-36 h-auto object-contain grayscale opacity-30 brightness-150 transition-all duration-700 group-hover/item:grayscale-0 group-hover/item:opacity-100 group-hover/item:scale-105"
                 />
 
-                <div className="absolute bottom-4 left-4 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300">
-                  <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest">
-                    REF: {idx < 9 ? `0${idx + 1}` : idx + 1}
-                  </span>
-                </div>
-
-                <div className="absolute top-4 right-4 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300">
-                  <span className="text-[10px] font-bold text-zinc-300 uppercase tracking-widest">
-                    {item.name}
+                {/* Technical Label */}
+                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 transition-all duration-500 translate-y-2 group-hover/item:translate-y-0">
+                  <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-[0.5em] whitespace-nowrap">
+                    VERIFIED // {idx % logos.length + 1}
                   </span>
                 </div>
               </div>
@@ -91,10 +95,13 @@ const InfiniteHorizontalScroll = () => {
       </div>
 
       {/* --- FOOTER META --- */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mt-4 flex justify-between text-[10px] font-mono text-zinc-600 uppercase tracking-widest">
-        <span>Total Active Partners: {logos.length}</span>
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mt-8 flex justify-between text-[9px] font-mono text-zinc-600 uppercase tracking-[0.4em]">
+        <div className="flex items-center gap-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-zinc-700"></span>
+            <span>Architecture v2.06</span>
+        </div>
         <span className="hidden md:inline">
-          Global Reach {'//'} 2024–25
+          Prasanth D Studio // Est. 2026
         </span>
       </div>
 
@@ -109,7 +116,7 @@ const InfiniteHorizontalScroll = () => {
         }
 
         .animate-marquee {
-          animation: marquee 60s linear infinite;
+          animation: marquee 80s linear infinite;
           will-change: transform;
         }
       `}</style>

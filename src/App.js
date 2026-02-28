@@ -13,10 +13,14 @@ import CertificationSection from './components/certification';
 import VerticalPosterScroll from './components/posterproject';
 import StorytellingSection from './components/storytelling';
 import Uxpage from "./components/Uxpage";
+import ScrollToTop from './components/scrollup';
+
+
 function App() {
   return (
     <div className="font-sans text-gray-800">
       <Navbar />
+      <ScrollToTop/>
       <WhatsappButton />
       <Hero />
       <InfiniteHorizontalScroll /> {/* fixed */}
