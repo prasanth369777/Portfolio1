@@ -12,7 +12,7 @@ const ContactControls = () => {
       {/* 1. DIALER BUTTON (The Direct Line) */}
       <div className="relative flex items-center justify-end">
         <div className="absolute right-[calc(100%+20px)] px-4 py-2 bg-black text-white text-[10px] font-black font-mono uppercase tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-xl">
-          Voice // Direct Line
+          Voice
         </div>
         <a
           href={ dialerLink }
@@ -29,7 +29,7 @@ const ContactControls = () => {
       {/* 2. CHAT BUTTON (The Communication Node) */}
       <div className="relative flex items-center justify-end">
         <div className="absolute right-[calc(100%+20px)] px-4 py-2 bg-black text-white text-[10px] font-black font-mono uppercase tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-xl">
-          Secure // Text Link
+         Text
         </div>
         <a
           href={ whatsappLink }
